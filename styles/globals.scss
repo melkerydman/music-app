@@ -1,4 +1,19 @@
-@import './reset.scss';
+@use './reset.scss' as *;
+@use './variables.scss' as *;
+
+// Do this is root or HTML?
+:root {
+  @include colors;
+}
+
+html {
+}
+h1 {
+  font-family: 'Inter', sans-serif;
+}
+p {
+  font-family: 'EB Garamond', serif;
+}
 
 @media (prefers-color-scheme: dark) {
   html {

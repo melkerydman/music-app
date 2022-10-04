@@ -1,0 +1,10 @@
+@use './type.scss' as *;
+
+@mixin Display {
+  font-family: 'Inter', sans-serif;
+  font-size: 7.2rem;
+  font-weight: 600;
+}
+
+@mixin H1 {
+}
