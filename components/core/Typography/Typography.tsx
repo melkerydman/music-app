@@ -1,3 +1,5 @@
+import styles from './typography.module.scss';
+
 type TypographyType = {
   className?: string;
   children?: React.ReactNode;
@@ -5,18 +7,25 @@ type TypographyType = {
 
 type DisplayType = {
   as: 'h1' | 'h2';
+  small?: boolean;
 };
 
 export const Display = ({
   as,
-  className,
+  small,
+  className = '',
   children,
   ...rest
 }: TypographyType & DisplayType): JSX.Element => {
   const Component = as;
 
   return (
-    <Component className={className} {...rest}>
+    <Component
+      className={`${styles.display} ${small ? styles['display_sm'] : ''} ${
+        className ? className : ''
+      }`}
+      {...rest}
+    >
       {children}
     </Component>
   );
@@ -35,7 +44,10 @@ export const Heading = ({
   const Component = as;
 
   return (
-    <Component className={className} {...rest}>
+    <Component
+      className={`${styles[as]} ${className ? className : ''}`}
+      {...rest}
+    >
       {children}
     </Component>
   );
@@ -43,10 +55,12 @@ export const Heading = ({
 
 type ParagraphType = {
   as: 'p' | 'span';
+  small?: boolean;
 };
 
 export const Paragraph = ({
   as,
+  small,
   className,
   children,
   ...rest
@@ -54,7 +68,12 @@ export const Paragraph = ({
   const Component = as;
 
   return (
-    <Component className={className} {...rest}>
+    <Component
+      className={`${styles.p} ${small ? styles['p_sm'] : ''} ${
+        className ? className : ''
+      }`}
+      {...rest}
+    >
       {children}
     </Component>
   );

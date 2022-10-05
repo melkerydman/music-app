@@ -1,10 +1,54 @@
-@use './type.scss' as *;
+// @use './type.scss' as *;
+@use './variables.scss' as *;
 
-@mixin Display {
-  font-family: 'Inter', sans-serif;
+@mixin display-lg {
+  font-size: 9.6rem;
+  font-weight: 600;
+  letter-spacing: -0.07em;
+}
+@mixin display-sm {
   font-size: 7.2rem;
   font-weight: 600;
+  letter-spacing: -0.07em;
 }
 
-@mixin H1 {
+@mixin h1 {
+  font-size: 5.6rem;
+  font-weight: 400;
+  letter-spacing: -0.05em;
+}
+@mixin h2 {
+  font-size: 4.4rem;
+  font-weight: 400;
+  letter-spacing: -0.05em;
+}
+@mixin h3 {
+  font-size: 3.6rem;
+  font-weight: 400;
+  letter-spacing: -0.05em;
+}
+@mixin h4 {
+  font-size: 2.8rem;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+@mixin h5 {
+  font-size: 2.2rem;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+}
+@mixin h6 {
+  font-size: 1.6rem;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+}
+
+@mixin p {
+  font-family: var(--ff-serif);
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+@mixin p-sm {
+  font-size: 1.4rem;
+  font-weight: 400;
 }

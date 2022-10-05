@@ -1,10 +1,13 @@
 @mixin colors {
-  --colors-primary: #e91627;
-  --colors-decond: #000000;
-  --colors-log: #24583d;
-  --colors-help: #6e16e9;
-  --colors-not: #fefefe;
-  --colors-mate: #16e944;
-  --colors-abs: #16e9c2;
-  --colors-dog: #c2e916;
+  --colors-black: #171717;
+  --colors-white: #efefef;
+
+  --colors-brand: #e91627;
+}
+
+@mixin fonts {
+  // --ff-sans-serif: 'Inter', sans-serif;
+  --ff-sans-serif: 'Inter', sans-serif;
+
+  --ff-serif: 'EB Garamond', serif;
 }

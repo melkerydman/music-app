@@ -4,15 +4,12 @@
 // Do this is root or HTML?
 :root {
   @include colors;
+  @include fonts;
 }
 
-html {
-}
-h1 {
-  font-family: 'Inter', sans-serif;
-}
-p {
-  font-family: 'EB Garamond', serif;
+html,
+body {
+  font-family: var(--ff-sans-serif);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,7 +17,7 @@ p {
     color-scheme: dark;
   }
   body {
-    color: white;
-    background: black;
+    color: var(--colors-white);
+    background: var(--colors-blacks);
   }
 }
