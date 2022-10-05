@@ -1,3 +1,4 @@
+import Logo from '../components/core/Logo/Logo';
 import {
   Display,
   Heading,
@@ -7,6 +8,7 @@ import {
 export default function Home() {
   return (
     <>
+      <Logo />
       <Display as="h1">Display</Display>
       <Display as="h1" small>
         Display
