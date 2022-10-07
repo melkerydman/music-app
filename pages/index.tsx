@@ -1,14 +1,14 @@
-import Logo from '../components/core/Logo/Logo';
 import {
   Display,
   Heading,
   Paragraph,
-} from '../components/core/Typography/Typography';
+} from '../components/Typography/Typography';
+import Header from '../components/Header/Header';
 
 export default function Home() {
   return (
     <>
-      <Logo />
+      <Header />
       <Display as="h1">Display</Display>
       <Display as="h1" small>
         Display
