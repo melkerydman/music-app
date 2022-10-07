@@ -3,11 +3,12 @@
   --colors-white: #efefef;
 
   --colors-brand: #e91627;
+
+  --colors-gradient-start: #e9506e;
+  --colors-gradient-end: #f37975;
 }
 
 @mixin fonts {
-  // --ff-sans-serif: 'Inter', sans-serif;
   --ff-sans-serif: 'Inter', sans-serif;
-
   --ff-serif: 'EB Garamond', serif;
 }
