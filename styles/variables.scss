@@ -1,9 +1,16 @@
 @mixin colors {
+  // BLACK AND WHITES
   --colors-black: #171717;
   --colors-white: #efefef;
 
+  // GREY SCALE
+  --colors-grey-100: #f4f4f4;
+
+  // BRAND
   --colors-brand: #e91627;
 
+  // GRADIENTS
+  // There's a mixin for using gradients as backgrounds
   --colors-gradient-start: #e9506e;
   --colors-gradient-end: #f37975;
 }
