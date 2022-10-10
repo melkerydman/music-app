@@ -10,14 +10,16 @@
 html,
 body {
   font-family: var(--ff-sans-serif);
+  background-color: var(--colors-white);
+  color: var(--colors-black);
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: var(--colors-white);
-    background: var(--colors-blacks);
-  }
-}
+// @media (prefers-color-scheme: dark) {
+//   html {
+//     color-scheme: dark;
+//   }
+//   body {
+//     color: var(--colors-white);
+//     background: var(--colors-blacks);
+//   }
+// }
