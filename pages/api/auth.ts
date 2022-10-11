@@ -33,7 +33,7 @@ const GetSpotifyAuthToken = async () => {
     });
 };
 
-export default async function handler(req, res) {
+export default async function handler(_, res) {
   try {
     const data = await GetSpotifyAuthToken();
     if (data.status === 400) res.status(400).json(data);
