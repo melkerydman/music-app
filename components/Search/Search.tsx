@@ -1,11 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useSpotifyAuth } from '../../hooks/useSpotifyAuth';
+import { Album } from '../../types/album';
+import { Artist } from '../../types/artist';
+import { Track } from '../../types/track';
 
 import styles from './Search.module.scss';
 
+type SearchResultType = {
+  topResult?: Artist | Track | Album;
+  artists?: Artist[];
+  tracks?: Track[];
+};
+
 const Search = () => {
   const [searchValue, setSearchValue] = useState<string>('');
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState<SearchResultType[]>([]);
   const [accessToken, setAccessToken] = useState();
 
   // TODO: handle access token storage (on server, cookie?)
@@ -34,28 +43,31 @@ const Search = () => {
       const result = await fetch(url, { headers })
         .then((response) => response.json())
         .then((data) => {
-          // Return formatted search results
-          return data;
-          // return data.tracks.items.map((track) => {
-          //   return {
-          //     id: track.id,
-          //     isrc: track.external_ids.isrc,
-          //     title: track.name,
-          //     artists: track.artists,
-          //     album: {
-          //       title: track.album.name,
-          //       year: track.album.release_date.substring(0, 4),
-          //     },
-          //     coverLarge: track.album.images[0],
-          //     coverMedium: track.album.images[1],
-          //     coverSmall: track.album.images[2],
-          //   };
-          // });
+          const maxTracks = 7;
+          const maxArtists = 3;
+
+          let tracks = [] as Track[];
+          if (data.tracks.items.length > 0) {
+            tracks = data.tracks.items.slice(0, maxTracks).map((track) => {
+              return track;
+            });
+          }
+
+          let artists = [];
+          if (data.artists.items.length > 0) {
+            artists = data.artists.items.slice(0, maxArtists).map((artist) => {
+              return artist;
+            });
+          }
+
+          let topResult = tracks[0];
+
+          setSearchResults([{ topResult }, { tracks }, { artists }]);
         });
-      console.log('results 🔴', result);
     };
     searchForTrack(searchValue, accessToken);
   }, [searchValue]);
+  console.log('search results 🔴', searchResults);
 
   return (
     <div className={styles['search']}>
