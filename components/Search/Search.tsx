@@ -27,6 +27,7 @@ const Search = () => {
 
   useEffect(() => {
     if (!accessToken) return;
+    // TODO: Break everything out into its own service
     const searchForTrack = async (string, accessToken) => {
       const defaultSpotifyUrl = 'https://api.spotify.com/v1';
       const headers = {
@@ -40,6 +41,7 @@ const Search = () => {
       const limit = 10;
       const url = `${defaultSpotifyUrl}/search?q=${query}&type=${type}&limit=${limit}`;
 
+      // TODO: Use axios instead of fetch
       const result = await fetch(url, { headers })
         .then((response) => response.json())
         .then((data) => {
@@ -62,14 +64,15 @@ const Search = () => {
 
           let topResult = tracks[0];
 
+          // TODO: Fix this, can't possibly be the right way
           setSearchResults([{ topResult }, { tracks }, { artists }]);
         });
     };
     searchForTrack(searchValue, accessToken);
   }, [searchValue]);
-  console.log('search results 🔴', searchResults);
 
   return (
+    // TODO: Create own components
     <div className={styles['search']}>
       <input
         className={styles['search_input']}
