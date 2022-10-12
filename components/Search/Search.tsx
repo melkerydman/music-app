@@ -5,6 +5,7 @@ import { Artist } from '../../types/artist';
 import { Track } from '../../types/track';
 
 import styles from './Search.module.scss';
+import SearchResults from './SearchResults/SearchResults';
 
 type SearchResultType = {
   topResult?: Artist | Track | Album;
@@ -14,7 +15,7 @@ type SearchResultType = {
 
 const Search = () => {
   const [searchValue, setSearchValue] = useState<string>('');
-  const [searchResults, setSearchResults] = useState<SearchResultType[]>([]);
+  const [searchResults, setSearchResults] = useState<SearchResultType>({});
   const [accessToken, setAccessToken] = useState();
 
   // TODO: handle access token storage (on server, cookie?)
@@ -62,13 +63,18 @@ const Search = () => {
             });
           }
 
-          let topResult = tracks[0];
+          // TODO: Test if this actually works
+          let topResult = tracks[0] || artists[0];
 
-          // TODO: Fix this, can't possibly be the right way
-          setSearchResults([{ topResult }, { tracks }, { artists }]);
+          setSearchResults({ topResult, tracks, artists });
         });
     };
-    searchForTrack(searchValue, accessToken);
+
+    if (searchValue === '') {
+      setSearchResults({});
+    } else {
+      searchForTrack(searchValue, accessToken);
+    }
   }, [searchValue]);
 
   return (
@@ -83,8 +89,13 @@ const Search = () => {
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
       />
-      {searchResults.length >= 0 && (
-        <div className={styles['search_results']}>Search results</div>
+      {/* // TODO: Better way of checking if searchResults is empty */}
+      {Object.entries(searchResults).length! > 0 && (
+        <SearchResults
+          topResult={searchResults.topResult}
+          artists={searchResults.artists}
+          tracks={searchResults.tracks}
+        />
       )}
     </div>
   );
