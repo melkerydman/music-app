@@ -23,10 +23,16 @@ const ListItem = ({ content }: Props) => {
 
   return (
     <li className={styles['list-item']}>
-      <Image width="24" height="24" src={image} alt={heading} />
+      <Image width="44" height="44" src={image} alt={heading} />
       <div className={styles['flex']}>
-        <Heading as="h5">{heading}</Heading>
-        {subHeading && <Heading as="h6">{subHeading.join(', ')}</Heading>}
+        <Heading className={styles['heading']} as="h5">
+          {heading}
+        </Heading>
+        {subHeading && (
+          <Heading className={styles['sub-heading']} as="h6">
+            {subHeading.join(', ')}
+          </Heading>
+        )}
       </div>
       <div className={type}>{type} icon</div>
     </li>
