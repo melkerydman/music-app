@@ -1,21 +1,30 @@
 import { useEffect, useState } from 'react';
 import { useSpotifyAuth } from '../../hooks/useSpotifyAuth';
-import { Album } from '../../types/album';
-import { Artist } from '../../types/artist';
-import { Track } from '../../types/track';
 
 import styles from './Search.module.scss';
 import SearchResults from './SearchResults/SearchResults';
 
-type SearchResultType = {
-  topResult?: Artist | Track | Album;
-  artists?: Artist[];
-  tracks?: Track[];
+// TODO: Create real types somewhere
+type QuickSearchResultsType = {
+  topResult?: QuickSearchType;
+  albums?: QuickSearchType[];
+  artists?: QuickSearchType[];
+  tracks?: QuickSearchType[];
+};
+
+type QuickSearchType = {
+  href: string;
+  image: string;
+  heading: string;
+  subHeading?: string[];
+  type: string;
 };
 
 const Search = () => {
   const [searchValue, setSearchValue] = useState<string>('');
-  const [searchResults, setSearchResults] = useState<SearchResultType>({});
+  const [searchResults, setSearchResults] = useState<QuickSearchResultsType>(
+    {}
+  );
   const [accessToken, setAccessToken] = useState();
 
   // TODO: handle access token storage (on server, cookie?)
@@ -43,30 +52,55 @@ const Search = () => {
       const url = `${defaultSpotifyUrl}/search?q=${query}&type=${type}&limit=${limit}`;
 
       // TODO: Use axios instead of fetch
-      const result = await fetch(url, { headers })
+      // TODO: Validate response
+      await fetch(url, { headers })
         .then((response) => response.json())
         .then((data) => {
           const maxTracks = 7;
           const maxArtists = 3;
+          const maxAlbums = 3;
 
-          let tracks = [] as Track[];
+          let tracks = [];
           if (data.tracks.items.length > 0) {
             tracks = data.tracks.items.slice(0, maxTracks).map((track) => {
-              return track;
+              return {
+                href: track.href,
+                heading: track.name,
+                subHeading: track.artists.map((artist) => artist.name),
+                image: track.album.images[2].url,
+                type: track.type,
+              };
             });
           }
-
           let artists = [];
           if (data.artists.items.length > 0) {
             artists = data.artists.items.slice(0, maxArtists).map((artist) => {
-              return artist;
+              return {
+                href: artist.href,
+                heading: artist.name,
+                image: artist.images[2]?.url,
+                type: artist.type,
+              };
             });
           }
 
-          // TODO: Test if this actually works
-          let topResult = tracks[0] || artists[0];
+          let albums = [];
+          if (data.albums.items.length > 0) {
+            albums = data.albums.items.slice(0, maxAlbums).map((album) => {
+              return {
+                href: album.href,
+                heading: album.name,
+                subHeading: album.artists.map((artist) => artist.name),
+                image: album.images[2].url,
+                type: album.type,
+              };
+            });
+          }
 
-          setSearchResults({ topResult, tracks, artists });
+          // TODO: Make sure this actually works
+          let topResult = tracks[0] || artists[0] || albums[0];
+
+          setSearchResults({ topResult, tracks, artists, albums });
         });
     };
 
@@ -95,6 +129,7 @@ const Search = () => {
           topResult={searchResults.topResult}
           artists={searchResults.artists}
           tracks={searchResults.tracks}
+          albums={searchResults.albums}
         />
       )}
     </div>
