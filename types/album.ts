@@ -1,13 +1,20 @@
-import { Artist } from './artist';
+interface Artist {
+  externalUrls: ExternalUrls;
+  href: string;
+  id: string;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+interface ExternalUrls {
+  spotify: string;
+}
 
 interface Image {
   height: number;
   url: string;
   width: number;
-}
-
-interface ExternalUrls {
-  spotify: string;
 }
 
 export interface Album {
@@ -22,6 +29,6 @@ export interface Album {
   releaseDate: Date;
   releaseDatePrecision: string;
   totalTracks: number;
-  type: string;
+  type: 'album';
   uri: string;
 }

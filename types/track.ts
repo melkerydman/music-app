@@ -1,14 +1,3 @@
-import { Album } from './album';
-import { Artist } from './artist';
-
-interface ExternalUrls {
-  spotify: string;
-}
-
-interface ExternalIDS {
-  isrc: string;
-}
-
 export interface Track {
   album: Album;
   artists: Artist[];
@@ -23,8 +12,47 @@ export interface Track {
   isLocal: boolean;
   name: string;
   popularity: number;
-  previewURL: null;
+  previewURL: string;
   trackNumber: number;
+  type: 'track';
+  uri: string;
+}
+
+interface Album {
+  albumType: string;
+  artists: Artist[];
+  availableMarkets: string[];
+  externalUrls: ExternalUrls;
+  href: string;
+  id: string;
+  images: Image[];
+  name: string;
+  releaseDate: Date;
+  releaseDatePrecision: string;
+  totalTracks: number;
   type: string;
   uri: string;
+}
+
+interface Artist {
+  externalUrls: ExternalUrls;
+  href: string;
+  id: string;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+interface ExternalUrls {
+  spotify: string;
+}
+
+interface Image {
+  height: number;
+  url: string;
+  width: number;
+}
+
+interface ExternalIDS {
+  isrc: string;
 }
