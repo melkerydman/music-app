@@ -21,6 +21,7 @@ type Props = {
 };
 
 const SearchResults = ({ topResult, albums, artists, tracks }: Props) => {
+  // TODO: Maybe clean up and break out components. Better handling of empty result?
   if (
     !topResult &&
     albums.length === 0 &&

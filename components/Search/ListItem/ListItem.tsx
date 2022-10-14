@@ -1,3 +1,4 @@
+import Image from 'next/future/image';
 import { Heading } from '../../Typography/Typography';
 
 import styles from './ListItem.module.scss';
@@ -22,7 +23,7 @@ const ListItem = ({ content }: Props) => {
 
   return (
     <li className={styles['list-item']}>
-      <img width="24" height="24" src={image} alt={heading} />
+      <Image width="24" height="24" src={image} alt={heading} />
       <div className={styles['flex']}>
         <Heading as="h5">{heading}</Heading>
         {subHeading && <Heading as="h6">{subHeading.join(', ')}</Heading>}
