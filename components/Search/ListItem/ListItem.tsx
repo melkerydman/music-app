@@ -1,4 +1,5 @@
 import Image from 'next/future/image';
+import Link from 'next/link';
 import { Heading } from '../../Typography/Typography';
 
 import styles from './ListItem.module.scss';
@@ -23,18 +24,23 @@ const ListItem = ({ content }: Props) => {
 
   return (
     <li className={styles['list-item']}>
-      <Image width="44" height="44" src={image} alt={heading} />
-      <div className={styles['flex']}>
-        <Heading className={styles['heading']} as="h5">
-          {heading}
-        </Heading>
-        {subHeading && (
-          <Heading className={styles['sub-heading']} as="h6">
-            {subHeading.join(', ')}
-          </Heading>
-        )}
-      </div>
-      <div className={type}>{type} icon</div>
+      {/* TODO: add proper href */}
+      <Link href={`/${type}/${heading}`}>
+        <a>
+          <Image width="44" height="44" src={image} alt={heading} />
+          <div className={styles['flex']}>
+            <Heading className={styles['heading']} as="h5">
+              {heading}
+            </Heading>
+            {subHeading && (
+              <Heading className={styles['sub-heading']} as="h6">
+                {subHeading.join(', ')}
+              </Heading>
+            )}
+          </div>
+          <div className={type}>{type} icon</div>
+        </a>
+      </Link>
     </li>
   );
 };
