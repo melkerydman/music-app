@@ -49,8 +49,8 @@ const SearchResults = ({ topResult, albums, artists, tracks }: Props) => {
           <li>
             <Heading as="h4">Tracks</Heading>
             <ul>
-              {tracks.map((track) => (
-                <ListItem content={track}></ListItem>
+              {tracks.map((track, index) => (
+                <ListItem key={index} content={track}></ListItem>
               ))}
             </ul>
           </li>
@@ -59,8 +59,8 @@ const SearchResults = ({ topResult, albums, artists, tracks }: Props) => {
           <li>
             <Heading as="h4">Artists</Heading>
             <ul>
-              {artists.map((artist) => (
-                <ListItem content={artist}></ListItem>
+              {artists.map((artist, index) => (
+                <ListItem key={index} content={artist}></ListItem>
               ))}
             </ul>
           </li>
@@ -69,8 +69,8 @@ const SearchResults = ({ topResult, albums, artists, tracks }: Props) => {
           <li>
             <Heading as="h4">Albums</Heading>
             <ul>
-              {albums.map((album) => (
-                <ListItem content={album}></ListItem>
+              {albums.map((album, index) => (
+                <ListItem key={index} content={album}></ListItem>
               ))}
             </ul>
           </li>
