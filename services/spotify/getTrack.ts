@@ -1,3 +1,5 @@
+import { Track } from '../../types/track';
+
 const getTrack = async (id, accessToken) => {
   const defaultSpotifyUrl = 'https://api.spotify.com/v1';
   const headers = {
@@ -12,7 +14,7 @@ const getTrack = async (id, accessToken) => {
   // TODO: Validate response
   return await fetch(url, { headers })
     .then((response) => response.json())
-    .then((data) => {
+    .then((data: Track) => {
       return data;
     });
 };

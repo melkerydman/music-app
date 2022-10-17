@@ -30,7 +30,7 @@ interface Album {
   releaseDate: Date;
   releaseDatePrecision: string;
   totalTracks: number;
-  type: string;
+  type: 'album';
   uri: string;
 }
 
@@ -39,7 +39,7 @@ interface Artist {
   href: string;
   id: string;
   name: string;
-  type: string;
+  type: 'artist';
   uri: string;
 }
 
