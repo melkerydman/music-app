@@ -12,6 +12,7 @@ type QuickSearchType = {
   heading: string;
   subHeading?: string[];
   type: string;
+  id: string;
 };
 
 type Props = {
@@ -20,12 +21,12 @@ type Props = {
 
 const ListItem = ({ content }: Props) => {
   if (!content) return;
-  const { href, image, heading, subHeading, type } = content;
+  const { href, image, heading, subHeading, type, id } = content;
 
   return (
     <li className={styles['list-item']}>
       {/* TODO: add proper href */}
-      <Link href={`/${type}/${heading}`}>
+      <Link href={`/${type}/${id}`}>
         <a>
           <Image width="44" height="44" src={image} alt={heading} />
           <div className={styles['flex']}>

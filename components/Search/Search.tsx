@@ -20,6 +20,7 @@ type QuickSearchType = {
   heading: string;
   subHeading?: string[];
   type: string;
+  id: string;
 };
 
 const Search = () => {

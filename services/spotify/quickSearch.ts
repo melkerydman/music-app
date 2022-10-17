@@ -29,6 +29,7 @@ const quickSearch = async (string, accessToken) => {
             subHeading: track.artists.map((artist) => artist.name),
             image: track.album.images[2].url,
             type: track.type,
+            id: track.id,
           };
         });
       }
@@ -40,6 +41,7 @@ const quickSearch = async (string, accessToken) => {
             heading: artist.name,
             image: artist.images[2]?.url,
             type: artist.type,
+            id: artist.id,
           };
         });
       }
@@ -53,6 +55,7 @@ const quickSearch = async (string, accessToken) => {
             subHeading: album.artists.map((artist) => artist.name),
             image: album.images[2].url,
             type: album.type,
+            id: album.id,
           };
         });
       }
