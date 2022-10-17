@@ -3,9 +3,11 @@
 .list-item {
   display: flex;
   position: relative;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
 
   &:hover {
-    background: green;
     background: var(--colors-grey-100);
 
     &:after {
@@ -28,4 +30,16 @@
 .flex {
   display: 'flex';
   flex-direction: 'column';
+}
+
+.heading {
+  color: var(--colors-grey-900);
+  font-size: 1.6rem;
+  font-weight: 400;
+  white-space: nowrap;
+}
+.sub-heading {
+  color: var(--colors-grey-500);
+  font-size: 1.2rem;
+  font-weight: 400;
 }
