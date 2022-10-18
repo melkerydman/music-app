@@ -38,6 +38,7 @@ export default async function handler(_, res) {
     const data = await GetSpotifyAuthToken();
     if (data.status === 400) res.status(400).json(data);
     res.status(200).json(data);
+    // TODO: res.status(200).json(data) instead of above?
   } catch {
     res.status(500).json({ status: 500, message: 'Internal server error.' });
   }

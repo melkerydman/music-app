@@ -15,7 +15,6 @@ const getTrack = async (id, accessToken) => {
   return await fetch(url, { headers })
     .then((response) => response.json())
     .then((data: Track) => {
-      console.log('data 🟢', data);
       return data;
     });
 };
