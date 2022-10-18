@@ -1,6 +1,6 @@
-import { Track } from '../../types/track';
+import { TrackFeatures } from '../../../types/trackFeatures';
 
-const getTrack = async (id, accessToken) => {
+const getTrackFeatures = async (id, accessToken) => {
   const defaultSpotifyUrl = 'https://api.spotify.com/v1';
   const headers = {
     Accept: 'application/json',
@@ -8,15 +8,15 @@ const getTrack = async (id, accessToken) => {
     Authorization: `Bearer ${accessToken}`,
   };
 
-  const url = `${defaultSpotifyUrl}/tracks/${id}`;
+  const url = `${defaultSpotifyUrl}/audio-features/${id}`;
 
   // TODO: Use axios instead of fetch
   // TODO: Validate response
   return await fetch(url, { headers })
     .then((response) => response.json())
-    .then((data: Track) => {
+    .then((data: TrackFeatures) => {
       return data;
     });
 };
 
-export default getTrack;
+export default getTrackFeatures;

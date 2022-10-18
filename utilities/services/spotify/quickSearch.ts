@@ -1,6 +1,6 @@
-import { Album } from '../../types/album';
-import { Artist } from '../../types/artist';
-import { Track } from '../../types/track';
+import { Album } from '../../../types/album';
+import { Artist } from '../../../types/artist';
+import { Track } from '../../../types/track';
 
 const quickSearch = async (string, accessToken) => {
   const defaultSpotifyUrl = 'https://api.spotify.com/v1';
