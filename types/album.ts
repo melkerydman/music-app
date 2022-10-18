@@ -1,5 +1,21 @@
+export interface Album {
+  album_type: string;
+  artists: Artist[];
+  available_markets: string[];
+  external_urls: ExternalUrls;
+  href: string;
+  id: string;
+  images: Image[];
+  name: string;
+  release_date: Date;
+  release_date_precision: string;
+  total_tracks: number;
+  type: string;
+  uri: string;
+}
+
 interface Artist {
-  externalUrls: ExternalUrls;
+  external_urls: ExternalUrls;
   href: string;
   id: string;
   name: string;
@@ -15,20 +31,4 @@ interface Image {
   height: number;
   url: string;
   width: number;
-}
-
-export interface Album {
-  albumType: string;
-  artists: Artist[];
-  availableMarkets: string[];
-  externalUrls: ExternalUrls;
-  href: string;
-  id: string;
-  images: Image[];
-  name: string;
-  releaseDate: Date;
-  releaseDatePrecision: string;
-  totalTracks: number;
-  type: 'album';
-  uri: string;
 }

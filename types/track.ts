@@ -1,45 +1,45 @@
 export interface Track {
   album: Album;
   artists: Artist[];
-  availableMarkets: string[];
-  discNumber: number;
-  durationMS: number;
+  available_markets: string[];
+  disc_number: number;
+  duration_ms: number;
   explicit: boolean;
-  externalIDS: ExternalIDS;
-  externalUrls: ExternalUrls;
+  external_ids: ExternalIDS;
+  external_urls: ExternalUrls;
   href: string;
   id: string;
-  isLocal: boolean;
+  is_local: boolean;
   name: string;
   popularity: number;
-  previewURL: string;
-  trackNumber: number;
-  type: 'track';
+  preview_url: string;
+  track_number: number;
+  type: string;
   uri: string;
 }
 
 interface Album {
-  albumType: string;
+  album_type: string;
   artists: Artist[];
-  availableMarkets: string[];
-  externalUrls: ExternalUrls;
+  available_markets: string[];
+  external_urls: ExternalUrls;
   href: string;
   id: string;
   images: Image[];
   name: string;
-  releaseDate: Date;
-  releaseDatePrecision: string;
-  totalTracks: number;
-  type: 'album';
+  release_date: Date;
+  release_date_precision: string;
+  total_tracks: number;
+  type: string;
   uri: string;
 }
 
 interface Artist {
-  externalUrls: ExternalUrls;
+  external_urls: ExternalUrls;
   href: string;
   id: string;
   name: string;
-  type: 'artist';
+  type: string;
   uri: string;
 }
 

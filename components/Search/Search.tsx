@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useSpotifyAuth } from '../../hooks/useSpotifyAuth';
+import { useSpotifyAuth } from '../../utilities/hooks/useSpotifyAuth';
 
 import styles from './Search.module.scss';
 import SearchResults from './SearchResults/SearchResults';
 
-import quickSearch from '../../services/spotify/quickSearch';
+import quickSearch from '../../utilities/services/spotify/quickSearch';
 
 // TODO: Create real types somewhere
 type QuickSearchResultsType = {

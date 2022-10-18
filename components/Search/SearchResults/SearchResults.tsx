@@ -12,6 +12,7 @@ type QuickSearchType = {
   heading: string;
   subHeading?: string[];
   type: string;
+  id: string;
 };
 type Props = {
   topResult?: QuickSearchType;

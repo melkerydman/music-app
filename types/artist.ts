@@ -1,13 +1,13 @@
 export interface Artist {
-  externalUrls: ExternalUrls;
+  external_urls: ExternalUrls;
   followers: Followers;
-  genres: any[];
+  genres: string[];
   href: string;
   id: string;
   images: Image[];
   name: string;
   popularity: number;
-  type: 'artist';
+  type: string;
   uri: string;
 }
 
