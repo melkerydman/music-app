@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiKey = process.env.API_KEY_MUSIXMATCH;
+const apiKey = process.env.MUSIXMATCH_API_KEY;
 const baseUrl = process.env.MUSIXMATCH_BASE_URL;
 
 // TODO: Add @params description
@@ -10,7 +10,6 @@ const getMusixmatchId = async (isrc: string) => {
   return await axios
     .get(url)
     .then((response) => {
-      console.log(response.data.message.body.track.track_id);
       return response.data.message.body.track.track_id;
     })
     .catch((error) => {
@@ -26,8 +25,7 @@ const getLyrics = async (isrc: string) => {
   return await axios
     .get(url)
     .then((response) => {
-      console.log(response.data.message.body.lyrics.lyrics_body);
-      return response.data.message.body.lyrics.lyrics_body;
+      return response.data.message.body.lyrics;
     })
     .catch((error) => {
       console.log('GetLyrics Error: ', error);

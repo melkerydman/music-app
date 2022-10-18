@@ -3,8 +3,9 @@ import getTrack from '../../services/spotify/getTrack';
 
 import { Heading } from '../../components/Typography/Typography';
 import getTrackFeatures from '../../services/spotify/getTrackFeatures';
+import getLyrics from '../../services/musixmatch/getLyrics';
 
-const Track = ({ trackData, trackFeatures }) => {
+const Track = ({ trackData, trackFeatures, lyrics }) => {
   const artists = trackData.artists.map((artist) => artist.name);
 
   return (
@@ -24,8 +25,14 @@ export async function getServerSideProps(context) {
     context.params.trackId,
     accessToken
   );
+  const isrc = spotifyTrackData.external_ids.isrc;
+  const lyrics = await getLyrics(isrc);
 
   return {
-    props: { trackData: spotifyTrackData, trackFeatures: spotifyTrackFeatures },
+    props: {
+      trackData: spotifyTrackData,
+      trackFeatures: spotifyTrackFeatures,
+      lyrics: lyrics,
+    },
   };
 }
