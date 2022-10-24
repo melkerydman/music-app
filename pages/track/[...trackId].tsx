@@ -1,4 +1,3 @@
-import { useSpotifyAuth } from '../../utilities/hooks/useSpotifyAuth';
 import getTrack from '../../utilities/services/spotify/getTrack';
 
 import { Heading, Paragraph } from '../../components/Typography/Typography';
@@ -8,6 +7,7 @@ import Header from '../../components/Header/Header';
 
 // TODO: Remove "styles" and create a layout component for TrackPage instead
 import styles from './track.module.scss';
+import { getTokenServer } from '../../utilities/helpers/getToken';
 
 // TODO: Type props
 const Track = ({ trackData, trackFeatures, lyrics }) => {
@@ -30,11 +30,11 @@ const Track = ({ trackData, trackFeatures, lyrics }) => {
 export default Track;
 
 export async function getServerSideProps(context) {
-  const accessToken = await useSpotifyAuth();
-  const spotifyTrackData = await getTrack(context.params.trackId, accessToken);
+  const token = await getTokenServer(context);
+  const spotifyTrackData = await getTrack(context.params.trackId, token);
   const spotifyTrackFeatures = await getTrackFeatures(
     context.params.trackId,
-    accessToken
+    token
   );
   const isrc = spotifyTrackData.external_ids.isrc;
   const lyrics = await getLyrics(isrc);

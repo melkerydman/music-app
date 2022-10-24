@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useSpotifyAuth } from '../../utilities/hooks/useSpotifyAuth';
 
 import styles from './Search.module.scss';
 import SearchResults from './SearchResults/SearchResults';
 
 import quickSearch from '../../utilities/services/spotify/quickSearch';
+import { getTokenClient } from '../../utilities/helpers/getToken';
 
 // TODO: Create real types somewhere
 type QuickSearchResultsType = {
@@ -28,12 +28,13 @@ const Search = () => {
   const [searchResults, setSearchResults] = useState<QuickSearchResultsType>(
     {}
   );
-  const [accessToken, setAccessToken] = useState();
+  const [accessToken, setAccessToken] = useState('');
 
   // TODO: handle access token storage (on server, cookie?)
   useEffect(() => {
     const getToken = async () => {
-      setAccessToken(await useSpotifyAuth());
+      const token = await getTokenClient();
+      setAccessToken(token);
     };
     getToken();
   }, []);
@@ -43,8 +44,12 @@ const Search = () => {
 
     // TODO: Naming convention for async function?
     const search = async () => {
-      const searchResult = await quickSearch(searchValue, accessToken);
-      setSearchResults(searchResult);
+      try {
+        const searchResult = await quickSearch(searchValue, accessToken);
+        setSearchResults(searchResult);
+      } catch {
+        setAccessToken(await getTokenClient());
+      }
     };
 
     search();
