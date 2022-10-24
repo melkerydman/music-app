@@ -1,10 +1,15 @@
 import axios from 'axios';
 
+// TODO: Replace with .env url
 const url = 'http://localhost:3000/api/auth';
 
-export const useSpotifyAuth = () => {
+const useSpotifyAuth = () => {
   return axios
     .get(url)
-    .then((res) => res.data.body.access_token)
+    .then((res) => {
+      return res.data.body;
+    })
     .catch((error) => error);
 };
+
+export default useSpotifyAuth;
