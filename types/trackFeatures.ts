@@ -1,20 +1,20 @@
 export interface TrackFeatures {
-  acousticness: number;
-  analysisURL: string;
   danceability: number;
-  durationMS: number;
   energy: number;
-  id: string;
-  instrumentalness: number;
   key: number;
-  liveness: number;
   loudness: number;
   mode: number;
   speechiness: number;
-  tempo: number;
-  timeSignature: number;
-  trackHref: string;
-  type: string;
-  uri: string;
+  acousticness: number;
+  instrumentalness: number;
+  liveness: number;
   valence: number;
+  tempo: number;
+  type: string;
+  id: string;
+  uri: string;
+  track_href: string;
+  analysis_url: string;
+  duration_ms: number;
+  time_signature: number;
 }
