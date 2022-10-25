@@ -1,28 +1,19 @@
 import getTrack from '../../utilities/services/spotify/getTrack';
 
-import { Heading, Paragraph } from '../../components/Typography/Typography';
+import TrackPage from '../../components/pages/TrackPage/TrackPage';
+
 import getTrackFeatures from '../../utilities/services/spotify/getTrackFeatures';
 import getLyrics from '../../utilities/services/musixmatch/getLyrics';
 import Header from '../../components/Header/Header';
 
-// TODO: Remove "styles" and create a layout component for TrackPage instead
-import styles from './track.module.scss';
 import { getTokenServer } from '../../utilities/helpers/getToken';
 
 // TODO: Type props
-const Track = ({ trackData, trackFeatures, lyrics }) => {
-  const artists = trackData.artists.map((artist) => artist.name);
-
+const Track = (props) => {
   return (
     <>
       <Header />
-      <div>
-        <Heading as="h1">{trackData.name}</Heading>;
-        <Heading as="h3">{artists.join(', ')}</Heading>;
-        <Paragraph className={styles.lyrics} as="span">
-          {lyrics.lyrics_body}
-        </Paragraph>
-      </div>
+      <TrackPage data={props} />
     </>
   );
 };
@@ -41,9 +32,9 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      trackData: spotifyTrackData,
-      trackFeatures: spotifyTrackFeatures,
-      lyrics: lyrics,
+      data: spotifyTrackData,
+      features: spotifyTrackFeatures,
+      lyrics,
     },
   };
 }
