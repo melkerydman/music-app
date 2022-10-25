@@ -1,43 +1,43 @@
-import { Lyrics, Track, TrackFeatures } from '../../../types';
+import { Album, Lyrics, Track, TrackFeatures } from '../../../types';
 import { Display, Heading, Paragraph } from '../../Typography/Typography';
+import AlbumAndFeatures from './AlbumAndFeatures/AlbumAndFeatures';
 
 import styles from './TrackPage.module.scss';
 
-const TrackPage = ({ data }) => {
-  const {
-    data: trackData,
-    features,
-    lyrics,
-  }: { data: Track; features: TrackFeatures; lyrics: Lyrics } = data;
+type Data = {
+  album: Album;
+  track: Track;
+  features: TrackFeatures;
+  lyrics: Lyrics;
+};
 
-  const artists = trackData.artists.map((artist) => artist.name);
+type Props = {
+  data: Data;
+};
+
+const TrackPage = ({ data }: Props) => {
+  const { album, track, features, lyrics } = data;
+
+  const artists = track.artists.map((artist) => artist.name);
 
   return (
-    <>
-      <div>
-        <Heading as="h3">{trackData.type}</Heading>;
+    <div>
+      <header>
+        <Heading as="h3">{track.type}</Heading>;
         <Display as="h1" small>
-          {trackData.name}
+          {track.name}
         </Display>
         <Heading as="h2">{artists.join(', ')}</Heading>;
-        <Paragraph className={styles.lyrics} as="span">
-          {lyrics.lyrics_body}
-        </Paragraph>
-      </div>
-      <img
-        width={trackData.album.images[1].width}
-        height={trackData.album.images[1].height}
-        src={trackData.album.images[1].url}
-        alt={trackData.album.name}
-      />
-      <div>
-        <h1>Features</h1>
-        <div>{features.key}</div>
-        <div>{features.mode}</div>
-        <div>{features.tempo}</div>
-        <div>{features.time_signature}</div>
-      </div>
-    </>
+      </header>
+      <main style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div>
+          <Paragraph className={styles.lyrics} as="span">
+            {lyrics.lyrics_body}
+          </Paragraph>
+        </div>
+        <AlbumAndFeatures data={{ album, features }} />
+      </main>
+    </div>
   );
 };
 export default TrackPage;
