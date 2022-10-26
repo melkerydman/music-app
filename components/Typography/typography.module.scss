@@ -34,3 +34,15 @@
     @include p-sm;
   }
 }
+
+.sans {
+  font-family: var(--ff-sans-serif);
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.thin {
+  font-weight: 400;
+}

@@ -1,19 +1,22 @@
+import { handleClassName } from '../../utilities/helpers';
 import styles from './typography.module.scss';
 
 type TypographyType = {
   className?: string;
   children?: React.ReactNode;
+  weight?: 'bold' | 'thin';
 };
 
 type DisplayType = {
-  as: 'h1' | 'h2';
+  as?: 'h1' | 'h2';
   small?: boolean;
 };
 
 export const Display = ({
-  as,
+  as = 'h1',
   small,
-  className = '',
+  weight,
+  className,
   children,
   ...rest
 }: TypographyType & DisplayType): JSX.Element => {
@@ -21,9 +24,12 @@ export const Display = ({
 
   return (
     <Component
-      className={`${styles.display} ${small ? styles['display_sm'] : ''} ${
-        className ? className : ''
-      }`}
+      className={handleClassName([
+        styles['display'],
+        small ? styles['display_sm'] : '',
+        weight ? styles[weight] : '',
+        className ? className : '',
+      ])}
       {...rest}
     >
       {children}
@@ -37,6 +43,7 @@ type HeadingType = {
 
 export const Heading = ({
   as,
+  weight,
   className,
   children,
   ...rest
@@ -45,7 +52,11 @@ export const Heading = ({
 
   return (
     <Component
-      className={`${styles[as]} ${className ? className : ''}`}
+      className={handleClassName([
+        styles[as],
+        weight ? styles[weight] : '',
+        className ? className : '',
+      ])}
       {...rest}
     >
       {children}
@@ -54,13 +65,16 @@ export const Heading = ({
 };
 
 type ParagraphType = {
-  as: 'p' | 'span';
+  as?: 'p' | 'span' | 'div';
   small?: boolean;
+  sans?: boolean;
 };
 
 export const Paragraph = ({
-  as,
+  as = 'p',
+  sans,
   small,
+  weight,
   className,
   children,
   ...rest
@@ -69,9 +83,13 @@ export const Paragraph = ({
 
   return (
     <Component
-      className={`${styles.p} ${small ? styles['p_sm'] : ''} ${
-        className ? className : ''
-      }`}
+      className={handleClassName([
+        styles['p'],
+        className ? className : '',
+        sans ? styles['sans'] : '',
+        small ? styles['p_sm'] : '',
+        weight ? styles[weight] : '',
+      ])}
       {...rest}
     >
       {children}
