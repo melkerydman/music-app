@@ -1,28 +1,18 @@
-import getTrack from '../../utilities/services/spotify/getTrack';
+import TrackPage from '../../components/pages/TrackPage/TrackPage';
+import { getAlbum, getTrack } from '../../utilities/services/spotify';
 
-import { Heading, Paragraph } from '../../components/Typography/Typography';
 import getTrackFeatures from '../../utilities/services/spotify/getTrackFeatures';
 import getLyrics from '../../utilities/services/musixmatch/getLyrics';
 import Header from '../../components/Header/Header';
 
-// TODO: Remove "styles" and create a layout component for TrackPage instead
-import styles from './track.module.scss';
 import { getTokenServer } from '../../utilities/helpers/getToken';
 
 // TODO: Type props
-const Track = ({ trackData, trackFeatures, lyrics }) => {
-  const artists = trackData.artists.map((artist) => artist.name);
-
+const Track = (props) => {
   return (
     <>
       <Header />
-      <div>
-        <Heading as="h1">{trackData.name}</Heading>;
-        <Heading as="h3">{artists.join(', ')}</Heading>;
-        <Paragraph className={styles.lyrics} as="span">
-          {lyrics.lyrics_body}
-        </Paragraph>
-      </div>
+      <TrackPage data={props} />
     </>
   );
 };
@@ -31,19 +21,22 @@ export default Track;
 
 export async function getServerSideProps(context) {
   const token = await getTokenServer(context);
-  const spotifyTrackData = await getTrack(context.params.trackId, token);
+  const spotifyTrack = await getTrack(context.params.trackId, token);
+  const albumId = spotifyTrack.album.id;
+  const spotifyAlbum = await getAlbum(albumId, token);
   const spotifyTrackFeatures = await getTrackFeatures(
     context.params.trackId,
     token
   );
-  const isrc = spotifyTrackData.external_ids.isrc;
+  const isrc = spotifyTrack.external_ids.isrc;
   const lyrics = await getLyrics(isrc);
 
   return {
     props: {
-      trackData: spotifyTrackData,
-      trackFeatures: spotifyTrackFeatures,
-      lyrics: lyrics,
+      album: spotifyAlbum,
+      track: spotifyTrack,
+      features: spotifyTrackFeatures,
+      lyrics,
     },
   };
 }

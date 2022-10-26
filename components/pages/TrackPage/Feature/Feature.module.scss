@@ -1,0 +1,22 @@
+.feature {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-size: 1.2rem;
+  letter-spacing: -0.07rem;
+
+  &_title {
+    white-space: nowrap;
+  }
+}
+
+.spacer {
+  flex-grow: 1;
+  width: 100%;
+  height: 0.05rem;
+  background-color: var(--colors-black);
+
+  &-bold {
+    height: 0.1rem;
+  }
+}
