@@ -3,54 +3,54 @@
 
 @mixin display-lg {
   font-size: 9.6rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.07em;
 }
 @mixin display-sm {
   font-size: 7.2rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.07em;
 }
 
 @mixin h1 {
   font-size: 5.6rem;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.05em;
 }
 @mixin h2 {
   font-size: 4.4rem;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.05em;
 }
 @mixin h3 {
   font-size: 3.6rem;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.05em;
 }
 @mixin h4 {
   font-size: 2.8rem;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.04em;
 }
 @mixin h5 {
   font-size: 2.2rem;
-  font-weight: 300;
+  font-weight: 500;
   letter-spacing: -0.03em;
 }
 @mixin h6 {
   font-size: 1.6rem;
-  font-weight: 300;
+  font-weight: 500;
   letter-spacing: -0.03em;
 }
 
 @mixin p {
   font-family: var(--ff-serif);
   font-size: 1.6rem;
-  font-weight: 400;
+  font-weight: 500;
 }
 @mixin p-sm {
   font-size: 1.4rem;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 @mixin background-gradient($start-color, $end-color, $orientation) {

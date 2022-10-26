@@ -1,5 +1,8 @@
+// TODO: Need to look over css style system and guide
+
 @use './reset.scss' as *;
 @use './variables.scss' as *;
+@use './type.scss' as *;
 
 // Do this is root or HTML?
 :root {
@@ -7,11 +10,17 @@
   @include fonts;
 }
 
-html,
+html {
+  font-size: 62.5%;
+}
+
 body {
   font-family: var(--ff-sans-serif);
   background-color: var(--colors-white);
   color: var(--colors-black);
+  font-size: 1.6rem;
+  height: 100vh;
+  overflow: hidden;
 }
 
 // @media (prefers-color-scheme: dark) {

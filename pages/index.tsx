@@ -9,7 +9,9 @@ export default function Home() {
   return (
     <>
       <Header />
-      <Display as="h1">Display</Display>
+      <Display as="h1" weight="bold">
+        Display
+      </Display>
       <Display as="h1" small>
         Display
       </Display>
@@ -19,10 +21,11 @@ export default function Home() {
       <Heading as="h4">Heading</Heading>
       <Heading as="h5">Heading</Heading>
       <Heading as="h6">Heading</Heading>
-      <Paragraph as="p">Paragraph</Paragraph>
-      <Paragraph as="p" small>
-        Paragraph
+      <Paragraph>Paragraph</Paragraph>
+      <Paragraph sans weight="bold">
+        Paragraph sans
       </Paragraph>
+      <Paragraph small>Paragraph small</Paragraph>
     </>
   );
 }
