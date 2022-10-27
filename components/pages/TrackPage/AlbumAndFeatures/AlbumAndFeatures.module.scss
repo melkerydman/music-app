@@ -1,3 +1,9 @@
+.album-and-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
 .features {
   display: flex;
   flex-direction: column;

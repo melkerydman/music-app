@@ -9,7 +9,8 @@
 }
 
 .track {
-  &:hover {
+  &:hover,
+  &--active {
     font-weight: 600;
   }
 }

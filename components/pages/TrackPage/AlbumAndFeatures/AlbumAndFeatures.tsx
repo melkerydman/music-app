@@ -1,5 +1,16 @@
-import type { Album as AlbumType, TrackFeatures } from '../../../../types';
-import { Heading } from '../../../Typography/Typography';
+import type {
+  Album as AlbumType,
+  Track,
+  TrackFeatures,
+} from '../../../../types';
+import {
+  handleClassName,
+  formatKey,
+  formatMode,
+  formatTempo,
+  formatTimeSignature,
+  formatDuration,
+} from '../../../../utilities/helpers';
 import Album from '../Album/Album';
 import Feature from '../Feature/Feature';
 import styles from './AlbumAndFeatures.module.scss';
@@ -8,6 +19,7 @@ import styles from './AlbumAndFeatures.module.scss';
 type Data = {
   album: AlbumType;
   features: TrackFeatures;
+  track: Track;
 };
 
 type Props = {
@@ -15,10 +27,10 @@ type Props = {
 };
 
 const AlbumAndFeatures = ({ data }: Props) => {
-  const { album, features } = data;
+  const { album, features, track } = data;
 
   return (
-    <aside>
+    <aside className={handleClassName([styles['album-and-features']])}>
       <img
         width={album.images[1].width}
         height={album.images[1].height}
@@ -26,16 +38,22 @@ const AlbumAndFeatures = ({ data }: Props) => {
         alt={album.name}
       />
       <div className={styles['features']}>
-        <Feature title="Tempo" value={features.tempo.toString()} />
-        <Feature title="Key" value={features.key.toString()} />
-        <Feature title="Mode" value={features.mode.toString()} />
+        <Feature title="Tempo" value={formatTempo(features.tempo)} />
+        <Feature
+          title="Key"
+          value={`${formatKey(features.key)} ${formatMode(features.mode)}`}
+        />
         <Feature
           title="Time Signature"
-          value={features.time_signature.toString()}
+          value={formatTimeSignature(features.time_signature)}
         />
-        <Feature title="Duration" value={features.duration_ms.toString()} />
+        <Feature
+          title="Duration"
+          value={formatDuration(features.duration_ms)}
+        />
       </div>
-      <Album album={album} />
+      {/* // TODO: Find better way of keeping track of which track is active */}
+      <Album activeId={track.id} album={album} />
     </aside>
   );
 };

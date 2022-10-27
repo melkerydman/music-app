@@ -23,19 +23,20 @@ const TrackPage = ({ data }: Props) => {
   return (
     <div>
       <header>
-        <Heading as="h3">{track.type}</Heading>;
+        <Heading as="h3">{track.type}</Heading>
         <Display as="h1" small>
           {track.name}
         </Display>
-        <Heading as="h2">{artists.join(', ')}</Heading>;
+        <Heading as="h2">{artists.join(', ')}</Heading>
       </header>
+      {/* //TODO: Remove inline styling   */}
       <main style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div>
           <Paragraph className={styles.lyrics} as="span">
             {lyrics.lyrics_body}
           </Paragraph>
         </div>
-        <AlbumAndFeatures data={{ album, features }} />
+        <AlbumAndFeatures data={{ album, features, track }} />
       </main>
     </div>
   );
