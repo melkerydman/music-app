@@ -26,7 +26,7 @@ export const Display = ({
     <Component
       className={handleClassName([
         styles['display'],
-        small ? styles['display_sm'] : '',
+        small ? styles['display--sm'] : '',
         weight ? styles[weight] : '',
         className ? className : '',
       ])}
@@ -87,7 +87,7 @@ export const Paragraph = ({
         styles['p'],
         className ? className : '',
         sans ? styles['sans'] : '',
-        small ? styles['p_sm'] : '',
+        small ? styles['p--sm'] : '',
         weight ? styles[weight] : '',
       ])}
       {...rest}

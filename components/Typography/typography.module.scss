@@ -3,7 +3,7 @@
 .display {
   @include display-lg;
 
-  &_sm {
+  &--sm {
     @include display-sm;
   }
 }
@@ -30,7 +30,7 @@
 .p {
   @include p;
 
-  &_sm {
+  &--sm {
     @include p-sm;
   }
 }
