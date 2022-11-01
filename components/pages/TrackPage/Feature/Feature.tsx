@@ -1,3 +1,4 @@
+import { Paragraph } from '../../../Typography/Typography';
 import styles from './Feature.module.scss';
 
 // TODO: New name
@@ -10,9 +11,13 @@ type Props = { title: string; value: string };
 const Feature = ({ title, value }: Props) => {
   return (
     <div className={styles['feature']}>
-      <div className={styles['feature_title']}>[ {title} ]</div>
+      <Paragraph as="div" sans small weight="bold">
+        [ {title} ]
+      </Paragraph>
       <Spacer />
-      <div>{value}</div>
+      <Paragraph as="div" sans small weight="thin">
+        {value}
+      </Paragraph>
     </div>
   );
 };

@@ -1,7 +1,11 @@
 .album-and-features {
-  display: flex;
-  flex-direction: column;
-  gap: 1.6rem;
+  width: 37.5%;
+
+  > img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 0.8rem;
+  }
 }
 
 .features {

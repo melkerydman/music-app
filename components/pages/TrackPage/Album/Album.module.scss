@@ -1,16 +1,31 @@
-.album {
-}
-
 .tracks {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  font-size: 1.2rem;
 }
 
 .track {
+  white-space: nowrap;
   &:hover,
   &--active {
     font-weight: 600;
+  }
+}
+
+.info {
+  display: flex;
+  // justify-content: space-between;
+  white-space: nowrap;
+
+  &--left {
+    width: 62.5%;
+    > div {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  &--right {
+    width: 37.5%;
+    text-align: right;
   }
 }

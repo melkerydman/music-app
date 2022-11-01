@@ -31,10 +31,11 @@ const AlbumAndFeatures = ({ data }: Props) => {
 
   return (
     <aside className={handleClassName([styles['album-and-features']])}>
+      {/* // TODO: Use next image component and see how that affects stuff */}
       <img
-        width={album.images[1].width}
-        height={album.images[1].height}
-        src={album.images[1].url}
+        width={album.images[0].width}
+        height={album.images[0].height}
+        src={album.images[0].url}
         alt={album.name}
       />
       <div className={styles['features']}>

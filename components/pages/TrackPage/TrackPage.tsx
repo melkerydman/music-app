@@ -21,7 +21,7 @@ const TrackPage = ({ data }: Props) => {
   const artists = track.artists.map((artist) => artist.name);
 
   return (
-    <div>
+    <main className="container">
       <header>
         <Heading as="h3">{track.type}</Heading>
         <Display as="h1" small>
@@ -30,15 +30,16 @@ const TrackPage = ({ data }: Props) => {
         <Heading as="h2">{artists.join(', ')}</Heading>
       </header>
       {/* //TODO: Remove inline styling   */}
-      <main style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <section style={{ display: 'flex', justifyContent: 'space-between' }}>
+        {/* //TODO: Create lyrics component */}
         <div>
           <Paragraph className={styles.lyrics} as="span">
             {lyrics.lyrics_body}
           </Paragraph>
         </div>
         <AlbumAndFeatures data={{ album, features, track }} />
-      </main>
-    </div>
+      </section>
+    </main>
   );
 };
 export default TrackPage;
