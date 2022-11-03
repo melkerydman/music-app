@@ -1,4 +1,37 @@
+// TODO: Double check if commented stuff is needed - otherwise remove
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* flex-grow: 1; */
+  min-height: 0;
+}
+
+.header {
+}
+
+.content {
+  display: flex;
+  /* justify-content: space-between; */
+  /* flex-grow: 1; */
+  overflow: hidden;
+}
+
 .lyrics {
   white-space: pre-wrap;
   word-break: break-word;
+  overflow: scroll;
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &-outer {
+    display: flex;
+    flex-direction: column;
+  }
 }
