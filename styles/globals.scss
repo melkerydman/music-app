@@ -19,7 +19,12 @@ body {
   background-color: var(--colors-white);
   color: var(--colors-black);
   font-size: 1.6rem;
+}
+#__next {
+  // TODO: Create solution for 100vh that works on all devices
   height: 100vh;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
 }
 

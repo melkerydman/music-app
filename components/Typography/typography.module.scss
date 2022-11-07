@@ -3,7 +3,7 @@
 .display {
   @include display-lg;
 
-  &_sm {
+  &--sm {
     @include display-sm;
   }
 }
@@ -30,13 +30,14 @@
 .p {
   @include p;
 
-  &_sm {
+  &--sm {
     @include p-sm;
   }
 }
 
 .sans {
   font-family: var(--ff-sans-serif);
+  letter-spacing: -0.03em;
 }
 
 .bold {

@@ -1,15 +1,13 @@
-.album {
-}
-
 .tracks {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  font-size: 1.2rem;
 }
 
 .track {
-  &:hover {
+  white-space: nowrap;
+  &:hover,
+  &--active {
     font-weight: 600;
   }
 }
