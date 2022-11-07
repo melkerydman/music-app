@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type {
   Album as AlbumType,
   Track,
@@ -33,16 +34,16 @@ const AlbumAndFeatures = ({ data }: Props) => {
   return (
     <aside className={handleClassName([styles['album-and-features']])}>
       {/* // TODO: Use next image component and see how that affects stuff */}
-      <img
+      <Image
         width={album.images[0].width}
         height={album.images[0].height}
         src={album.images[0].url}
         alt={album.name}
       />
       {/* // TODO: Rename wrapper */}
-      <div className={styles['wrapper']}>
+      <div className={styles.wrapper}>
         <AlbumInfo album={album} />
-        <div className={styles['features']}>
+        <div className={styles.features}>
           <Feature title="Tempo" value={formatTempo(features.tempo)} />
           <Feature
             title="Key"
@@ -57,7 +58,7 @@ const AlbumAndFeatures = ({ data }: Props) => {
             value={formatDuration(features.duration_ms)}
           />
         </div>
-        {/* // TODO: Find better way of keeping track of which track is active - maybe store it in state? */}
+        {/* // TODO: Store active track in state instead? */}
         <TrackList activeId={track.id} album={album}></TrackList>
       </div>
     </aside>

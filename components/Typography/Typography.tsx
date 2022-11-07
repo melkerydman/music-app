@@ -25,10 +25,10 @@ export const Display = ({
   return (
     <Component
       className={handleClassName([
-        styles['display'],
+        styles.display,
         small ? styles['display--sm'] : '',
         weight ? styles[weight] : '',
-        className ? className : '',
+        className || '',
       ])}
       {...rest}
     >
@@ -55,7 +55,7 @@ export const Heading = ({
       className={handleClassName([
         styles[as],
         weight ? styles[weight] : '',
-        className ? className : '',
+        className || '',
       ])}
       {...rest}
     >
@@ -84,9 +84,9 @@ export const Paragraph = ({
   return (
     <Component
       className={handleClassName([
-        styles['p'],
-        className ? className : '',
-        sans ? styles['sans'] : '',
+        styles.p,
+        className || '',
+        sans ? styles.sans : '',
         small ? styles['p--sm'] : '',
         weight ? styles[weight] : '',
       ])}
