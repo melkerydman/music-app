@@ -1,4 +1,4 @@
-import TrackPage from '../../components/pages/TrackPage/TrackPage';
+import TrackPage from '../../components/pages';
 import { getAlbum, getTrack } from '../../utilities/services/spotify';
 
 import getTrackFeatures from '../../utilities/services/spotify/getTrackFeatures';
@@ -8,14 +8,12 @@ import Header from '../../components/Header/Header';
 import { getTokenServer } from '../../utilities/helpers/getToken';
 
 // TODO: Type props
-const Track = (props) => {
-  return (
-    <>
-      <Header />
-      <TrackPage data={props} />
-    </>
-  );
-};
+const Track = (props) => (
+  <>
+    <Header />
+    <TrackPage data={props} />
+  </>
+);
 
 export default Track;
 
@@ -28,7 +26,7 @@ export async function getServerSideProps(context) {
     context.params.trackId,
     token
   );
-  const isrc = spotifyTrack.external_ids.isrc;
+  const { isrc } = spotifyTrack.external_ids;
   const lyrics = await getLyrics(isrc);
 
   return {
