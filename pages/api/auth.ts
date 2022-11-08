@@ -1,4 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+// https://github.com/vercel/next.js/blob/canary/examples/api-routes-cors/pages/api/cors.ts
 
 const axios = require('axios');
 const qs = require('qs');
