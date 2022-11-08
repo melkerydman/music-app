@@ -53,13 +53,14 @@ const Search = () => {
     };
 
     search();
-  }, [searchValue]);
+    return undefined;
+  }, [searchValue, accessToken]);
 
   return (
     // TODO: Create own components
-    <div className={styles['search']}>
+    <div className={styles.search}>
       <input
-        className={styles['search_input']}
+        className={styles.search_input}
         id="search"
         name="search"
         type="text"

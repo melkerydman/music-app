@@ -13,13 +13,12 @@ function padTo2Digits(num: number) {
   return num.toString().padStart(2, '0');
 }
 
-const TrackList = ({ activeId, album }: Props) => {
-  return (
+const TrackList = ({ activeId, album }: Props) => (
     <div>
       <Paragraph as="div" sans small weight="bold">
         [ Tracklist ]
       </Paragraph>
-      <div className={styles['tracks']}>
+      <div className={styles.tracks}>
         {album.tracks.items.map((track, index) => (
           <Paragraph
             as="div"
@@ -27,7 +26,7 @@ const TrackList = ({ activeId, album }: Props) => {
             weight="thin"
             sans
             className={handleClassName([
-              styles['track'],
+              styles.track,
               track.id === activeId ? styles['track--active'] : '',
             ])}
             key={index}
@@ -42,5 +41,4 @@ const TrackList = ({ activeId, album }: Props) => {
       </div>
     </div>
   );
-};
 export default TrackList;

@@ -7,11 +7,11 @@ type Props = {
   album: AlbumType;
 };
 
-const AlbumInfo = ({ album }: Props) => {
+const AlbumInfo = ({ album }: Props) => 
   // TODO: Look through all of this, break out to classes as well as create global classes to use
-  return (
+   (
     <div>
-      <div className={handleClassName([styles['info']])}>
+      <div className={handleClassName([styles.info])}>
         <div className={handleClassName([styles['info--left']])}>
           <Paragraph small sans weight="bold" as="div">
             [ Album ]
@@ -30,6 +30,6 @@ const AlbumInfo = ({ album }: Props) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+;
 export default AlbumInfo;
