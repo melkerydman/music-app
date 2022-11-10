@@ -1,3 +1,16 @@
 {
-  "extends": ["next/core-web-vitals", "airbnb-base", "airbnb-typescript/base"]
+  "extends": [
+    "next/core-web-vitals",
+    "airbnb-base",
+    "airbnb-typescript/base",
+    "prettier"
+  ],
+  "parserOptions": {
+    "project": ["./tsconfig.json"]
+  },
+  "rules": {
+    // "comma-dangle": "off"
+    // "@typescript-eslint/comma-dangle": "off",
+    // "object-curly-newline": "off",
+  }
 }

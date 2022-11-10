@@ -1,26 +1,39 @@
+// TODO: Need to look over css style system and guide
+
 @use './reset.scss' as *;
 @use './variables.scss' as *;
+@use './type.scss' as *;
 
 // Do this is root or HTML?
 :root {
   @include colors;
+  @include fonts;
 }
 
 html {
-}
-h1 {
-  font-family: 'Inter', sans-serif;
-}
-p {
-  font-family: 'EB Garamond', serif;
+  font-size: 62.5%;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+body {
+  font-family: var(--ff-sans-serif);
+  background-color: var(--colors-white);
+  color: var(--colors-black);
+  font-size: 1.6rem;
 }
+#__next {
+  // TODO: Create solution for 100vh that works on all devices
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+// @media (prefers-color-scheme: dark) {
+//   html {
+//     color-scheme: dark;
+//   }
+//   body {
+//     color: var(--colors-white);
+//     background: var(--colors-blacks);
+//   }
+// }

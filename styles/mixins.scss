@@ -1,10 +1,74 @@
-@use './type.scss' as *;
+// @use './type.scss' as *;
+@use './variables.scss' as *;
 
-@mixin Display {
-  font-family: 'Inter', sans-serif;
+@mixin display-lg {
+  font-size: 9.6rem;
+  font-weight: 500;
+  letter-spacing: -0.07em;
+}
+@mixin display-sm {
   font-size: 7.2rem;
-  font-weight: 600;
+  font-weight: 500;
+  letter-spacing: -0.07em;
 }
 
-@mixin H1 {
+@mixin h1 {
+  font-size: 5.6rem;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+}
+@mixin h2 {
+  font-size: 4.4rem;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+}
+@mixin h3 {
+  font-size: 3.6rem;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+}
+@mixin h4 {
+  font-size: 2.8rem;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+@mixin h5 {
+  font-size: 2.2rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+@mixin h6 {
+  font-size: 1.6rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+@mixin p {
+  font-family: var(--ff-serif);
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+@mixin p-sm {
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+@mixin background-gradient($start-color, $end-color, $orientation) {
+  background: $start-color;
+
+  @if $orientation == 'vertical' {
+    background: -webkit-linear-gradient(top, $start-color, $end-color);
+    background: linear-gradient(to bottom, $start-color, $end-color);
+  } @else if $orientation == 'horizontal' {
+    background: -webkit-linear-gradient(left, $start-color, $end-color);
+    background: linear-gradient(to right, $start-color, $end-color);
+  } @else {
+    background: -webkit-radial-gradient(
+      center,
+      ellipse cover,
+      $start-color,
+      $end-color
+    );
+    background: radial-gradient(ellipse at center, $start-color, $end-color);
+  }
 }

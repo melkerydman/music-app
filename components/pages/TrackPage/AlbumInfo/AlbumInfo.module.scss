@@ -1,0 +1,17 @@
+.info {
+  display: flex;
+  // justify-content: space-between;
+  white-space: nowrap;
+
+  &--left {
+    width: 62.5%;
+    > div {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  &--right {
+    width: 37.5%;
+    text-align: right;
+  }
+}
