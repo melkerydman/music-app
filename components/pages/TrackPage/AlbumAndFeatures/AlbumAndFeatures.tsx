@@ -26,14 +26,14 @@ type Data = {
 
 type Props = {
   data: Data;
+  className?: string;
 };
 
-const AlbumAndFeatures = ({ data }: Props) => {
+const AlbumAndFeatures = ({ data, className }: Props) => {
   const { album, features, track } = data;
 
   return (
-    <aside className={handleClassName([styles['album-and-features']])}>
-      {/* // TODO: Use next image component and see how that affects stuff */}
+    <aside className={handleClassName([className || '', styles.outer])}>
       <Image
         width={album.images[0].width}
         height={album.images[0].height}
@@ -41,7 +41,7 @@ const AlbumAndFeatures = ({ data }: Props) => {
         alt={album.name}
       />
       {/* // TODO: Rename wrapper */}
-      <div className={styles.wrapper}>
+      <div className={styles.inner}>
         <AlbumInfo album={album} />
         <div className={styles.features}>
           <Feature title="Tempo" value={formatTempo(features.tempo)} />

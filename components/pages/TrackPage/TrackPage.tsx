@@ -39,7 +39,10 @@ const TrackPage = ({ data }: Props) => {
             {lyrics.lyrics_body}
           </Paragraph>
         </div>
-        <AlbumAndFeatures data={{ album, features, track }} />
+        <AlbumAndFeatures
+          className={styles['album-and-features']}
+          data={{ album, features, track }}
+        />
       </section>
     </main>
   );
