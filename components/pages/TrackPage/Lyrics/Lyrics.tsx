@@ -1,0 +1,26 @@
+import { Lyrics as LyricsType } from '../../../../types';
+import { Heading, Paragraph } from '../../../Typography/Typography';
+import styles from './Lyrics.module.scss';
+
+type Data = {
+  lyrics: LyricsType;
+};
+
+type Props = {
+  data: Data;
+};
+
+const Lyrics = ({ data }: Props): JSX.Element => {
+  const { lyrics } = data;
+
+  return (
+    <div className={styles['lyrics-outer']}>
+      <Heading as="h4">Lyrics</Heading>
+      <Paragraph className={styles.lyrics} as="span">
+        {lyrics.lyrics_body}
+      </Paragraph>
+    </div>
+  );
+};
+
+export default Lyrics;

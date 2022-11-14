@@ -1,7 +1,13 @@
-import { Album, Lyrics, Track, TrackFeatures } from '../../../types';
-import { handleClassName } from '../../../utilities/helpers';
-import { Display, Heading, Paragraph } from '../../Typography/Typography';
+import {
+  Album,
+  Lyrics as LyricsType,
+  Track,
+  TrackFeatures,
+} from '../../../types';
+import PageSection from '../../PageSection/PageSection';
+import { Display, Heading } from '../../Typography/Typography';
 import AlbumAndFeatures from './AlbumAndFeatures/AlbumAndFeatures';
+import Lyrics from './Lyrics/Lyrics';
 
 import styles from './TrackPage.module.scss';
 
@@ -9,7 +15,7 @@ type Data = {
   album: Album;
   track: Track;
   features: TrackFeatures;
-  lyrics: Lyrics;
+  lyrics: LyricsType;
 };
 
 type Props = {
@@ -23,25 +29,42 @@ const TrackPage = ({ data }: Props) => {
   const artists = track.artists.map((artist) => artist.name);
 
   return (
-    <main className={handleClassName(['container', styles.page])}>
-      <header className={styles.header}>
-        <Heading as="h3">{track.type}</Heading>
-        <Display as="h1" small>
-          {track.name}
-        </Display>
-        <Heading as="h2">{artists.join(', ')}</Heading>
-      </header>
-      <section className={styles.content}>
-        {/* //TODO: Create lyrics component */}
-        <div className={styles['lyrics-outer']}>
-          <Heading as="h4">Lyrics</Heading>
-          <Paragraph className={styles.lyrics} as="span">
-            {lyrics.lyrics_body}
-          </Paragraph>
+    <PageSection containerClassName="flex">
+      <>
+        <div>
+          <header className={styles.header}>
+            <Heading as="h3">{track.type}</Heading>
+            <Display as="h1" small>
+              {track.name}
+            </Display>
+            <Heading as="h2">{artists.join(', ')}</Heading>
+          </header>
+
+          <Lyrics data={{ lyrics }} />
         </div>
-        <AlbumAndFeatures data={{ album, features, track }} />
-      </section>
-    </main>
+        <AlbumAndFeatures
+          className={styles['album-and-features']}
+          data={{ album, features, track }}
+        />
+      </>
+    </PageSection>
   );
 };
 export default TrackPage;
+
+// <div className={handleClassName([styles.page])}>
+//   <header className={styles.header}>
+//     <Heading as="h3">{track.type}</Heading>
+//     <Display as="h1" small>
+//       {track.name}
+//     </Display>
+//     <Heading as="h2">{artists.join(', ')}</Heading>
+//   </header>
+//   <section className={styles.content}>
+//     <Lyrics data={{ lyrics }} />
+//     <AlbumAndFeatures
+//       className={styles['album-and-features']}
+//       data={{ album, features, track }}
+//     />
+//   </section>
+// </div>

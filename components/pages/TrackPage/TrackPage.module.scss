@@ -4,8 +4,19 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  /* flex-grow: 1; */
+  flex-grow: 1;
   min-height: 0;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 5rem;
+    background: linear-gradient(var(--colors-white), rgba(0, 0, 0, 0));
+  }
 }
 
 .header {
@@ -13,25 +24,21 @@
 
 .content {
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   /* flex-grow: 1; */
-  overflow: hidden;
+  // overflow: hidden;
 }
 
-.lyrics {
-  white-space: pre-wrap;
-  word-break: break-word;
-  overflow: scroll;
-
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  &-outer {
-    display: flex;
-    flex-direction: column;
+.album-and-features {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 90%;
+  background-color: var(--colors-white);
+  @media screen and (min-width: 768px) {
+    position: relative;
+    top: unset;
+    right: unset;
+    width: 30%;
   }
 }

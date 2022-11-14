@@ -1,8 +1,4 @@
-.album-and-features {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 37.5%;
+.outer {
   padding-top: 15rem;
   // padding-top: HEIGHT OF PAGEHEADER;
   height: 100%;
@@ -21,14 +17,14 @@
   }
 }
 
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
 .features {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-}
-
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 2.4rem;
 }
