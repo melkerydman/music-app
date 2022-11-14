@@ -3,6 +3,7 @@
 // TODO: Why using --size instead of just border-radius: 0.8rem 0 0 0
 .logo {
   --size: 4rem;
+  position: relative;
 
   @include background-gradient(
     var(--colors-gradient-start),
@@ -19,5 +20,16 @@
     width: 7.2rem;
     height: 7.2rem;
     // border-radius: calc(var(--size) / 5) 0 0 0;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    height: 0.8rem;
+    width: 0.8rem;
+    border-radius: 50%;
+    background-color: var(--colors-white);
+    top: calc(50% - 0.4rem);
+    left: calc(50% - 0.4rem);
   }
 }

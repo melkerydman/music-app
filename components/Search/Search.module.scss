@@ -2,29 +2,37 @@
   font-size: 1.2rem;
   padding-left: 1.6rem;
   padding-right: 1.6rem;
-  background-color: var(--colors-white);
+  // background-color: var(--colors-white);
   color: var(--colors-grey-500);
-  width: 50rem;
-  height: 4rem;
-  border-radius: 0 0 0.8rem 0;
-
-  // &:focus {
-  //   // background-color: var(--colors-grey-100);
-  //   color: var(--colors-grey-900);
-  //   box-shadow: inset 0px 0px 1.6rem rgba(0, 0, 0, 0.1);
-  // }
+  // width: 50rem;
+  // height: 4rem;
 }
 
 .search {
   position: relative;
+  background: linear-gradient(
+    to right,
+    var(--colors-gradient-start) 50%,
+    var(--colors-white) 50%
+  );
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all 0.5s ease-out;
 
-  &:focus-within {
-    // background-color: var(--colors-grey-100);
-    // box-shadow: inset 0px 0px 1.6rem rgba(0, 0, 0, 0.1);
-    filter: drop-shadow(0px 4px 16px rgba(0, 0, 0, 0.05));
+  &:hover {
+    background-position: left bottom;
+    // background-color: var(--colors-gradient-start);
 
     .search_input {
-      color: var(--colors-grey-900);
+      color: var(--colors-grey-100);
+    }
+  }
+
+  &:focus-within {
+    background: var(--colors-gradient-start);
+
+    .search_input {
+      color: var(--colors-white);
     }
   }
 }
