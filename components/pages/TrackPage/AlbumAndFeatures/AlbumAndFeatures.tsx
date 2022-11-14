@@ -29,7 +29,7 @@ type Props = {
   className?: string;
 };
 
-const AlbumAndFeatures = ({ data, className }: Props) => {
+const AlbumAndFeatures = ({ data, className }: Props): JSX.Element => {
   const { album, features, track } = data;
 
   return (
