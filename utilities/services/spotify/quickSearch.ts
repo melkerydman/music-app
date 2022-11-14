@@ -17,7 +17,7 @@ const quickSearch = async (string, accessToken) => {
 
   // TODO: Use axios instead of fetch
   // TODO: Validate response
-  return await fetch(url, { headers })
+  return fetch(url, { headers })
     .then((response) => response.json())
     .then((data) => {
       const albums = data.albums.items as Album[];
@@ -29,46 +29,40 @@ const quickSearch = async (string, accessToken) => {
 
       let formattedTracks = [];
       if (tracks.length > 0) {
-        formattedTracks = tracks.slice(0, maxTracks).map((track) => {
-          return {
-            href: track.href,
-            heading: track.name,
-            subHeading: track.artists.map((artist) => artist.name),
-            image: track.album.images[2].url,
-            type: track.type,
-            id: track.id,
-          };
-        });
+        formattedTracks = tracks.slice(0, maxTracks).map((track) => ({
+          href: track.href,
+          heading: track.name,
+          subHeading: track.artists.map((artist) => artist.name),
+          image: track.album.images[2].url,
+          type: track.type,
+          id: track.id,
+        }));
       }
       let formattedArtists = [];
       if (artists.length > 0) {
-        formattedArtists = artists.slice(0, maxArtists).map((artist) => {
-          return {
-            href: artist.href,
-            heading: artist.name,
-            image: artist.images[2]?.url,
-            type: artist.type,
-            id: artist.id,
-          };
-        });
+        formattedArtists = artists.slice(0, maxArtists).map((artist) => ({
+          href: artist.href,
+          heading: artist.name,
+          image: artist.images[2]?.url,
+          type: artist.type,
+          id: artist.id,
+        }));
       }
 
       let formattedAlbums = [];
       if (albums.length > 0) {
-        formattedAlbums = albums.slice(0, maxAlbums).map((album) => {
-          return {
-            href: album.href,
-            heading: album.name,
-            subHeading: album.artists.map((artist) => artist.name),
-            image: album.images[2].url,
-            type: album.type,
-            id: album.id,
-          };
-        });
+        formattedAlbums = albums.slice(0, maxAlbums).map((album) => ({
+          href: album.href,
+          heading: album.name,
+          subHeading: album.artists.map((artist) => artist.name),
+          image: album.images[2].url,
+          type: album.type,
+          id: album.id,
+        }));
       }
 
       // TODO: Make sure this actually works
-      let topResult =
+      const topResult =
         formattedTracks[0] || formattedArtists[0] || formattedAlbums[0];
       return {
         topResult,
