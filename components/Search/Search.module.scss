@@ -2,14 +2,9 @@
   font-size: 1.2rem;
   padding-left: 1.6rem;
   padding-right: 1.6rem;
-  // background-color: var(--colors-white);
   color: var(--colors-grey-500);
-  // width: 50rem;
-  // height: 4rem;
-}
+  width: 50rem;
 
-.search {
-  position: relative;
   background: linear-gradient(
     to right,
     var(--colors-gradient-start) 50%,
@@ -17,22 +12,33 @@
   );
   background-size: 200% 100%;
   background-position: right bottom;
-  transition: all 0.5s ease-out;
-
-  &:hover {
+  transition: all 0s;
+  &:hover,
+  &:focus {
     background-position: left bottom;
-    // background-color: var(--colors-gradient-start);
-
-    .search_input {
-      color: var(--colors-grey-100);
-    }
+    transition: all 0.3s ease-in;
   }
-
-  &:focus-within {
-    background: var(--colors-gradient-start);
-
-    .search_input {
-      color: var(--colors-white);
-    }
+  &:hover {
+    color: var(--colors-white);
   }
+  &:focus {
+    color: var(--colors-white);
+  }
+}
+
+.search {
+  position: relative;
+  z-index: 1;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  // TODO: Decide whether or not to use overlay
+  // background-color: #171717;
+  opacity: 0.15;
+  z-index: -1;
 }
