@@ -84,12 +84,15 @@ const Search = () => {
       {/* // TODO: Better way of checking if searchResults is empty */}
       {/* {Object.entries(searchResults).length! > 0 && ( */}
       {isSearching && Object.entries(searchResults).length! > 0 && (
-        <SearchResults
-          topResult={searchResults.topResult}
-          artists={searchResults.artists}
-          tracks={searchResults.tracks}
-          albums={searchResults.albums}
-        />
+        <>
+          <div className={styles.overlay} />
+          <SearchResults
+            topResult={searchResults.topResult}
+            artists={searchResults.artists}
+            tracks={searchResults.tracks}
+            albums={searchResults.albums}
+          />
+        </>
       )}
     </div>
   );
