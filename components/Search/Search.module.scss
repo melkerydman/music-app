@@ -4,7 +4,7 @@
   padding-right: 1.6rem;
   // background-color: var(--colors-white);
   color: var(--colors-grey-500);
-  // width: 50rem;
+  width: 50rem;
   // height: 4rem;
 }
 
@@ -17,10 +17,11 @@
   );
   background-size: 200% 100%;
   background-position: right bottom;
-  transition: all 0.5s ease-out;
+  transition: all 0.2s ease-in;
 
   &:hover {
     background-position: left bottom;
+
     // background-color: var(--colors-gradient-start);
 
     .search_input {

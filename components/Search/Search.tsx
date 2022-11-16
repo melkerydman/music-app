@@ -5,6 +5,7 @@ import SearchResults from './SearchResults/SearchResults';
 
 import quickSearch from '../../utilities/services/spotify/quickSearch';
 import { getTokenClient } from '../../utilities/helpers/getToken';
+import useSearchStore from '../../store/useStore';
 
 // TODO: Create real types somewhere
 type QuickSearchResultsType = {
@@ -24,11 +25,15 @@ type QuickSearchType = {
 };
 
 const Search = () => {
-  const [searchValue, setSearchValue] = useState<string>('');
   const [searchResults, setSearchResults] = useState<QuickSearchResultsType>(
     {}
   );
   const [accessToken, setAccessToken] = useState('');
+
+  const isSearching = useSearchStore((state) => state.isSearching);
+  const setIsSearching = useSearchStore((state) => state.setIsSearching);
+  const searchString = useSearchStore((state) => state.searchString);
+  const setSearchString = useSearchStore((state) => state.setSearchString);
 
   // TODO: handle access token storage (on server, cookie?)
   useEffect(() => {
@@ -40,21 +45,29 @@ const Search = () => {
   }, []);
 
   useEffect(() => {
-    if (!accessToken || searchValue === '') return setSearchResults({});
+    if (!accessToken || searchString === '') {
+      setIsSearching(false);
+      return setSearchResults({});
+    }
 
     // TODO: Naming convention for async function?
     const search = async () => {
       try {
-        const searchResult = await quickSearch(searchValue, accessToken);
+        const searchResult = await quickSearch(searchString, accessToken);
         setSearchResults(searchResult);
+        if (!isSearching) setIsSearching(true);
       } catch {
         setAccessToken(await getTokenClient());
+        search();
       }
     };
 
     search();
     return undefined;
-  }, [searchValue, accessToken]);
+
+    // TODO: Look at this dependency array - can it be made smaller or is this fine?
+    // https://dev.to/wkrueger/never-ignore-the-exhaustive-deps-rule-2ap8
+  }, [searchString, accessToken, isSearching, setIsSearching]);
 
   return (
     // TODO: Create own components
@@ -65,11 +78,12 @@ const Search = () => {
         name="search"
         type="text"
         placeholder="Search for artist, song or album"
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
+        value={searchString}
+        onChange={(e) => setSearchString(e.target.value)}
       />
       {/* // TODO: Better way of checking if searchResults is empty */}
-      {Object.entries(searchResults).length! > 0 && (
+      {/* {Object.entries(searchResults).length! > 0 && ( */}
+      {isSearching && Object.entries(searchResults).length! > 0 && (
         <SearchResults
           topResult={searchResults.topResult}
           artists={searchResults.artists}
