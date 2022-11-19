@@ -1,11 +1,13 @@
 import TrackPage from '../../components/pages';
-import { getAlbum, getTrack } from '../../utilities/services/spotify';
+import {
+  getAlbum,
+  getTrack,
+  getTokenServer,
+} from '../../utilities/services/spotify';
 
 import getTrackFeatures from '../../utilities/services/spotify/getTrackFeatures';
 import getLyrics from '../../utilities/services/musixmatch/getLyrics';
 import Header from '../../components/Header/Header';
-
-import { getTokenServer } from '../../utilities/helpers/getToken';
 
 // TODO: Type props
 const Track = (props) => (
@@ -19,6 +21,7 @@ export default Track;
 
 export async function getServerSideProps(context) {
   const token = await getTokenServer(context);
+
   const spotifyTrack = await getTrack(context.params.trackId, token);
   const albumId = spotifyTrack.album.id;
   const spotifyAlbum = await getAlbum(albumId, token);

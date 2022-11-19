@@ -6,6 +6,7 @@
   align-items: center;
   gap: 1rem;
   padding: 1rem;
+  padding-left: 0;
 
   &:hover {
     background: var(--colors-grey-100);
@@ -27,9 +28,18 @@
   }
 }
 
-.flex {
-  display: 'flex';
-  flex-direction: 'column';
+.text {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  flex-grow: 1;
+  min-width: 0;
+
+  > * {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
 }
 
 .heading {
