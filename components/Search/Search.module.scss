@@ -1,29 +1,12 @@
+@use '../../styles/mixins.scss' as *;
+
 .search_input {
+  @include button;
   font-size: 1.2rem;
   padding-left: 1.6rem;
   padding-right: 1.6rem;
   color: var(--colors-grey-500);
   width: 50rem;
-
-  background: linear-gradient(
-    to right,
-    var(--colors-gradient-start) 50%,
-    var(--colors-white) 50%
-  );
-  background-size: 200% 100%;
-  background-position: right bottom;
-  transition: all 0s;
-  &:hover,
-  &:focus {
-    background-position: left bottom;
-    transition: all 0.3s ease-in;
-  }
-  &:hover {
-    color: var(--colors-white);
-  }
-  &:focus {
-    color: var(--colors-white);
-  }
 }
 
 .search {

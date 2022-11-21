@@ -14,31 +14,26 @@ function padTo2Digits(num: number) {
 }
 
 const TrackList = ({ activeId, album }: Props) => (
-    <div>
-      <Paragraph as="div" sans small weight="bold">
-        [ Tracklist ]
-      </Paragraph>
-      <div className={styles.tracks}>
-        {album.tracks.items.map((track, index) => (
-          <Paragraph
-            as="div"
-            small
-            weight="thin"
-            sans
-            className={handleClassName([
-              styles.track,
-              track.id === activeId ? styles['track--active'] : '',
-            ])}
-            key={index}
-          >
-            <Link href={`/${track.type}/${track.id}`}>
-              <a>
-                {padTo2Digits(track.track_number)} / {track.name}
-              </a>
-            </Link>
-          </Paragraph>
-        ))}
-      </div>
+  <div>
+    <Paragraph as="div" sans small weight="bold">
+      [ Tracklist ]
+    </Paragraph>
+    <div className={styles.tracks}>
+      {album.tracks.items.map((track, index) => (
+        <Paragraph as="div" small weight="thin" sans key={index}>
+          <Link href={`/${track.type}/${track.id}`}>
+            <a
+              className={handleClassName([
+                styles.track,
+                track.id === activeId ? styles['track--active'] : '',
+              ])}
+            >
+              {padTo2Digits(track.track_number)} / {track.name}
+            </a>
+          </Link>
+        </Paragraph>
+      ))}
     </div>
-  );
+  </div>
+);
 export default TrackList;
