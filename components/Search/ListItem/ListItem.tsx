@@ -1,6 +1,7 @@
 import Image from 'next/future/image';
 import Link from 'next/link';
 import { useSearchContext } from '../../../store/useSearch';
+import useStore from '../../../store/useStore';
 import { Heading } from '../../Typography/Typography';
 
 import styles from './ListItem.module.scss';
@@ -23,7 +24,7 @@ const ListItem = ({ content }: Props): JSX.Element => {
   // if (!content) return;
   const { image, heading, subHeading, type, id } = content;
 
-  const { setSearch } = useSearchContext();
+  const setSearch = useStore((state) => state.setSearch);
 
   return (
     <li onClick={() => setSearch('')}>

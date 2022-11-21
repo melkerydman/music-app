@@ -6,6 +6,7 @@ import SearchResults from './SearchResults/SearchResults';
 import quickSearch from '../../utilities/services/spotify/quickSearch';
 import { getTokenClient } from '../../utilities/services/spotify';
 import { useSearchContext } from '../../store/useSearch';
+import useStore from '../../store/useStore';
 
 // TODO: Create real types somewhere
 type QuickSearchResultsType = {
@@ -28,8 +29,12 @@ const Search = () => {
   const [searchResults, setSearchResults] = useState<QuickSearchResultsType>(
     {}
   );
+
   const [accessToken, setAccessToken] = useState('');
-  const { search: query, setSearch } = useSearchContext();
+  const search = useStore((state) => state.search);
+  const setSearch = useStore((state) => state.setSearch);
+
+  // const { search: query, setSearch } = useSearchContext();
 
   const inputRef = useRef(null);
 
@@ -43,14 +48,13 @@ const Search = () => {
   }, []);
 
   useEffect(() => {
-    // TODO: Continue refactoring search - also find solution to eslint consistent-return
-    if (query === '') {
+    if (search === '') {
       return setSearchResults({});
     }
 
     const searchTimeout = setTimeout(async () => {
       try {
-        const searchResult = await quickSearch(query, accessToken);
+        const searchResult = await quickSearch(search, accessToken);
         setSearchResults(searchResult);
       } catch (err) {
         setAccessToken(await getTokenClient());
@@ -58,7 +62,7 @@ const Search = () => {
     }, 300);
 
     return () => clearTimeout(searchTimeout);
-  }, [query, accessToken]);
+  }, [search, accessToken]);
 
   return (
     // TODO: Create own components
@@ -71,11 +75,11 @@ const Search = () => {
         name="search"
         type="text"
         placeholder="Search for artist, song or album"
-        value={query}
+        value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
       {/* // TODO: Better way of checking if searchResults is empty */}
-      {query !== '' && Object.entries(searchResults).length! > 0 && (
+      {search !== '' && Object.entries(searchResults).length! > 0 && (
         <>
           <SearchResults
             topResult={searchResults.topResult}
