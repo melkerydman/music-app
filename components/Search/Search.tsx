@@ -5,7 +5,6 @@ import SearchResults from './SearchResults/SearchResults';
 
 import quickSearch from '../../utilities/services/spotify/quickSearch';
 import { getTokenClient } from '../../utilities/services/spotify';
-import { useSearchContext } from '../../store/useSearch';
 import useStore from '../../store/useStore';
 
 // TODO: Create real types somewhere
@@ -33,8 +32,6 @@ const Search = () => {
   const [accessToken, setAccessToken] = useState('');
   const search = useStore((state) => state.search);
   const setSearch = useStore((state) => state.setSearch);
-
-  // const { search: query, setSearch } = useSearchContext();
 
   const inputRef = useRef(null);
 

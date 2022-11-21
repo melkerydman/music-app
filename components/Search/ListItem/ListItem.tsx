@@ -1,6 +1,5 @@
 import Image from 'next/future/image';
 import Link from 'next/link';
-import { useSearchContext } from '../../../store/useSearch';
 import useStore from '../../../store/useStore';
 import { Heading } from '../../Typography/Typography';
 
