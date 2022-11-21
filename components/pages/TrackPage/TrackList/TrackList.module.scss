@@ -1,3 +1,5 @@
+@use '../../../../styles/mixins.scss' as *;
+
 .tracks {
   display: flex;
   flex-direction: column;
@@ -5,9 +7,6 @@
 }
 
 .track {
+  @include button;
   white-space: nowrap;
-  &:hover,
-  &--active {
-    font-weight: 600;
-  }
 }
