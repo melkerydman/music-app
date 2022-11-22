@@ -12,6 +12,7 @@ import {
   formatTimeSignature,
   formatDuration,
 } from '../../../../utilities/helpers';
+import useWindowSize from '../../../../utilities/hooks/useWindowSize';
 import AlbumInfo from '../AlbumInfo/AlbumInfo';
 import Feature from '../Feature/Feature';
 import TrackList from '../TrackList/TrackList';
