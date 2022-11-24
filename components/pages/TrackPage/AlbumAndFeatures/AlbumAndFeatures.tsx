@@ -1,4 +1,6 @@
 import Image from 'next/future/image';
+import { useEffect, useState } from 'react';
+import useHeaderStore from '../../../../store/useHeaderStore';
 import type {
   Album as AlbumType,
   Track,
@@ -12,7 +14,6 @@ import {
   formatTimeSignature,
   formatDuration,
 } from '../../../../utilities/helpers';
-import useWindowSize from '../../../../utilities/hooks/useWindowSize';
 import AlbumInfo from '../AlbumInfo/AlbumInfo';
 import Feature from '../Feature/Feature';
 import TrackList from '../TrackList/TrackList';
@@ -33,6 +34,19 @@ type Props = {
 const AlbumAndFeatures = ({ data, className }: Props): JSX.Element => {
   const { album, features, track } = data;
 
+  const [target, setTarget] = useState<HTMLElement>(null);
+  const setHeight = useHeaderStore((state) => state.setHeight);
+
+  // TODO: FIND MORE SOLID WAY TO HANDLE HEIGHT CHANGE ON IMAGE UPDATING STATE
+  useEffect(() => {
+    const updateHeight = () => {
+      setHeight(`${target !== null ? `${target.offsetHeight}px` : 'auto'}`);
+    };
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+    return () => window.removeEventListener('resize', updateHeight);
+  }, [target, setHeight]);
+
   return (
     <aside className={handleClassName([className || '', styles.outer])}>
       <Image
@@ -40,6 +54,9 @@ const AlbumAndFeatures = ({ data, className }: Props): JSX.Element => {
         height={album.images[0].height}
         src={album.images[0].url}
         alt={album.name}
+        onLoadingComplete={(e) => {
+          setTarget(e);
+        }}
       />
       {/* // TODO: Rename wrapper */}
       <div className={styles.inner}>

@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import useHeaderStore from '../../../store/useHeaderStore';
 import {
   Album,
   Lyrics as LyricsType,
@@ -26,6 +26,7 @@ type Props = {
 // TODO: Proper class names
 const TrackPage = ({ data }: Props) => {
   const { album, track, features, lyrics } = data;
+  const headerHeight = useHeaderStore((props) => props.height);
 
   const artists = track.artists.map((artist) => artist.name);
 
@@ -34,7 +35,7 @@ const TrackPage = ({ data }: Props) => {
       <PageSection containerClassName="flex">
         <>
           <div className={styles.content}>
-            <header className={styles.header}>
+            <header style={{ height: headerHeight }} className={styles.header}>
               <Heading as="h3">{track.type}</Heading>
               <Display as="h1" small>
                 {track.name}
@@ -49,15 +50,6 @@ const TrackPage = ({ data }: Props) => {
           />
         </>
       </PageSection>
-      <div style={{ display: 'flex' }}>
-        <h2>{artists.join(', ')}</h2>
-        <Image
-          src={track.album.images[0].url}
-          width={track.album.images[0].width}
-          height={track.album.images[0].height}
-          alt=""
-        ></Image>
-      </div>
     </>
   );
 };

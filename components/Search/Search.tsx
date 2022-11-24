@@ -32,6 +32,8 @@ const Search = () => {
   const [accessToken, setAccessToken] = useState('');
   const search = useStore((state) => state.search);
   const setSearch = useStore((state) => state.setSearch);
+  const isFocus = useStore((state) => state.isFocus);
+  const setIsFocus = useStore((state) => state.setIsFocus);
 
   const inputRef = useRef(null);
 
@@ -63,7 +65,6 @@ const Search = () => {
 
   return (
     // TODO: Create own components
-    // <div ref={modalRef} className={styles.search}>
     <div className={styles.search}>
       <input
         ref={inputRef}
@@ -74,9 +75,11 @@ const Search = () => {
         placeholder="Search for artist, song or album"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
+        onFocus={() => setIsFocus(true)}
+        onBlur={() => setTimeout(() => setIsFocus(false), 100)}
       />
       {/* // TODO: Better way of checking if searchResults is empty */}
-      {search !== '' && Object.entries(searchResults).length! > 0 && (
+      {search !== '' && isFocus && Object.entries(searchResults).length! > 0 && (
         <>
           <SearchResults
             topResult={searchResults.topResult}

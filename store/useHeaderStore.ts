@@ -1,3 +1,4 @@
+// TODO: Rename this and create slice
 import create from 'zustand';
 
 type State = {
@@ -5,9 +6,9 @@ type State = {
   setHeight: (height: string) => void;
 };
 
-const useHeader = create<State>((set) => ({
+const useHeaderStore = create<State>((set) => ({
   height: 'auto',
   setHeight: (height: string) => set((state) => ({ ...state, height })),
 }));
 
-export default useHeader;
+export default useHeaderStore;
