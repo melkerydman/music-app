@@ -9,4 +9,8 @@
 
   border-radius: 0 0 calc(var(--size) / 5) 0;
   background: var(--colors-white);
+
+  border-bottom: 1px solid var(--colors-black);
+  border-left: 1px solid var(--colors-black);
+  border-right: 1px solid var(--colors-black);
 }

@@ -1,12 +1,14 @@
 @use '../../styles/mixins.scss' as *;
 
 .search_input {
-  @include button;
+  @include underline;
   font-size: 1.2rem;
   padding-left: 1.6rem;
   padding-right: 1.6rem;
   color: var(--colors-grey-500);
   width: 50rem;
+  position: relative;
+  z-index: 2;
 }
 
 .search {

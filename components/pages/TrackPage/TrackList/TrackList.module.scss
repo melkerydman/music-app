@@ -7,6 +7,6 @@
 }
 
 .track {
-  @include button;
+  @include underline;
   white-space: nowrap;
 }
