@@ -1,6 +1,5 @@
 import React from 'react';
-import { Heading } from '../../Typography/Typography';
-import ListItem from '../ListItem/ListItem';
+import ListItems from '../ListItems/ListItems';
 
 import styles from './SearchResults.module.scss';
 
@@ -37,45 +36,12 @@ const SearchResults = ({ topResult, albums, artists, tracks }: Props) => {
   }
   return (
     <ul className={styles['search-results']}>
-      {topResult && (
-        <li>
-          <Heading as="h4">Top Result</Heading>
-
-          <ul>
-            <ListItem content={topResult}></ListItem>
-          </ul>
-        </li>
-      )}
       {tracks.length > 0 && (
-        <li>
-          <Heading as="h4">Tracks</Heading>
-          <ul>
-            {tracks.map((track, index) => (
-              <ListItem key={index} content={track}></ListItem>
-            ))}
-          </ul>
-        </li>
+        <ListItems data={[topResult]} heading="Top Result" />
       )}
-      {artists.length > 0 && (
-        <li>
-          <Heading as="h4">Artists</Heading>
-          <ul>
-            {artists.map((artist, index) => (
-              <ListItem key={index} content={artist}></ListItem>
-            ))}
-          </ul>
-        </li>
-      )}
-      {albums.length > 0 && (
-        <li>
-          <Heading as="h4">Albums</Heading>
-          <ul>
-            {albums.map((album, index) => (
-              <ListItem key={index} content={album}></ListItem>
-            ))}
-          </ul>
-        </li>
-      )}
+      {tracks.length > 0 && <ListItems data={tracks} heading="Tracks" />}
+      {artists.length > 0 && <ListItems data={artists} heading="Artists" />}
+      {albums.length > 0 && <ListItems data={albums} heading="Albums" />}
     </ul>
   );
 };
