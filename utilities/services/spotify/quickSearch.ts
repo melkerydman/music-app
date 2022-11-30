@@ -23,13 +23,15 @@ const quickSearch = async (string, accessToken) => {
       const albums = data.albums.items as Album[];
       const artists = data.artists.items as Artist[];
       const tracks = data.tracks.items as Track[];
-      const maxTracks = 7;
-      const maxArtists = 3;
-      const maxAlbums = 3;
+      // const maxTracks = 7;
+      // const maxArtists = 3;
+      // const maxAlbums = 3;
 
       let formattedTracks = [];
       if (tracks.length > 0) {
-        formattedTracks = tracks.slice(0, maxTracks).map((track) => ({
+        console.log('tracks 🔴', tracks);
+        // formattedTracks = tracks.slice(0, maxTracks).map((track) => ({
+        formattedTracks = tracks.map((track) => ({
           href: track.href,
           heading: track.name,
           subHeading: track.artists.map((artist) => artist.name),
@@ -40,7 +42,8 @@ const quickSearch = async (string, accessToken) => {
       }
       let formattedArtists = [];
       if (artists.length > 0) {
-        formattedArtists = artists.slice(0, maxArtists).map((artist) => ({
+        // formattedArtists = artists.slice(0, maxArtists).map((artist) => ({
+        formattedArtists = artists.map((artist) => ({
           href: artist.href,
           heading: artist.name,
           image: artist.images[2]?.url,
@@ -51,7 +54,8 @@ const quickSearch = async (string, accessToken) => {
 
       let formattedAlbums = [];
       if (albums.length > 0) {
-        formattedAlbums = albums.slice(0, maxAlbums).map((album) => ({
+        // formattedAlbums = albums.slice(0, maxAlbums).map((album) => ({
+        formattedAlbums = albums.map((album) => ({
           href: album.href,
           heading: album.name,
           subHeading: album.artists.map((artist) => artist.name),
