@@ -30,10 +30,16 @@ const Search = () => {
   );
 
   const [accessToken, setAccessToken] = useState('');
-  const search = useStore((state) => state.search);
-  const setSearch = useStore((state) => state.setSearch);
-  const isFocus = useStore((state) => state.isFocus);
-  const setIsFocus = useStore((state) => state.setIsFocus);
+  const search = useStore((state) => state.search.search);
+  const setSearch = useStore((state) => state.search.setSearch);
+  const isFocus = useStore((state) => state.search.isFocus);
+  const setIsFocus = useStore((state) => state.search.setIsFocus);
+  // const searchResultsFromStore = useStore(
+  //   (state) => state.search.searchResults
+  // );
+  // const setSearchResultsInStore = useStore(
+  //   (state) => state.search.setSearchResults
+  // );
 
   const inputRef = useRef(null);
 
@@ -62,6 +68,10 @@ const Search = () => {
 
     return () => clearTimeout(searchTimeout);
   }, [search, accessToken]);
+
+  // useEffect(() => {
+  //   setSearchResultsInStore(searchResults);
+  // }, [searchResults, setSearchResultsInStore]);
 
   return (
     // TODO: Create own components

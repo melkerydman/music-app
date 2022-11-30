@@ -23,7 +23,7 @@ const ListItem = ({ content }: Props): JSX.Element => {
   // if (!content) return;
   const { image, heading, subHeading, type, id } = content;
 
-  const setSearch = useStore((state) => state.setSearch);
+  const setSearch = useStore((state) => state.search.setSearch);
 
   return (
     <li onClick={() => setSearch('')}>
