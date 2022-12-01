@@ -6,6 +6,13 @@ export type SearchSlice = {
   setIsFocus: (isFocus: boolean) => void;
   search: string;
   setSearch: (search: string) => void;
-  searchResults: {};
-  setSearchResults: (searchResults: {}) => void;
+  // TODO: Import correct type here
+  searchResults: {
+    topResult: any;
+    albums: any;
+    artists: any;
+    tracks: any;
+  };
+  setSearchResults: (searchResults: any) => void;
+  addSearchResults: (searchResults: any, type: string) => void;
 };
