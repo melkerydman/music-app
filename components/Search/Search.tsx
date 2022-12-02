@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './Search.module.scss';
 import SearchResults from './SearchResults/SearchResults';
 
-import quickSearch from '../../utilities/services/spotify/quickSearch';
 import { getTokenClient } from '../../utilities/services/spotify';
 import useStore from '../../store/useStore';
 import searchSpotify from '../../utilities/services/spotify/searchSpotify';
@@ -74,9 +73,22 @@ const Search = () => {
     return () => clearTimeout(searchTimeout);
   }, [search, accessToken, setSearchResultsInStore]);
 
+  // TODO: Create reusable hook for this functionality to close a modal
+  const searchRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const closeSearch = (e) => {
+      if (e.target !== searchRef && !searchRef.current.contains(e.target)) {
+        setIsFocus(false);
+      }
+    };
+    document.body.addEventListener('click', closeSearch);
+
+    return () => document.body.removeEventListener('click', closeSearch);
+  }, [searchRef, setIsFocus]);
+
   return (
     // TODO: Create own components
-    <div className={styles.search}>
+    <div className={styles.search} ref={searchRef}>
       <input
         ref={inputRef}
         className={styles.search_input}
@@ -87,7 +99,7 @@ const Search = () => {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         onFocus={() => setIsFocus(true)}
-        onBlur={() => setTimeout(() => setIsFocus(false), 100)}
+        // onBlur={() => setTimeout(() => setIsFocus(false), 100)}
       />
       {/* // TODO: Better way of checking if searchResults is empty */}
       {/* {search !== '' && isFocus && Object.entries(searchResults).length! > 0 && ( */}
