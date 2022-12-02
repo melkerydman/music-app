@@ -1,3 +1,7 @@
 .items:not(:last-child) {
   border-bottom: solid 1px var(--colors-black);
 }
+
+.hidden {
+  display: none;
+}

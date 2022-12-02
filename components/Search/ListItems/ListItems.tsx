@@ -26,6 +26,8 @@ const ListItems = ({ data, heading, collapsible, ...rest }: Props) => {
   const [accessToken, setAccessToken] = useState('');
   const searchResults = useStore((state) => state.search.searchResults);
   const addSearchResults = useStore((state) => state.search.addSearchResults);
+  const activeCategory = useStore((state) => state.search.activeCategory);
+  const setActiveCategory = useStore((state) => state.search.setActiveCategory);
 
   // TODO: Find another way of ahndling the access token, this is duplicate code from "Search.tsx"
   // TODO: Should probably find a way of storing the token in global state or something similiar, with a timeout set to run before the token expires.
@@ -36,6 +38,13 @@ const ListItems = ({ data, heading, collapsible, ...rest }: Props) => {
     };
     getToken();
   }, []);
+
+  const handleClick = (type) => {
+    if (type !== activeCategory) {
+      return setActiveCategory(type);
+    }
+    return setActiveCategory(null);
+  };
 
   const fetchMore = async (type: string) => {
     try {
@@ -51,24 +60,48 @@ const ListItems = ({ data, heading, collapsible, ...rest }: Props) => {
   };
 
   const Header = () => (
-    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+    // TODO: Create class
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        padding: '1rem',
+      }}
+    >
       <Heading as="h4">{heading}</Heading>
       {collapsible && (
-        <button onClick={() => fetchMore(heading.toLowerCase())}>
-          Show more {heading}
+        <button onClick={() => handleClick(heading.toLowerCase())}>
+          {heading.toLowerCase() !== activeCategory
+            ? `Show more ${heading}`
+            : `Show less ${heading}`}
         </button>
       )}
     </div>
   );
 
+  const Items = () => (
+    <ul
+      className={
+        heading.toLowerCase() !== activeCategory && activeCategory !== null
+          ? styles.hidden
+          : ''
+      }
+    >
+      {data.map((item, index) => (
+        <ListItem key={index} content={item}></ListItem>
+      ))}
+    </ul>
+  );
+
   return (
     <li className={styles.items} {...rest}>
       <Header />
-      <ul>
-        {data.map((item, index) => (
-          <ListItem key={index} content={item}></ListItem>
-        ))}
-      </ul>
+      <Items />
+      {heading.toLowerCase() === activeCategory && (
+        <button onClick={() => fetchMore(heading.toLowerCase())}>
+          Show more {heading.toLowerCase()}{' '}
+        </button>
+      )}
     </li>
   );
 };

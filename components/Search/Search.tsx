@@ -73,22 +73,23 @@ const Search = () => {
     return () => clearTimeout(searchTimeout);
   }, [search, accessToken, setSearchResultsInStore]);
 
-  // TODO: Create reusable hook for this functionality to close a modal
-  const searchRef = useRef<HTMLDivElement>(null);
+  // TODO: Create reusable hook for adding overlay?
+  // TODO: Add the eventlistener to the ref instead of the entire body
+  const overlayRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const closeSearch = (e) => {
-      if (e.target !== searchRef && !searchRef.current.contains(e.target)) {
+      if (e.target === overlayRef.current) {
         setIsFocus(false);
       }
     };
     document.body.addEventListener('click', closeSearch);
 
     return () => document.body.removeEventListener('click', closeSearch);
-  }, [searchRef, setIsFocus]);
+  }, [setIsFocus]);
 
   return (
     // TODO: Create own components
-    <div className={styles.search} ref={searchRef}>
+    <div className={styles.search}>
       <input
         ref={inputRef}
         className={styles.search_input}
@@ -102,7 +103,6 @@ const Search = () => {
         // onBlur={() => setTimeout(() => setIsFocus(false), 100)}
       />
       {/* // TODO: Better way of checking if searchResults is empty */}
-      {/* {search !== '' && isFocus && Object.entries(searchResults).length! > 0 && ( */}
       {search !== '' &&
         isFocus &&
         Object.entries(searchResultsFromStore).length! > 0 && (
@@ -110,7 +110,9 @@ const Search = () => {
             <SearchResults />
           </>
         )}
-      {/* <button onClick={fetchMore}>Load more</button> */}
+      {search !== '' && isFocus && (
+        <div ref={overlayRef} className={styles.overlay} />
+      )}
     </div>
   );
 };

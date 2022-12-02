@@ -1,16 +1,9 @@
 .search-results {
-  --size: 4rem;
-
   position: absolute;
+  background: var(--colors-white);
+  border: 1px solid var(--colors-black);
   width: 100%;
   top: 95%;
   left: 0;
   filter: drop-shadow(0px 0.6rem 0.6rem rgba(0, 0, 0, 0.1));
-
-  border-radius: 0 0 calc(var(--size) / 5) 0;
-  background: var(--colors-white);
-
-  border-bottom: 1px solid var(--colors-black);
-  border-left: 1px solid var(--colors-black);
-  border-right: 1px solid var(--colors-black);
 }

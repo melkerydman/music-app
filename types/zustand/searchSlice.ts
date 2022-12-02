@@ -15,4 +15,6 @@ export type SearchSlice = {
   };
   setSearchResults: (searchResults: any) => void;
   addSearchResults: (searchResults: any, type: string) => void;
+  activeCategory: null | string;
+  setActiveCategory: (type: null | string) => void;
 };

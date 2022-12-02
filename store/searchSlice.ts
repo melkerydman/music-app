@@ -57,6 +57,18 @@ const searchSlice: SliceType<SearchSlice> = (set) => ({
       false,
       'search/addSearchResults'
     ),
+  activeCategory: null,
+  setActiveCategory: (type) =>
+    set(
+      (state) => ({
+        search: {
+          ...state.search,
+          activeCategory: type,
+        },
+      }),
+      false,
+      'search/setActiveCategory'
+    ),
 });
 
 export default searchSlice;
