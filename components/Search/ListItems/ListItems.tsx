@@ -72,8 +72,8 @@ const ListItems = ({ data, heading, collapsible, ...rest }: Props) => {
       {collapsible && (
         <button onClick={() => handleClick(heading.toLowerCase())}>
           {heading.toLowerCase() !== activeCategory
-            ? `Show more ${heading}`
-            : `Show less ${heading}`}
+            ? `Show more ${heading.toLowerCase()}`
+            : `Show fewer ${heading.toLowerCase()}`}
         </button>
       )}
     </div>
@@ -99,7 +99,7 @@ const ListItems = ({ data, heading, collapsible, ...rest }: Props) => {
       <Items />
       {heading.toLowerCase() === activeCategory && (
         <button onClick={() => fetchMore(heading.toLowerCase())}>
-          Show more {heading.toLowerCase()}{' '}
+          Load more {heading.toLowerCase()}{' '}
         </button>
       )}
     </li>
