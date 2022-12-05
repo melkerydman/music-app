@@ -1,6 +1,7 @@
 import { Album } from '../../../types/album';
 import { Artist } from '../../../types/artist';
 import { Track } from '../../../types/track';
+import { getStringBetween } from '../../helpers';
 
 // TODO: Create proper type somewhere
 type SearchResults = {
@@ -22,9 +23,6 @@ type Props = {
   offset?: number;
   next?: string;
 };
-
-const getStringBetween = (str, start, end) =>
-  str.split(start).pop().split(end)[0];
 
 const searchSpotify = async (
   accessToken,
@@ -97,7 +95,7 @@ const searchSpotify = async (
           type: album.type,
           id: album.id,
         }));
-        if (t === 'albums')
+        if (t === 'album')
           return { albums: { items: formattedAlbums, next: albums.next } };
       }
 
