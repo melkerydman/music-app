@@ -24,6 +24,7 @@ type Props = {
 
 const ListItems = ({ data, heading, collapsible, ...rest }: Props) => {
   const [accessToken, setAccessToken] = useState('');
+
   const searchResults = useStore((state) => state.search.searchResults);
   const addSearchResults = useStore((state) => state.search.addSearchResults);
   const activeCategory = useStore((state) => state.search.activeCategory);
@@ -79,6 +80,7 @@ const ListItems = ({ data, heading, collapsible, ...rest }: Props) => {
     </div>
   );
 
+  const initialRenderAmount = heading.toLowerCase() === 'tracks' ? 7 : 3;
   const Items = () => (
     <ul
       className={
@@ -87,9 +89,15 @@ const ListItems = ({ data, heading, collapsible, ...rest }: Props) => {
           : ''
       }
     >
-      {data.map((item, index) => (
-        <ListItem key={index} content={item}></ListItem>
-      ))}
+      {activeCategory === null
+        ? data
+            .slice(0, initialRenderAmount)
+            .map((item, index) => (
+              <ListItem key={index} content={item}></ListItem>
+            ))
+        : data.map((item, index) => (
+            <ListItem key={index} content={item}></ListItem>
+          ))}
     </ul>
   );
 
