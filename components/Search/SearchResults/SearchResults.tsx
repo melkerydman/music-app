@@ -3,22 +3,22 @@ import ListItems from '../ListItems/ListItems';
 
 import styles from './SearchResults.module.scss';
 
-// TODO: Create real types somewhere
-type QuickSearchType = {
-  href: string;
-  image: string;
-  heading: string;
-  subHeading?: string[];
-  type: string;
-  id: string;
-};
+// TODO: Create real types somewhere - or remove these completely?
+// type QuickSearchType = {
+//   href: string;
+//   image: string;
+//   heading: string;
+//   subHeading?: string[];
+//   type: string;
+//   id: string;
+// };
 // TODO: Remove this?
-type Props = {
-  topResult?: QuickSearchType;
-  albums?: QuickSearchType[];
-  artists?: QuickSearchType[];
-  tracks?: QuickSearchType[];
-};
+// type Props = {
+//   topResult?: QuickSearchType;
+//   albums?: QuickSearchType[];
+//   artists?: QuickSearchType[];
+//   tracks?: QuickSearchType[];
+// };
 
 const SearchResults = () => {
   const searchResultsFromStore = useStore(

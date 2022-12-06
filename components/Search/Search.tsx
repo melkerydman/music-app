@@ -8,21 +8,22 @@ import useStore from '../../store/useStore';
 import searchSpotify from '../../utilities/services/spotify/searchSpotify';
 
 // TODO: Create real types somewhere
-type QuickSearchResultsType = {
-  topResult?: QuickSearchType;
-  albums?: QuickSearchType[];
-  artists?: QuickSearchType[];
-  tracks?: QuickSearchType[];
-};
+// TODO: Remove these compoletely?
+// type QuickSearchResultsType = {
+//   topResult?: QuickSearchType;
+//   albums?: QuickSearchType[];
+//   artists?: QuickSearchType[];
+//   tracks?: QuickSearchType[];
+// };
 
-type QuickSearchType = {
-  href: string;
-  image: string;
-  heading: string;
-  subHeading?: string[];
-  type: string;
-  id: string;
-};
+// type QuickSearchType = {
+//   href: string;
+//   image: string;
+//   heading: string;
+//   subHeading?: string[];
+//   type: string;
+//   id: string;
+// };
 
 const Search = () => {
   const [accessToken, setAccessToken] = useState('');
