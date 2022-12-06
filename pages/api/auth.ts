@@ -1,36 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 // https://github.com/vercel/next.js/blob/canary/examples/api-routes-cors/pages/api/cors.ts
 
-const axios = require('axios');
-const qs = require('qs');
-
-// TODO: Look at error handling, as well as whats returned from axios
-// TODO: Type
-
-const clientId = process.env.SPOTIFY_CLIENT_ID;
-const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
-
-const GetSpotifyAuthToken = async () => {
-  const url = 'https://accounts.spotify.com/api/token';
-  const data = qs.stringify({ grant_type: 'client_credentials' });
-  const headers = {
-    Authorization: `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString(
-      'base64'
-    )}`,
-    'Content-Type': 'application/x-www-form-urlencoded',
-  };
-
-  try {
-    const response = await axios.post(url, data, { headers });
-    return { status: response.status, body: response.data };
-  } catch (error) {
-    return {
-      status: error.response.status,
-      message: error.message,
-      body: error.response.data,
-    };
-  }
-};
+import { GetSpotifyAuthToken } from '../../utilities/services/spotify/getAccessToken';
 
 export default async function handler(_, res) {
   try {
