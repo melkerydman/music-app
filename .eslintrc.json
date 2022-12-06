@@ -5,7 +5,6 @@
     "airbnb-typescript/base",
     "prettier"
   ],
-  "plugins": ["prettier"],
   "parserOptions": {
     "project": ["./tsconfig.json"]
   },
