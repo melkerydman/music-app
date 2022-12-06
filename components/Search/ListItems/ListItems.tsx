@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import useStore from '../../../store/useStore';
+import { handleClassName } from '../../../utilities/helpers';
 import { getTokenClient } from '../../../utilities/services/spotify';
 import searchSpotify from '../../../utilities/services/spotify/searchSpotify';
 import { Heading } from '../../Typography/Typography';
@@ -83,11 +84,12 @@ const ListItems = ({ data, heading, collapsible, ...rest }: Props) => {
   const initialRenderAmount = heading.toLowerCase() === 'tracks' ? 7 : 3;
   const Items = () => (
     <ul
-      className={
+      className={handleClassName([
         heading.toLowerCase() !== activeCategory && activeCategory !== null
           ? styles.hidden
-          : ''
-      }
+          : '',
+        styles.items,
+      ])}
     >
       {activeCategory === null
         ? data
@@ -102,7 +104,7 @@ const ListItems = ({ data, heading, collapsible, ...rest }: Props) => {
   );
 
   return (
-    <li className={styles.items} {...rest}>
+    <li className={styles.wrapper} {...rest}>
       <Header />
       <Items />
       {heading.toLowerCase() === activeCategory && (
