@@ -12,8 +12,6 @@ const clientId = process.env.SPOTIFY_CLIENT_ID;
 const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 
 export const GetSpotifyAuthToken = async () => {
-  console.log('GetSpotifyAuthToken running');
-
   const url = 'https://accounts.spotify.com/api/token';
   const data = qs.stringify({ grant_type: 'client_credentials' });
   const headers = {
@@ -39,32 +37,25 @@ export const GetSpotifyAuthToken = async () => {
 // TODO: Replace with .env url
 const dev = process.env.NEXT_PUBLIC_NODE_ENV !== 'production';
 
-const authenticateClient = () => {
-  console.log('authenticateClient running');
-
-  return axios
+const authenticateClient = () =>
+  axios
     .get(`${dev ? 'http://localhost:3000' : ''}/api/auth`)
     .then((res) => res.data.body)
     .catch((error) => error);
-};
 
 const authenticateServer = async () => {
-  console.log('authenticateServer running');
-
   const data = await GetSpotifyAuthToken();
   return data.body;
 };
 
 // TODO: Refactor into one function where server functionality is run if context is passed and client if its not
 const getTokenClient = async () => {
-  console.log('getTokenClient running');
   const cookies = parseCookies();
   const { token } = cookies;
 
   if (token) return token;
   // TODO: Call something else than newToken
   const newToken: AccessSpotify = await authenticateClient();
-  console.log('newToken', newToken);
   setCookie(null, 'token', newToken.access_token, {
     maxAge: newToken.expires_in - 10,
     path: '/',
@@ -74,7 +65,6 @@ const getTokenClient = async () => {
 };
 
 const getTokenServer = async (context) => {
-  console.log('getTokenServer running');
   const cookies = nookies.get(context);
   const { token } = cookies;
 
