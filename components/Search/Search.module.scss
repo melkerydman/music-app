@@ -1,29 +1,14 @@
+@use '../../styles/mixins.scss' as *;
+
 .search_input {
+  @include underline;
   font-size: 1.2rem;
   padding-left: 1.6rem;
   padding-right: 1.6rem;
   color: var(--colors-grey-500);
   width: 50rem;
-
-  background: linear-gradient(
-    to right,
-    var(--colors-gradient-start) 50%,
-    var(--colors-white) 50%
-  );
-  background-size: 200% 100%;
-  background-position: right bottom;
-  transition: all 0s;
-  &:hover,
-  &:focus {
-    background-position: left bottom;
-    transition: all 0.3s ease-in;
-  }
-  &:hover {
-    color: var(--colors-white);
-  }
-  &:focus {
-    color: var(--colors-white);
-  }
+  position: relative;
+  z-index: 2;
 }
 
 .search {
@@ -33,12 +18,13 @@
 
 .overlay {
   position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: grey;
+  opacity: 0.3;
   top: 0;
+  left: 0;
   right: 0;
   bottom: 0;
-  left: 0;
-  // TODO: Decide whether or not to use overlay
-  // background-color: #171717;
-  opacity: 0.15;
   z-index: -1;
 }

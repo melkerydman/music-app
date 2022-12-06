@@ -23,10 +23,8 @@
 }
 
 .content {
-  display: flex;
-  justify-content: space-between;
-  /* flex-grow: 1; */
-  // overflow: hidden;
+  flex-grow: 1;
+  width: 70%;
 }
 
 .album-and-features {

@@ -1,39 +1,44 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import styles from './Search.module.scss';
 import SearchResults from './SearchResults/SearchResults';
 
-import quickSearch from '../../utilities/services/spotify/quickSearch';
-import { getTokenClient } from '../../utilities/helpers/getToken';
-import useSearchStore from '../../store/useStore';
+import { getTokenClient } from '../../utilities/services/spotify';
+import useStore from '../../store/useStore';
+import searchSpotify from '../../utilities/services/spotify/searchSpotify';
 
 // TODO: Create real types somewhere
-type QuickSearchResultsType = {
-  topResult?: QuickSearchType;
-  albums?: QuickSearchType[];
-  artists?: QuickSearchType[];
-  tracks?: QuickSearchType[];
-};
+// TODO: Remove these compoletely?
+// type QuickSearchResultsType = {
+//   topResult?: QuickSearchType;
+//   albums?: QuickSearchType[];
+//   artists?: QuickSearchType[];
+//   tracks?: QuickSearchType[];
+// };
 
-type QuickSearchType = {
-  href: string;
-  image: string;
-  heading: string;
-  subHeading?: string[];
-  type: string;
-  id: string;
-};
+// type QuickSearchType = {
+//   href: string;
+//   image: string;
+//   heading: string;
+//   subHeading?: string[];
+//   type: string;
+//   id: string;
+// };
 
 const Search = () => {
-  const [searchResults, setSearchResults] = useState<QuickSearchResultsType>(
-    {}
-  );
   const [accessToken, setAccessToken] = useState('');
+  const search = useStore((state) => state.search.search);
+  const setSearch = useStore((state) => state.search.setSearch);
+  const isFocus = useStore((state) => state.search.isFocus);
+  const setIsFocus = useStore((state) => state.search.setIsFocus);
+  const searchResultsFromStore = useStore(
+    (state) => state.search.searchResults
+  );
+  const setSearchResultsInStore = useStore(
+    (state) => state.search.setSearchResults
+  );
 
-  const isSearching = useSearchStore((state) => state.isSearching);
-  const setIsSearching = useSearchStore((state) => state.setIsSearching);
-  const searchString = useSearchStore((state) => state.searchString);
-  const setSearchString = useSearchStore((state) => state.setSearchString);
+  const inputRef = useRef(null);
 
   // TODO: handle access token storage (on server, cookie?)
   useEffect(() => {
@@ -45,54 +50,69 @@ const Search = () => {
   }, []);
 
   useEffect(() => {
-    if (!accessToken || searchString === '') {
-      setIsSearching(false);
-      return setSearchResults({});
+    if (search === '') {
+      return setSearchResultsInStore({
+        topResult: {},
+        albums: { items: [], next: '' },
+        artists: { items: [], next: '' },
+        tracks: { items: [], next: '' },
+      });
     }
 
-    // TODO: Naming convention for async function?
-    const search = async () => {
+    const searchTimeout = setTimeout(async () => {
       try {
-        const searchResult = await quickSearch(searchString, accessToken);
-        setSearchResults(searchResult);
-        if (!isSearching) setIsSearching(true);
-      } catch {
+        const searchResultsFromSpotify = await searchSpotify(
+          accessToken,
+          search
+        );
+        setSearchResultsInStore(searchResultsFromSpotify);
+      } catch (err) {
         setAccessToken(await getTokenClient());
-        search();
+      }
+    }, 300);
+
+    return () => clearTimeout(searchTimeout);
+  }, [search, accessToken, setSearchResultsInStore]);
+
+  // TODO: Create reusable hook for adding overlay?
+  // TODO: Add the eventlistener to the ref instead of the entire body
+  const overlayRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const closeSearch = (e) => {
+      if (e.target === overlayRef.current) {
+        setIsFocus(false);
       }
     };
+    document.body.addEventListener('click', closeSearch);
 
-    search();
-    return undefined;
-
-    // TODO: Look at this dependency array - can it be made smaller or is this fine?
-    // https://dev.to/wkrueger/never-ignore-the-exhaustive-deps-rule-2ap8
-  }, [searchString, accessToken, isSearching, setIsSearching]);
+    return () => document.body.removeEventListener('click', closeSearch);
+  }, [setIsFocus]);
 
   return (
     // TODO: Create own components
     <div className={styles.search}>
       <input
+        ref={inputRef}
         className={styles.search_input}
         id="search"
         name="search"
         type="text"
         placeholder="Search for artist, song or album"
-        value={searchString}
-        onChange={(e) => setSearchString(e.target.value)}
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        onFocus={() => setIsFocus(true)}
+        // onBlur={() => setTimeout(() => setIsFocus(false), 100)}
       />
       {/* // TODO: Better way of checking if searchResults is empty */}
-      {/* {Object.entries(searchResults).length! > 0 && ( */}
-      {isSearching && Object.entries(searchResults).length! > 0 && (
-        <>
-          <div className={styles.overlay} />
-          <SearchResults
-            topResult={searchResults.topResult}
-            artists={searchResults.artists}
-            tracks={searchResults.tracks}
-            albums={searchResults.albums}
-          />
-        </>
+      {search !== '' &&
+        isFocus &&
+        Object.entries(searchResultsFromStore).length! > 0 && (
+          <>
+            <SearchResults />
+          </>
+        )}
+      {search !== '' && isFocus && (
+        <div ref={overlayRef} className={styles.overlay} />
       )}
     </div>
   );

@@ -1,18 +1,13 @@
 import create from 'zustand';
+import { devtools } from 'zustand/middleware';
+import StoreType from '../types/zustand/store';
 
-type State = {
-  isSearching: boolean;
-  searchString: string;
-  setIsSearching: (isSearching: boolean) => void;
-  setSearchString: (searchString: string) => void;
-};
+import searchSlice from './searchSlice';
 
-const useSearchStore = create<State>((set) => ({
-  isSearching: false,
-  setIsSearching: (isSearching) => set((state) => ({ ...state, isSearching })),
-  searchString: '',
-  setSearchString: (searchString) =>
-    set((state) => ({ ...state, searchString })),
-}));
+const useStore = create<StoreType, [['zustand/devtools', never]]>(
+  devtools((...a) => ({
+    search: searchSlice(...a),
+  }))
+);
 
-export default useSearchStore;
+export default useStore;

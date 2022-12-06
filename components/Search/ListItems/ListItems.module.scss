@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  // flex: 1;
+  /* overflow: hidden; */
+  &:not(:last-child) {
+    border-bottom: solid 1px var(--colors-black);
+  }
+}
+
+.items {
+  flex: 1;
+  overflow: scroll;
+}
+
+.hidden {
+  display: none;
+}

@@ -1,6 +1,6 @@
 import Image from 'next/future/image';
 import Link from 'next/link';
-import useSearchStore from '../../../store/useStore';
+import useStore from '../../../store/useStore';
 import { Heading } from '../../Typography/Typography';
 
 import styles from './ListItem.module.scss';
@@ -23,21 +23,15 @@ const ListItem = ({ content }: Props): JSX.Element => {
   // if (!content) return;
   const { image, heading, subHeading, type, id } = content;
 
-  const setIsSearching = useSearchStore((state) => state.setIsSearching);
-  const setSearchString = useSearchStore((state) => state.setSearchString);
-
-  const handleClick = () => {
-    setIsSearching(false);
-    setSearchString('');
-  };
+  const setSearch = useStore((state) => state.search.setSearch);
 
   return (
-    <li onClick={handleClick} className={styles['list-item']}>
+    <li onClick={() => setSearch('')}>
       {/* TODO: add proper href */}
       <Link href={`/${type}/${id}`}>
-        <a>
+        <a className={styles['list-item']}>
           <Image width="44" height="44" src={image} alt={heading} />
-          <div className={styles.flex}>
+          <div className={styles.text}>
             <Heading className={styles.heading} as="h5">
               {heading}
             </Heading>
