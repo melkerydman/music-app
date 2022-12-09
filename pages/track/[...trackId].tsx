@@ -31,13 +31,14 @@ export async function getServerSideProps(context) {
   );
   const { isrc } = spotifyTrack.external_ids;
   const lyrics = await getLyrics(isrc);
+  console.log('lyrics 🔴', lyrics);
 
   return {
     props: {
       album: spotifyAlbum,
       track: spotifyTrack,
       features: spotifyTrackFeatures,
-      lyrics,
+      lyrics: lyrics !== undefined ? lyrics : null,
     },
   };
 }

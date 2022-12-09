@@ -1,11 +1,14 @@
 .feature {
   display: flex;
-  gap: 1rem;
+  // gap: 1rem;
   align-items: center;
   white-space: nowrap;
+  border-bottom: 1.5px solid rgba(23, 23, 23, 0.2);
+  padding-bottom: 0.8rem;
 
   &_title {
     font-weight: 600;
+    width: 20rem;
   }
 }
 

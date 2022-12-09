@@ -1,4 +1,4 @@
-import useHeaderStore from '../../../store/useHeaderStore';
+// import useHeaderStore from '../../../store/useHeaderStore';
 import {
   Album,
   Lyrics as LyricsType,
@@ -6,7 +6,7 @@ import {
   TrackFeatures,
 } from '../../../types';
 import PageSection from '../../PageSection/PageSection';
-import { Display, Heading } from '../../Typography/Typography';
+import { Heading } from '../../Typography/Typography';
 import AlbumAndFeatures from './AlbumAndFeatures/AlbumAndFeatures';
 import Lyrics from './Lyrics/Lyrics';
 
@@ -26,28 +26,27 @@ type Props = {
 // TODO: Proper class names
 const TrackPage = ({ data }: Props) => {
   const { album, track, features, lyrics } = data;
-  const headerHeight = useHeaderStore((props) => props.height);
+  // TODO: Remove headerheight completely?
+  // const headerHeight = useHeaderStore((props) => props.height);
 
   const artists = track.artists.map((artist) => artist.name);
 
   return (
     <>
-      <PageSection containerClassName="flex">
+      <PageSection containerClassName={styles.container}>
         <>
+          <header>
+            {/* <Heading as="h3">{track.type}</Heading> */}
+            <Heading as="h4">{artists.join(', ')}</Heading>
+            <Heading as="h1">{track.name}</Heading>
+          </header>
           <div className={styles.content}>
-            <header style={{ height: headerHeight }} className={styles.header}>
-              <Heading as="h3">{track.type}</Heading>
-              <Display as="h1" small>
-                {track.name}
-              </Display>
-              <Heading as="h2">{artists.join(', ')}</Heading>
-            </header>
+            <AlbumAndFeatures
+              className={styles['album-and-features']}
+              data={{ album, features, track }}
+            />
             <Lyrics data={{ lyrics }} />
           </div>
-          <AlbumAndFeatures
-            className={styles['album-and-features']}
-            data={{ album, features, track }}
-          />
         </>
       </PageSection>
     </>
