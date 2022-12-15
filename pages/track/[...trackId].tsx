@@ -1,3 +1,5 @@
+import { GetServerSideProps } from 'next';
+
 import TrackPage from '../../components/pages';
 import {
   getAlbum,
@@ -19,9 +21,10 @@ const Track = (props) => (
 
 export default Track;
 
-export async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const token = await getTokenServer(context);
 
+  // TODO: Entire track is already stored in state at this stage if I find a way of grabbing that one instead
   const spotifyTrack = await getTrack(context.params.trackId, token);
   const albumId = spotifyTrack.album.id;
   const spotifyAlbum = await getAlbum(albumId, token);
@@ -31,7 +34,6 @@ export async function getServerSideProps(context) {
   );
   const { isrc } = spotifyTrack.external_ids;
   const lyrics = await getLyrics(isrc);
-  console.log('lyrics 🔴', lyrics);
 
   return {
     props: {
@@ -41,4 +43,4 @@ export async function getServerSideProps(context) {
       lyrics: lyrics !== undefined ? lyrics : null,
     },
   };
-}
+};
