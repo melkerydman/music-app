@@ -1,14 +1,6 @@
 import type { SearchSlice } from '../types';
 import { SliceType } from '../types/zustand/store';
 
-// TODO: Create proper type somewhere?
-type SearchResultsType = {
-  topResult: {};
-  albums: { items: any[]; next: string };
-  artists: { items: any[]; next: string };
-  tracks: { items: any[]; next: string };
-};
-
 const searchSlice: SliceType<SearchSlice> = (set) => ({
   search: '',
   setSearch: (searchString) =>
@@ -24,15 +16,12 @@ const searchSlice: SliceType<SearchSlice> = (set) => ({
       false,
       'search/setIsFocus'
     ),
-  searchResults: {
-    topResult: {},
-    albums: { items: [], next: '' },
-    artists: { items: [], next: '' },
-    tracks: { items: [], next: '' },
-  },
-  setSearchResults: (searchResults: SearchResultsType) =>
+  searchResults: {},
+  setSearchResults: (searchResults: SpotifyApi.SearchResponse) =>
     set(
-      (state) => ({ search: { ...state.search, searchResults } }),
+      (state) => ({
+        search: { ...state.search, searchResults },
+      }),
       false,
       'search/setSearchResults'
     ),
@@ -44,12 +33,11 @@ const searchSlice: SliceType<SearchSlice> = (set) => ({
           searchResults: {
             ...state.search.searchResults,
             [type]: {
-              ...state.search.searchResults[type],
+              ...searchResults[type],
               items: [
                 ...state.search.searchResults[type].items,
                 ...searchResults[type].items,
               ],
-              next: searchResults[type].next,
             },
           },
         },

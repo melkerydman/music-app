@@ -2,28 +2,20 @@ import { useEffect, useState } from 'react';
 import useStore from '../../../store/useStore';
 import { handleClassName } from '../../../utilities/helpers';
 import { getTokenClient } from '../../../utilities/services/spotify';
-import searchSpotify from '../../../utilities/services/spotify/searchSpotify';
+import { fetchNext } from '../../../utilities/services/spotify/searchSpotify';
 import { Heading } from '../../Typography/Typography';
 import ListItem from '../ListItem/ListItem';
 import styles from './ListItems.module.scss';
 
-// TODO: Create proper type in types
-type QuickSearchType = {
-  href: string;
-  image: string;
-  heading: string;
-  subHeading?: string[];
-  type: string;
-  id: string;
-};
-
 type Props = {
-  data: QuickSearchType[];
-  heading: string;
-  collapsible?: boolean;
+  data:
+    | SpotifyApi.AlbumObjectSimplified[]
+    | SpotifyApi.ArtistObjectFull[]
+    | SpotifyApi.TrackObjectFull[];
+  type: 'album' | 'artist' | 'track';
 };
 
-const ListItems = ({ data, heading, collapsible, ...rest }: Props) => {
+const ListItems = ({ data, type, ...rest }: Props) => {
   const [accessToken, setAccessToken] = useState('');
 
   const searchResults = useStore((state) => state.search.searchResults);
@@ -41,21 +33,26 @@ const ListItems = ({ data, heading, collapsible, ...rest }: Props) => {
     getToken();
   }, []);
 
-  const handleClick = (type) => {
+  const handleClick = () => {
     if (type !== activeCategory) {
       return setActiveCategory(type);
     }
     return setActiveCategory(null);
   };
 
-  const fetchMore = async (type: string) => {
+  /* // !INFO: Note the difference between type and category 
+        The type will be without s whereas category will be with s, e.g. "track" contra "tracks"  
+  */
+  const fetchMore = async () => {
+    const category = `${type}s`;
+
     try {
-      const searchResult = await searchSpotify(
+      const searchResult = await fetchNext(
         accessToken,
-        '',
-        searchResults[type].next
+        searchResults[category].next
       );
-      addSearchResults(searchResult, type);
+
+      addSearchResults(searchResult, category);
     } catch (err) {
       setAccessToken(await getTokenClient());
     }
@@ -70,47 +67,42 @@ const ListItems = ({ data, heading, collapsible, ...rest }: Props) => {
         padding: '1rem',
       }}
     >
-      <Heading as="h4">{heading}</Heading>
-      {collapsible && (
-        <button onClick={() => handleClick(heading.toLowerCase())}>
-          {heading.toLowerCase() !== activeCategory
-            ? `Show more ${heading.toLowerCase()}`
-            : `Show fewer ${heading.toLowerCase()}`}
-        </button>
-      )}
+      <Heading as="h4">{type}</Heading>
+      <button onClick={handleClick}>
+        {type !== activeCategory ? 'Expand ->' : 'Collapse <-'}
+      </button>
     </div>
   );
 
-  const initialRenderAmount = heading.toLowerCase() === 'tracks' ? 7 : 3;
-  const Items = () => (
-    <ul
-      className={handleClassName([
-        heading.toLowerCase() !== activeCategory && activeCategory !== null
-          ? styles.hidden
-          : '',
-        styles.items,
-      ])}
-    >
-      {activeCategory === null
-        ? data
-            .slice(0, initialRenderAmount)
-            .map((item, index) => (
+  const Items = () => {
+    const slicedArray = data.slice(0, 3);
+
+    return (
+      <ul className={handleClassName([styles.items])}>
+        {activeCategory === null
+          ? slicedArray.map((item, index) => (
               <ListItem key={index} content={item}></ListItem>
             ))
-        : data.map((item, index) => (
-            <ListItem key={index} content={item}></ListItem>
-          ))}
-    </ul>
-  );
+          : data.map((item, index) => (
+              <ListItem key={index} content={item}></ListItem>
+            ))}
+      </ul>
+    );
+  };
 
   return (
-    <li className={styles.wrapper} {...rest}>
+    <li
+      className={handleClassName([
+        type === activeCategory ? styles.active : '',
+        type !== activeCategory && activeCategory !== null ? styles.hidden : '',
+        styles.wrapper,
+      ])}
+      {...rest}
+    >
       <Header />
       <Items />
-      {heading.toLowerCase() === activeCategory && (
-        <button onClick={() => fetchMore(heading.toLowerCase())}>
-          Load more {heading.toLowerCase()}{' '}
-        </button>
+      {type === activeCategory && (
+        <button onClick={fetchMore}>Load more {`${type}s`}</button>
       )}
     </li>
   );
