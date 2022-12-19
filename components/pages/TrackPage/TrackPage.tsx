@@ -32,24 +32,20 @@ const TrackPage = ({ data }: Props) => {
   const artists = track.artists.map((artist) => artist.name);
 
   return (
-    <>
-      <PageSection containerClassName={styles.container}>
-        <>
-          <header>
-            {/* <Heading as="h3">{track.type}</Heading> */}
-            <Heading as="h4">{artists.join(', ')}</Heading>
-            <Heading as="h1">{track.name}</Heading>
-          </header>
-          <div className={styles.content}>
-            <AlbumAndFeatures
-              className={styles['album-and-features']}
-              data={{ album, features, track }}
-            />
-            <Lyrics data={{ lyrics }} />
-          </div>
-        </>
-      </PageSection>
-    </>
+    <PageSection containerClassName={styles.container}>
+      <header>
+        {/* <Heading as="h3">{track.type}</Heading> */}
+        <Heading as="h4">{artists.join(', ')}</Heading>
+        <Heading as="h1">{track.name}</Heading>
+      </header>
+      <div className={styles.content}>
+        <AlbumAndFeatures
+          className={styles['album-and-features']}
+          data={{ album, features, track }}
+        />
+        <Lyrics data={{ lyrics }} />
+      </div>
+    </PageSection>
   );
 };
 export default TrackPage;

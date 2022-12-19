@@ -7,8 +7,10 @@ import useStore from '../../store/useStore';
 import { searchForItem } from '../../utilities/services/spotify/searchSpotify';
 import SearchInput from './SearchInput/SearchInput';
 import ListItems from './ListItems/ListItems';
+// import { useAuthToken } from '../../utilities/hooks';
 
 const Search = () => {
+  // const accessToken = useAuthToken();
   const [accessToken, setAccessToken] = useState('');
   const search = useStore((state) => state.search.search);
   const isFocus = useStore((state) => state.search.isFocus);
@@ -19,7 +21,7 @@ const Search = () => {
     (state) => state.search.setSearchResults
   );
 
-  // TODO: handle access token storage (on server, cookie?)
+  // TODO: Finish partially created authentication hook
   useEffect(() => {
     const getToken = async () => {
       const token = await getTokenClient();

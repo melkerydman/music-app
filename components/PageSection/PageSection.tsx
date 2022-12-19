@@ -1,7 +1,7 @@
 import { handleClassName } from '../../utilities/helpers';
 
 type Props = {
-  children: JSX.Element;
+  children: React.ReactNode;
   className?: string;
   // style?: React.CSSProperties;
   withoutContainer?: boolean;
