@@ -5,7 +5,7 @@ import {
   Track,
   TrackFeatures,
 } from '../../../types';
-import PageSection from '../../PageSection/PageSection';
+import PageSection from '../../layout/PageSection/PageSection';
 import { Heading } from '../../Typography/Typography';
 import AlbumAndFeatures from './AlbumAndFeatures/AlbumAndFeatures';
 import Lyrics from './Lyrics/Lyrics';

@@ -4,7 +4,7 @@ import {
   Paragraph,
 } from '../components/Typography/Typography';
 import Header from '../components/Header/Header';
-import PageSection from '../components/PageSection/PageSection';
+import PageSection from '../components/layout/PageSection/PageSection';
 
 export default function Home() {
   return (
