@@ -1,4 +1,6 @@
-import { handleClassName } from '../../utilities/helpers';
+import { handleClassName } from '../../../utilities/helpers';
+
+import styles from './PageSection.module.scss';
 
 type Props = {
   children: React.ReactNode;
@@ -6,6 +8,7 @@ type Props = {
   // style?: React.CSSProperties;
   withoutContainer?: boolean;
   containerClassName?: string;
+  border?: boolean;
 };
 
 const PageSection = ({
@@ -13,9 +16,13 @@ const PageSection = ({
   className,
   withoutContainer,
   containerClassName,
+  border,
   ...rest
 }: Props) => (
-  <section className={handleClassName([className || ''])} {...rest}>
+  <section
+    className={handleClassName([className || '', border ? styles.border : ''])}
+    {...rest}
+  >
     {!withoutContainer ? (
       <div className={handleClassName(['container', containerClassName || ''])}>
         {children}
