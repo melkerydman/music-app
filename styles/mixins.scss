@@ -1,5 +1,5 @@
 // @use './type.scss' as *;
-@use './variables.scss' as *;
+// @use './variables.scss' as *;
 
 @mixin display-lg {
   font-size: 9.6rem;
@@ -48,6 +48,7 @@
   font-size: 1.6rem;
   font-weight: 500;
 }
+
 @mixin p-sm {
   font-size: 1.4rem;
   font-weight: 500;

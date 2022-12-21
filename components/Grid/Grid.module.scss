@@ -1,0 +1,44 @@
+@use '../../styles/breakpoints.scss' as *;
+
+.heading {
+  margin-bottom: 2.4rem;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.grid-item {
+  padding: 2.4rem;
+  flex: 0 0 100%;
+  max-width: 100%;
+
+  // border-bottom: 1px solid black;
+  &:last-child {
+    border-bottom: unset;
+  }
+
+  @include xs-breakpoint {
+    flex: 0 0 50%;
+    max-width: 50%;
+    // border-right: 1px solid black;
+    &:nth-last-child(-n + 2) {
+      // border-bottom: unset;
+    }
+  }
+  @include sm-breakpoint {
+    flex: 0 0 25%;
+    max-width: 25%;
+    // border-right: 1px solid black;
+    &:nth-last-child(-n + 2) {
+      // border-bottom: unset;
+    }
+  }
+}
+
+.text > * {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

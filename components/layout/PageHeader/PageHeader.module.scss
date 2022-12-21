@@ -1,0 +1,24 @@
+.header {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.image-wrapper {
+  position: relative;
+  padding-bottom: 25%;
+  flex: 0 0 25%;
+}
+// .image {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   bottom: 0;
+//   right: 0;
+// }
+
+.titles {
+  padding: 2.4rem;
+  flex: 0 0 75%;
+}

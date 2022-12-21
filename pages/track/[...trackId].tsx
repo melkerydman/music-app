@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
 
-import TrackPage from '../../components/pages';
+import { TrackPage } from '../../components/pages';
 import {
   getAlbum,
   getTrack,
