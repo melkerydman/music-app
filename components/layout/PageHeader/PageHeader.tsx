@@ -23,7 +23,7 @@ const PageHeader = ({ image, heading, subHeading }: Props) => {
         />
       </div>
       <div className={styles.titles}>
-        <Heading as="h2">{subHeading}</Heading>
+        <Heading as="h4">{subHeading}</Heading>
         <Heading as="h1">{heading}</Heading>
       </div>
     </header>

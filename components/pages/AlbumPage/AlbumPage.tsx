@@ -7,10 +7,10 @@ import {
 import Grid from '../../Grid/Grid';
 import PageHeader from '../../layout/PageHeader/PageHeader';
 import PageSection from '../../layout/PageSection/PageSection';
+import TrackList from '../../TrackList/TrackList';
 
-import styles from './AlbumPage.module.scss';
+// import styles from './AlbumPage.module.scss';
 import MoreAlbums from './MoreAlbums/MoreAlbums';
-import Tracklist from './Tracklist/Tracklist';
 
 type Data = {
   album: SpotifyApi.AlbumObjectFull;
@@ -83,18 +83,22 @@ const AlbumPage = ({ data }: Props) => {
         </Grid>
       </PageSection>
       <PageSection border>
-        <div className={handleClassName([styles.grid])}>
-          <Tracklist
-            className={handleClassName([styles['grid-9']])}
-            tracks={tracks.items}
-          ></Tracklist>
+        <div className={handleClassName(['grid'])}>
           {artistsAlbums && (
-            <MoreAlbums
-              className={styles['grid-3']}
-              albums={artistsAlbums.items}
-              activeAlbumId={album.id}
-            />
+            <div
+              className={handleClassName(['grid-item__12', 'grid-item__3:md'])}
+            >
+              <MoreAlbums
+                albums={artistsAlbums.items}
+                activeAlbumId={album.id}
+              />
+            </div>
           )}
+          <div
+            className={handleClassName(['grid-item__12', 'grid-item__9:md'])}
+          >
+            <TrackList tracks={tracks.items}></TrackList>
+          </div>
         </div>
       </PageSection>
     </>

@@ -1,35 +1,37 @@
-$xsBreakpoint: 576px;
-$smBreakpoint: 768px;
-$mdBreakpoint: 1024px;
-$lgBreakpoint: 1290px;
-$xlBreakpoint: 1440px;
+$breakpoints: (
+  'xs': 576px,
+  'sm': 768px,
+  'md': 1024px,
+  'lg': 1290px,
+  'xl': 1440px,
+);
 
 @mixin xs-breakpoint {
-  @media only screen and (min-width: $xsBreakpoint) {
+  @media only screen and (min-width: map-get($breakpoints, 'xs')) {
     @content;
   }
 }
 
 @mixin sm-breakpoint {
-  @media only screen and (min-width: $smBreakpoint) {
+  @media only screen and (min-width: map-get($breakpoints, 'sm')) {
     @content;
   }
 }
 
 @mixin md-breakpoint {
-  @media only screen and (min-width: $mdBreakpoint) {
+  @media only screen and (min-width: map-get($breakpoints, 'md')) {
     @content;
   }
 }
 
 @mixin lg-breakpoint {
-  @media only screen and (min-width: $lgBreakpoint) {
+  @media only screen and (min-width: map-get($breakpoints, 'lg')) {
     @content;
   }
 }
 
 @mixin xl-breakpoint {
-  @media only screen and (min-width: $xlBreakpoint) {
+  @media only screen and (min-width: map-get($breakpoints, 'xl')) {
     @content;
   }
 }

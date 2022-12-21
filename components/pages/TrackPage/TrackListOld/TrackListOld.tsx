@@ -2,7 +2,7 @@ import Link from 'next/link';
 import type { Album as AlbumType } from '../../../../types';
 import { handleClassName } from '../../../../utilities/helpers';
 import { Paragraph } from '../../../Typography/Typography';
-import styles from './TrackList.module.scss';
+import styles from './TrackListOld.module.scss';
 
 type Props = {
   activeId: string;
@@ -13,10 +13,10 @@ function padTo2Digits(num: number) {
   return num.toString().padStart(2, '0');
 }
 
-const TrackList = ({ activeId, album }: Props) => (
+const TrackListOld = ({ activeId, album }: Props) => (
   <div>
     <Paragraph as="div" sans small weight="bold">
-      [ Tracklist ]
+      [ TracklistOld ]
     </Paragraph>
     <div className={styles.tracks}>
       {album.tracks.items.map((track, index) => (
@@ -36,4 +36,4 @@ const TrackList = ({ activeId, album }: Props) => (
     </div>
   </div>
 );
-export default TrackList;
+export default TrackListOld;

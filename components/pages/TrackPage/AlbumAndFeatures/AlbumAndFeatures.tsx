@@ -16,7 +16,7 @@ import {
 } from '../../../../utilities/helpers';
 import AlbumInfo from '../AlbumInfo/AlbumInfo';
 import Feature from '../Feature/Feature';
-import TrackList from '../TrackList/TrackList';
+import TrackListOld from '../TrackListOld/TrackListOld';
 import styles from './AlbumAndFeatures.module.scss';
 
 // TODO: Rename TrackFeatures to AudioFeatures in EVERY file
@@ -77,7 +77,7 @@ const AlbumAndFeatures = ({ data, className }: Props): JSX.Element => {
           />
         </div>
         {/* // TODO: Store active track in state instead? */}
-        <TrackList activeId={track.id} album={album}></TrackList>
+        <TrackListOld activeId={track.id} album={album}></TrackListOld>
       </div>
     </aside>
   );
