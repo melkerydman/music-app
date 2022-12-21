@@ -1,0 +1,28 @@
+@use '../../../../styles/breakpoints.scss' as *;
+
+.album {
+  &__outer {
+    position: relative;
+    padding-bottom: 100%;
+  }
+
+  // &__inner {
+  // }
+}
+
+.more-albums {
+  padding: 2.4rem;
+
+  .heading {
+    margin-bottom: 2.4rem;
+  }
+
+  &__innner {
+    display: flex;
+    overflow: scroll;
+
+    @include sm-breakpoint {
+      flex-direction: column;
+    }
+  }
+}
