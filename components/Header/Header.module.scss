@@ -1,8 +1,14 @@
+.header {
+  border-bottom: 1px solid black;
+  width: 100%;
+}
+
 .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   z-index: 1;
+  padding: 0.8rem;
 }
 
 .search {

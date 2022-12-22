@@ -10,13 +10,17 @@ type Props = {
 };
 
 const Header = ({ className }: Props): JSX.Element => (
-  <div className={handleClassName(['container', styles.container, className])}>
-    {/* <div className={`container ${styles.header_container}`}> */}
-    <div className={`flex ${styles.search}`}>
-      <Logo />
-      <Search />
+  <header className={styles.header}>
+    <div
+      className={handleClassName(['container', styles.container, className])}
+    >
+      {/* <div className={`container ${styles.header_container}`}> */}
+      <div className={`flex ${styles.search}`}>
+        <Logo />
+        <Search />
+      </div>
+      <Metronome />
     </div>
-    <Metronome />
-  </div>
+  </header>
 );
 export default Header;

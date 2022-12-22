@@ -1,0 +1,17 @@
+.full-border {
+  margin-top: -1px;
+  border-top: 1px solid var(--colors-black);
+  border-left: 1px solid var(--colors-black);
+
+  > div {
+    border-right: 1px solid var(--colors-black);
+    border-bottom: 1px solid var(--colors-black);
+  }
+}
+
+// .container {
+// }
+
+.item {
+  padding: 2.4rem;
+}
