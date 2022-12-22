@@ -1,21 +1,39 @@
 import Link from 'next/link';
 import { Heading } from '../Typography/Typography';
-import { formatDuration } from '../../utilities/helpers';
+import { formatDuration, handleClassName } from '../../utilities/helpers';
 
-// import styles from './TrackList.module.scss';
+import styles from './TrackList.module.scss';
 
+// TODO: Update artist link - currently it just links to the same thing as the track
+// TODO: Finish styling - need to make design choices
+
+const SimpleTrack = ({ item }: { item: SpotifyApi.TrackObjectSimplified }) => (
+  <li className={handleClassName([styles.item, styles['item-small']])}>
+    <span className={styles['number--small']}>{`${item.track_number}.`}</span>
+    <Link href={`/${item.type}/${item.id}`}>
+      <a>
+        <Heading as="h6" className={styles['heading-small']}>
+          {item.name}
+        </Heading>
+      </a>
+    </Link>
+  </li>
+);
 const Track = ({ item }: { item: SpotifyApi.TrackObjectSimplified }) => (
-  <li style={{ display: 'flex' }}>
-    <Heading as="h6">{item.track_number}</Heading>
+  <li className={styles.item}>
+    <span className={styles.number}>{`${item.track_number}.`}</span>
+    <span className={styles.arrow} />
     <div>
       <Link href={`/${item.type}/${item.id}`}>
         <a>
-          <Heading as="h5">{item.name}</Heading>
+          <Heading as="h6" className={styles['']}>
+            {item.name}
+          </Heading>
         </a>
       </Link>
-      <Heading as="h6">
-        {item.artists.map((artist) => artist.name).join(', ')}
-      </Heading>
+      <Link href={`/${item.type}/${item.id}`}>
+        <a>{item.artists.map((artist) => artist.name).join(', ')}</a>
+      </Link>
     </div>
     <span>{formatDuration(item.duration_ms)}</span>
   </li>
@@ -24,15 +42,19 @@ const Track = ({ item }: { item: SpotifyApi.TrackObjectSimplified }) => (
 interface Props {
   tracks: SpotifyApi.TrackObjectSimplified[];
   className?: string;
+  simple?: boolean;
 }
 
-const TrackList = ({ tracks, className }: Props) => (
+const TrackList = ({ tracks, className, simple }: Props) => (
   <div className={className}>
-    <Heading as="h5">Tracklist</Heading>
+    <Heading as="h5" className={styles.title}>
+      Tracklist
+    </Heading>
     <ul>
-      {tracks.map((track, index) => (
-        <Track item={track} key={index} />
-      ))}
+      {tracks.map((track, index) => {
+        if (simple) return <SimpleTrack key={index} item={track} />;
+        return <Track item={track} key={index} />;
+      })}
     </ul>
   </div>
 );

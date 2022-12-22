@@ -84,9 +84,6 @@ const AlbumPage = ({ data }: Props) => {
       </PageSection>
       <PageSection>
         <NewGrid container fullBorder>
-          <NewGrid item sm={9}>
-            <TrackList tracks={tracks.items}></TrackList>
-          </NewGrid>
           {artistsAlbums && (
             <NewGrid item sm={3}>
               <MoreAlbums
@@ -95,6 +92,9 @@ const AlbumPage = ({ data }: Props) => {
               />
             </NewGrid>
           )}
+          <NewGrid item sm={9}>
+            <TrackList tracks={tracks.items}></TrackList>
+          </NewGrid>
         </NewGrid>
       </PageSection>
     </>

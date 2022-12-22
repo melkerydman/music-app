@@ -84,7 +84,7 @@ const TrackPage = ({ data }: Props) => {
         <NewGrid container fullBorder>
           <NewGrid item sm={3}>
             <AlbumInfo album={album}></AlbumInfo>
-            <TrackList tracks={album.tracks.items} />
+            <TrackList simple tracks={album.tracks.items} />
           </NewGrid>
           <NewGrid item sm={9}>
             <Lyrics data={{ lyrics }} />

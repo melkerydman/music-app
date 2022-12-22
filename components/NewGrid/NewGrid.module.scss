@@ -1,11 +1,11 @@
 .full-border {
   margin-top: -1px;
-  border-top: 1px solid var(--colors-black);
-  border-left: 1px solid var(--colors-black);
+  border-top: 1px solid var(--colors-grey-500);
+  border-left: 1px solid var(--colors-grey-500);
 
   > div {
-    border-right: 1px solid var(--colors-black);
-    border-bottom: 1px solid var(--colors-black);
+    border-right: 1px solid var(--colors-grey-500);
+    border-bottom: 1px solid var(--colors-grey-500);
   }
 }
 
