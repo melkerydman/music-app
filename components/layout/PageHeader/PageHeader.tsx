@@ -22,8 +22,10 @@ const PageHeader = ({ image, heading, subHeading }: Props) => {
               src={url}
               alt={heading}
               className={styles.image}
-              sizes="100vw"
               fill
+              sizes="(max-width: 768px) 100vw,
+              25vw"
+              priority
             />
           </div>
         </NewGrid>

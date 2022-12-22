@@ -1,10 +1,5 @@
 // import useHeaderStore from '../../../store/useHeaderStore';
-import {
-  Album,
-  Lyrics as LyricsType,
-  Track,
-  TrackFeatures,
-} from '../../../types';
+import { Lyrics as LyricsType } from '../../../types';
 import {
   formatDuration,
   formatKey,
@@ -23,9 +18,9 @@ import AlbumInfo from './AlbumInfo/AlbumInfo';
 // import styles from './TrackPage.module.scss';
 
 type DataType = {
-  album: Album;
-  track: Track;
-  features: TrackFeatures;
+  album: SpotifyApi.AlbumObjectFull;
+  track: SpotifyApi.TrackObjectFull;
+  features: SpotifyApi.AudioFeaturesObject;
   lyrics: LyricsType;
 };
 
