@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { handleClassName } from '../../../utilities/helpers';
 import {
   getArtistsAlbums,
   getTokenClient,
 } from '../../../utilities/services/spotify';
-import Grid from '../../Grid/Grid';
+import Data from '../../Data/Data';
+import NewGrid from '../../NewGrid/NewGrid';
 import PageHeader from '../../layout/PageHeader/PageHeader';
 import PageSection from '../../layout/PageSection/PageSection';
 import TrackList from '../../TrackList/TrackList';
@@ -12,12 +12,12 @@ import TrackList from '../../TrackList/TrackList';
 // import styles from './AlbumPage.module.scss';
 import MoreAlbums from './MoreAlbums/MoreAlbums';
 
-type Data = {
+type DataType = {
   album: SpotifyApi.AlbumObjectFull;
 };
 
 type Props = {
-  data: Data;
+  data: DataType;
 };
 
 const AlbumPage = ({ data }: Props) => {
@@ -62,44 +62,40 @@ const AlbumPage = ({ data }: Props) => {
 
   return (
     <>
-      <PageSection border>
+      <PageSection>
         <PageHeader
           image={images[0]}
           heading={name}
           subHeading={artists.map((artist) => artist.name).join(', ')}
         />
       </PageSection>
-      <PageSection border>
-        <Grid container>
+      <PageSection>
+        <NewGrid container fullBorder>
           {gridItems.map((item, index) => (
-            <Grid
-              item
-              key={index}
-              title={item.title}
-              value={item.value}
-              description={item.description}
-            />
+            <NewGrid key={index} item xs={6} sm={3}>
+              <Data
+                title={item.title}
+                value={item.value}
+                description={item.description}
+              />
+            </NewGrid>
           ))}
-        </Grid>
+        </NewGrid>
       </PageSection>
-      <PageSection border>
-        <div className={handleClassName(['grid'])}>
+      <PageSection>
+        <NewGrid container fullBorder>
+          <NewGrid item sm={9}>
+            <TrackList tracks={tracks.items}></TrackList>
+          </NewGrid>
           {artistsAlbums && (
-            <div
-              className={handleClassName(['grid-item__12', 'grid-item__3:md'])}
-            >
+            <NewGrid item sm={3}>
               <MoreAlbums
                 albums={artistsAlbums.items}
                 activeAlbumId={album.id}
               />
-            </div>
+            </NewGrid>
           )}
-          <div
-            className={handleClassName(['grid-item__12', 'grid-item__9:md'])}
-          >
-            <TrackList tracks={tracks.items}></TrackList>
-          </div>
-        </div>
+        </NewGrid>
       </PageSection>
     </>
   );

@@ -70,6 +70,7 @@ const Grid = ({
       <div
         className={handleClassName([
           'grid',
+          styles.container,
           className && className,
           fullBorder && styles['full-border'],
         ])}
@@ -81,7 +82,7 @@ const Grid = ({
   if (item)
     return (
       <Item
-        className={className}
+        className={handleClassName([className && className, styles.item])}
         span={span}
         xs={xs}
         sm={sm}
