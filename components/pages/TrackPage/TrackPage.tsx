@@ -11,13 +11,13 @@ import {
   formatMode,
   formatTempo,
   formatTimeSignature,
-  handleClassName,
 } from '../../../utilities/helpers';
 import Grid from '../../Grid/Grid';
 import PageHeader from '../../layout/PageHeader/PageHeader';
 import PageSection from '../../layout/PageSection/PageSection';
 import TrackList from '../../TrackList/TrackList';
 import Lyrics from './Lyrics/Lyrics';
+import NewGrid from '../../NewGrid/NewGrid';
 
 // import styles from './TrackPage.module.scss';
 
@@ -84,18 +84,14 @@ const TrackPage = ({ data }: Props) => {
         </Grid>
       </PageSection>
       <PageSection border>
-        <div className={handleClassName(['grid'])}>
-          <div
-            className={handleClassName(['grid-item__12', 'grid-item__3:md'])}
-          >
-            <TrackList tracks={album.tracks.items}></TrackList>
-          </div>
-          <div
-            className={handleClassName(['grid-item__12', 'grid-item__9:md'])}
-          >
+        <NewGrid container>
+          <NewGrid item sm={3}>
+            <TrackList tracks={album.tracks.items} />
+          </NewGrid>
+          <NewGrid item sm={9}>
             <Lyrics data={{ lyrics }} />
-          </div>
-        </div>
+          </NewGrid>
+        </NewGrid>
       </PageSection>
     </>
   );
