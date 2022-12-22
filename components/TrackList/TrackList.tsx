@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { Heading } from '../../../Typography/Typography';
-import { formatDuration } from '../../../../utilities/helpers';
+import { Heading } from '../Typography/Typography';
+import { formatDuration } from '../../utilities/helpers';
 
-// import styles from './Tracklist.module.scss';
+// import styles from './TrackList.module.scss';
 
 const Track = ({ item }: { item: SpotifyApi.TrackObjectSimplified }) => (
   <li style={{ display: 'flex' }}>
@@ -26,7 +26,7 @@ interface Props {
   className?: string;
 }
 
-const Tracklist = ({ tracks, className }: Props) => (
+const TrackList = ({ tracks, className }: Props) => (
   <div className={className}>
     <Heading as="h5">Tracklist</Heading>
     <ul>
@@ -36,4 +36,4 @@ const Tracklist = ({ tracks, className }: Props) => (
     </ul>
   </div>
 );
-export default Tracklist;
+export default TrackList;

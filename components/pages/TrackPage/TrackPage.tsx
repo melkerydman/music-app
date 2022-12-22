@@ -5,12 +5,21 @@ import {
   Track,
   TrackFeatures,
 } from '../../../types';
+import {
+  formatDuration,
+  formatKey,
+  formatMode,
+  formatTempo,
+  formatTimeSignature,
+  handleClassName,
+} from '../../../utilities/helpers';
+import Grid from '../../Grid/Grid';
+import PageHeader from '../../layout/PageHeader/PageHeader';
 import PageSection from '../../layout/PageSection/PageSection';
-import { Heading } from '../../Typography/Typography';
-import AlbumAndFeatures from './AlbumAndFeatures/AlbumAndFeatures';
+import TrackList from '../../TrackList/TrackList';
 import Lyrics from './Lyrics/Lyrics';
 
-import styles from './TrackPage.module.scss';
+// import styles from './TrackPage.module.scss';
 
 type Data = {
   album: Album;
@@ -29,23 +38,66 @@ const TrackPage = ({ data }: Props) => {
   // TODO: Remove headerheight completely?
   // const headerHeight = useHeaderStore((props) => props.height);
 
-  const artists = track.artists.map((artist) => artist.name);
+  const gridItems = [
+    {
+      title: 'Tempo',
+      value: formatTempo(features.tempo),
+      description: '',
+    },
+    {
+      title: 'Key',
+      value: `${formatKey(features.key)} ${formatMode(features.mode)}`,
+      description: '',
+    },
+    {
+      title: 'Time Signature',
+      value: formatTimeSignature(features.time_signature),
+      description: '',
+    },
+    {
+      title: 'Duration',
+      value: formatDuration(features.duration_ms),
+      description: '',
+    },
+  ];
 
   return (
-    <PageSection containerClassName={styles.container}>
-      <header>
-        {/* <Heading as="h3">{track.type}</Heading> */}
-        <Heading as="h4">{artists.join(', ')}</Heading>
-        <Heading as="h1">{track.name}</Heading>
-      </header>
-      <div className={styles.content}>
-        <AlbumAndFeatures
-          className={styles['album-and-features']}
-          data={{ album, features, track }}
+    <>
+      <PageSection border>
+        <PageHeader
+          image={album.images[0]}
+          heading={track.name}
+          subHeading={track.artists.map((artist) => artist.name).join(', ')}
         />
-        <Lyrics data={{ lyrics }} />
-      </div>
-    </PageSection>
+      </PageSection>
+      <PageSection border>
+        <Grid container>
+          {gridItems.map((item, index) => (
+            <Grid
+              item
+              key={index}
+              title={item.title}
+              value={item.value}
+              description={item.description}
+            />
+          ))}
+        </Grid>
+      </PageSection>
+      <PageSection border>
+        <div className={handleClassName(['grid'])}>
+          <div
+            className={handleClassName(['grid-item__12', 'grid-item__3:md'])}
+          >
+            <TrackList tracks={album.tracks.items}></TrackList>
+          </div>
+          <div
+            className={handleClassName(['grid-item__12', 'grid-item__9:md'])}
+          >
+            <Lyrics data={{ lyrics }} />
+          </div>
+        </div>
+      </PageSection>
+    </>
   );
 };
 export default TrackPage;
