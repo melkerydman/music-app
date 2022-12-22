@@ -1,16 +1,16 @@
 import Link from 'next/link';
-import type { Album as AlbumType } from '../../../../types';
 import { handleClassName } from '../../../../utilities/helpers';
 import { Paragraph } from '../../../Typography/Typography';
 import styles from './AlbumInfo.module.scss';
 
 type Props = {
-  album: AlbumType;
+  album: SpotifyApi.AlbumObjectFull;
 };
 
 const AlbumInfo = ({ album }: Props) => {
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  const { type, id, name } = album;
+  const { type, id, name, release_date } = album;
+  const releaseDate = new Date(release_date);
   // TODO: Look through all of this, break out to classes as well as create global classes to use
 
   return (
@@ -31,7 +31,7 @@ const AlbumInfo = ({ album }: Props) => {
             [ Year ]
           </Paragraph>
           <Paragraph small sans weight="thin" as="div">
-            2004
+            {releaseDate.getFullYear()}
           </Paragraph>
         </div>
       </div>
