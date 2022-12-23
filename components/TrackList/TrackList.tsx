@@ -4,7 +4,7 @@ import { formatDuration, handleClassName } from '../../utilities/helpers';
 
 import styles from './TrackList.module.scss';
 
-// TODO: Update artist link - currently it just links to the same thing as the track
+// TODO: Update artist link, make the artists comma separated
 // TODO: Finish styling - need to make design choices
 
 const SimpleTrack = ({ item }: { item: SpotifyApi.TrackObjectSimplified }) => (
@@ -31,9 +31,13 @@ const Track = ({ item }: { item: SpotifyApi.TrackObjectSimplified }) => (
           </Heading>
         </a>
       </Link>
-      <Link href={`/${item.type}/${item.id}`}>
-        <a>{item.artists.map((artist) => artist.name).join(', ')}</a>
-      </Link>
+      <div>
+        {item.artists.map((artist, index) => (
+          <Link key={index} href={`/${artist.type}/${artist.id}`}>
+            <a>{artist.name}</a>
+          </Link>
+        ))}
+      </div>
     </div>
     <span>{formatDuration(item.duration_ms)}</span>
   </li>
