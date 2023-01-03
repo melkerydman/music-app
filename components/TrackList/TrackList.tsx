@@ -11,6 +11,7 @@ import styles from './TrackList.module.scss';
 
 // TODO: Update artist link, make the artists comma separated
 // TODO: Finish styling - need to make design choices
+// TODO: Potentially find a way to stop re-renders when going from a track to a different track but on the same album
 
 const SimpleTrack = ({ item }: { item: SpotifyApi.TrackObjectSimplified }) => (
   <li className={handleClassName([styles.item, styles['item-small']])}>
