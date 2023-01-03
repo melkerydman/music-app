@@ -1,11 +1,17 @@
 import Link from 'next/link';
+import React from 'react';
 import { Heading } from '../Typography/Typography';
-import { formatDuration, handleClassName } from '../../utilities/helpers';
+import {
+  formatDuration,
+  handleClassName,
+  groupBy,
+} from '../../utilities/helpers';
 
 import styles from './TrackList.module.scss';
 
-// TODO: Update artist link - currently it just links to the same thing as the track
+// TODO: Update artist link, make the artists comma separated
 // TODO: Finish styling - need to make design choices
+// TODO: Potentially find a way to stop re-renders when going from a track to a different track but on the same album
 
 const SimpleTrack = ({ item }: { item: SpotifyApi.TrackObjectSimplified }) => (
   <li className={handleClassName([styles.item, styles['item-small']])}>
@@ -31,9 +37,13 @@ const Track = ({ item }: { item: SpotifyApi.TrackObjectSimplified }) => (
           </Heading>
         </a>
       </Link>
-      <Link href={`/${item.type}/${item.id}`}>
-        <a>{item.artists.map((artist) => artist.name).join(', ')}</a>
-      </Link>
+      <div>
+        {item.artists.map((artist, index) => (
+          <Link key={index} href={`/${artist.type}/${artist.id}`}>
+            <a>{artist.name}</a>
+          </Link>
+        ))}
+      </div>
     </div>
     <span>{formatDuration(item.duration_ms)}</span>
   </li>
@@ -45,17 +55,29 @@ interface Props {
   simple?: boolean;
 }
 
-const TrackList = ({ tracks, className, simple }: Props) => (
-  <div className={className}>
-    <Heading as="h5" className={styles.title}>
-      Tracklist
-    </Heading>
-    <ul>
-      {tracks.map((track, index) => {
-        if (simple) return <SimpleTrack key={index} item={track} />;
-        return <Track item={track} key={index} />;
-      })}
-    </ul>
-  </div>
-);
+const TrackList = React.memo(({ tracks, className, simple }: Props) => {
+  const discs = groupBy(tracks, 'disc_number');
+
+  return (
+    <div className={className}>
+      <Heading as="h5" className={styles.title}>
+        Tracklist
+      </Heading>
+      {discs.map((disc, index) => (
+        <section key={index}>
+          {discs.length > 1 && <h3>Disc {index + 1}</h3>}
+          <ul>
+            {disc.map((track, trackIndex) => {
+              if (simple) return <SimpleTrack key={trackIndex} item={track} />;
+              return <Track item={track} key={trackIndex} />;
+            })}
+          </ul>
+        </section>
+      ))}
+    </div>
+  );
+});
+
+TrackList.displayName = 'TrackList';
+
 export default TrackList;

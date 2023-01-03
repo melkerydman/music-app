@@ -5,6 +5,7 @@ import formatMode from './formatMode';
 import formatTempo from './formatTempo';
 import formatTimeSignature from './formatTimeSignature';
 import getStringBetween from './getStringBetween';
+import groupBy from './groupBy';
 
 export {
   handleClassName,
@@ -14,4 +15,5 @@ export {
   formatTempo,
   formatTimeSignature,
   getStringBetween,
+  groupBy,
 };
