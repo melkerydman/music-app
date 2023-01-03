@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import React from 'react';
 import { Heading } from '../Typography/Typography';
 import {
   formatDuration,
@@ -53,7 +54,7 @@ interface Props {
   simple?: boolean;
 }
 
-const TrackList = ({ tracks, className, simple }: Props) => {
+const TrackList = React.memo(({ tracks, className, simple }: Props) => {
   const discs = groupBy(tracks, 'disc_number');
 
   return (
@@ -74,5 +75,8 @@ const TrackList = ({ tracks, className, simple }: Props) => {
       ))}
     </div>
   );
-};
+});
+
+TrackList.displayName = 'TrackList';
+
 export default TrackList;
