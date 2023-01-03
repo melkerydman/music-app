@@ -1,6 +1,10 @@
 import Link from 'next/link';
 import { Heading } from '../Typography/Typography';
-import { formatDuration, handleClassName } from '../../utilities/helpers';
+import {
+  formatDuration,
+  handleClassName,
+  groupBy,
+} from '../../utilities/helpers';
 
 import styles from './TrackList.module.scss';
 
@@ -49,17 +53,26 @@ interface Props {
   simple?: boolean;
 }
 
-const TrackList = ({ tracks, className, simple }: Props) => (
-  <div className={className}>
-    <Heading as="h5" className={styles.title}>
-      Tracklist
-    </Heading>
-    <ul>
-      {tracks.map((track, index) => {
-        if (simple) return <SimpleTrack key={index} item={track} />;
-        return <Track item={track} key={index} />;
-      })}
-    </ul>
-  </div>
-);
+const TrackList = ({ tracks, className, simple }: Props) => {
+  const discs = groupBy(tracks, 'disc_number');
+
+  return (
+    <div className={className}>
+      <Heading as="h5" className={styles.title}>
+        Tracklist
+      </Heading>
+      {discs.map((disc, index) => (
+        <section key={index}>
+          {discs.length > 1 && <h3>Disc {index + 1}</h3>}
+          <ul>
+            {disc.map((track, trackIndex) => {
+              if (simple) return <SimpleTrack key={trackIndex} item={track} />;
+              return <Track item={track} key={trackIndex} />;
+            })}
+          </ul>
+        </section>
+      ))}
+    </div>
+  );
+};
 export default TrackList;
