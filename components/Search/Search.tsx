@@ -1,17 +1,19 @@
-import { useEffect, useState } from 'react';
+import React, { PropsWithChildren, useEffect, useState } from 'react';
 
 import styles from './Search.module.scss';
 
 import { getTokenClient } from '../../utilities/services/spotify';
 import useStore from '../../store/useStore';
 import { searchForItem } from '../../utilities/services/spotify/searchSpotify';
-import SearchInput from './SearchInput/SearchInput';
+import SearchBox from './SearchBox/SearchBox';
 import ListItems from './ListItems/ListItems';
+import { handleClassName } from '../../utilities/helpers';
 // import { useAuthToken } from '../../utilities/hooks';
 
 const Search = () => {
   // const accessToken = useAuthToken();
   const [accessToken, setAccessToken] = useState('');
+  const [isMobile, setIsMobile] = useState(false);
   const search = useStore((state) => state.search.search);
   const isFocus = useStore((state) => state.search.isFocus);
   const searchResultsFromStore = useStore(
@@ -20,6 +22,10 @@ const Search = () => {
   const setSearchResultsInStore = useStore(
     (state) => state.search.setSearchResults
   );
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
 
   // TODO: Finish partially created authentication hook
   useEffect(() => {
@@ -51,43 +57,62 @@ const Search = () => {
   }, [search, accessToken, setSearchResultsInStore]);
 
   const SearchResults = () => {
-    // TODO: Find a cleaner way of solving this very simple check
     const { albums, artists, tracks } = searchResultsFromStore;
-    if (
-      albums.items.length === 0 &&
-      artists.items.length === 0 &&
-      tracks.items.length === 0
-    ) {
-      return (
-        <ul className={styles['search-results']}>
-          <li>No results found.</li>
-        </ul>
-      );
-    }
+    const noResults =
+      !albums?.items.length && !artists?.items.length && !tracks?.items.length;
 
     return (
       <ul className={styles['search-results']}>
-        {tracks.items.length > 0 && (
-          <ListItems data={tracks.items} type="track" />
-        )}
-        {artists.items.length > 0 && (
-          <ListItems data={artists.items} type="artist" />
-        )}
-        {albums.items.length > 0 && (
-          <ListItems data={albums.items} type="album" />
+        {noResults ? (
+          <li>No results found.</li>
+        ) : (
+          <>
+            {tracks?.items.length > 0 && (
+              <ListItems data={tracks.items} type="track" />
+            )}
+            {artists?.items.length > 0 && (
+              <ListItems data={artists.items} type="artist" />
+            )}
+            {albums?.items.length > 0 && (
+              <ListItems data={albums.items} type="album" />
+            )}
+          </>
         )}
       </ul>
     );
   };
 
-  return (
-    <div className={styles.search}>
-      <SearchInput />
+  // TODO: potentially memoize component to avoid re-renders
+  // TODO: Create Modal component
+  const Modal = ({ children }: PropsWithChildren): JSX.Element => (
+    <div className={handleClassName([styles.modal])}>{children}</div>
+  );
 
-      {/* // TODO: Better way of checking if searchResults is empty */}
-      {search !== '' &&
-        isFocus &&
-        Object.entries(searchResultsFromStore).length! > 0 && <SearchResults />}
+  return (
+    <div className={handleClassName([styles.search])}>
+      {!isFocus && <SearchBox />}
+      {isFocus && isMobile && (
+        <>
+          <SearchBox active />
+          <Modal>
+            {search !== '' &&
+              Object.entries(searchResultsFromStore).length! > 0 && (
+                <SearchResults />
+              )}
+          </Modal>
+        </>
+      )}
+      {isFocus && !isMobile && (
+        <>
+          <SearchBox active />
+          <Modal>
+            {search !== '' &&
+              Object.entries(searchResultsFromStore).length! > 0 && (
+                <SearchResults />
+              )}
+          </Modal>
+        </>
+      )}
     </div>
   );
 };
