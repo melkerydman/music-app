@@ -14,13 +14,20 @@ type Props = {
 
 const ListItem = ({ content }: Props): JSX.Element => {
   const setSearch = useStore((state) => state.search.setSearch);
+  const setIsFocus = useStore((state) => state.search.setIsFocus);
   const setActiveCategory = useStore((state) => state.search.setActiveCategory);
 
   // TODO: Better way of creating variants of component
   const Item = () => {
     if (content.type === 'album')
       return (
-        <li onClick={() => setSearch('')}>
+        <li
+          onClick={() => {
+            setSearch('');
+            setActiveCategory(null);
+            setIsFocus(null);
+          }}
+        >
           {/* // TODO: add proper href */}
           <Link href={`/${content.type}/${content.id}`}>
             <a className={styles['list-item']}>
@@ -48,7 +55,13 @@ const ListItem = ({ content }: Props): JSX.Element => {
 
     if (content.type === 'artist')
       return (
-        <li onClick={() => setSearch('')}>
+        <li
+          onClick={() => {
+            setSearch('');
+            setActiveCategory(null);
+            setIsFocus(null);
+          }}
+        >
           {/* // TODO: add proper href */}
           <Link href={`/${content.type}/${content.id}`}>
             <a className={styles['list-item']}>
@@ -74,6 +87,7 @@ const ListItem = ({ content }: Props): JSX.Element => {
           onClick={() => {
             setSearch('');
             setActiveCategory(null);
+            setIsFocus(null);
           }}
         >
           {/* // TODO: add proper href */}

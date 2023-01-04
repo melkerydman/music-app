@@ -1,31 +1,19 @@
 .header {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--colors-grey-500);
   width: 100%;
+  background-color: transparent;
+}
+
+.modal-active {
+  background-color: var(--colors-white);
 }
 
 .container {
+  position: relative;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  z-index: 1;
-  padding: 0.8rem;
-}
-
-.search {
+  width: 100%;
+  height: 5.6rem;
+  padding: 0 0.8rem;
   align-items: center;
-  gap: 0.8rem;
-
-  // TODO: active class needs to be added when searching
-  // &.active {
-  //   &::after {
-  //     // content: '';
-  //     position: fixed;
-  //     top: 0;
-  //     right: 0;
-  //     bottom: 0;
-  //     left: 0;
-  //     background-color: rgba($color: #000000, $alpha: 0.25);
-  //     z-index: 1;
-  //   }
-  // }
 }
