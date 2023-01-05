@@ -1,5 +1,7 @@
 @use '../../styles/breakpoints.scss' as *;
 
+// TODO: Look at these classes, they are messy
+
 .search {
   flex-grow: 1;
   display: flex;
@@ -8,6 +10,10 @@
   .modal {
     height: calc(100vh - 5.6rem);
     top: 5.7rem;
+
+    &.mobile {
+      position: absolute;
+    }
   }
 }
 
