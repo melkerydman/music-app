@@ -100,7 +100,10 @@ const Search = () => {
             onClose={() => {
               setIsFocus(false);
             }}
-            className={styles.modal}
+            className={handleClassName([
+              styles.modal,
+              isMobile ? styles.mobile : '',
+            ])}
           >
             {search !== '' &&
               Object.entries(searchResultsFromStore).length! > 0 && (
@@ -117,7 +120,10 @@ const Search = () => {
             onClose={() => {
               setIsFocus(false);
             }}
-            className={styles.modal}
+            className={handleClassName([
+              styles.modal,
+              isMobile ? styles.mobile : '',
+            ])}
           >
             {search !== '' &&
               Object.entries(searchResultsFromStore).length! > 0 && (
