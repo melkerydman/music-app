@@ -6,7 +6,7 @@
   align-items: center;
 
   .modal {
-    // height: calc(100vh - 5.6rem);
+    height: calc(100vh - 5.6rem);
     top: 5.7rem;
   }
 }
@@ -14,7 +14,7 @@
 .search-results {
   background: var(--colors-white);
   width: 100%;
-  height: 50%;
+  height: 100%;
   display: flex;
   flex-direction: column;
 
