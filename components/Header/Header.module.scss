@@ -2,6 +2,10 @@
   border-bottom: 1px solid var(--colors-grey-500);
   width: 100%;
   background-color: transparent;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 10;
 }
 
 .modal-active {
