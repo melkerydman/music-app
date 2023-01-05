@@ -16,10 +16,16 @@ html {
 
 body {
   font-family: var(--ff-sans-serif);
-  background-color: var(--colors-white);
-  background-image: url(../public/Gradient.png);
   color: var(--colors-black);
   font-size: 1.6rem;
+  background-color: var(--colors-white);
+  background-image: url(../public/Gradient.png);
+  background-size: cover;
+  background-position: center;
+
+  &.modal-active {
+    overflow: hidden;
+  }
 }
 #__next {
   // TODO: Create solution for 100vh that works on all devices
