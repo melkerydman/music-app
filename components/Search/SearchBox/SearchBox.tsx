@@ -10,7 +10,7 @@ type Props = {
 };
 
 const SearchBox = ({ active, className, ...rest }: Props) => {
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [isMobile, setIsMobile] = useState(false);
 
   const search = useStore((state) => state.search.search);
@@ -28,6 +28,34 @@ const SearchBox = ({ active, className, ...rest }: Props) => {
     }
   }, [active]);
 
+  // TODO: Remove from here...
+  const originalY = useRef(0);
+
+  const handleFocus = () => {
+    console.log('handleFocus() 🔴');
+    if (inputRef.current) {
+      originalY.current = window.pageYOffset;
+      const inputRect = inputRef.current.getBoundingClientRect();
+      window.scrollTo(0, inputRect.top + window.pageYOffset);
+    }
+  };
+
+  const handleResize = () => {
+    console.log('handleResize() 🔴');
+    if (originalY.current !== 0) {
+      window.scrollTo(0, originalY.current);
+      originalY.current = 0;
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+  // TODO: ... to here if doesn't fix viewport height issue on mobile when keyboard opens. As well as handleFocus in onFocus in input element
+
   return (
     <div className={handleClassName([styles.wrapper, className && className])}>
       <button onClick={() => setIsFocus(true)}>🔦</button>
@@ -43,7 +71,10 @@ const SearchBox = ({ active, className, ...rest }: Props) => {
         placeholder="Search for artist, song or album"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        onFocus={() => setIsFocus(true)}
+        onFocus={() => {
+          setIsFocus(true);
+          handleFocus();
+        }}
         {...rest}
       />
       <button

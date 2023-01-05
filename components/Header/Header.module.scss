@@ -2,14 +2,14 @@
   border-bottom: 1px solid var(--colors-grey-500);
   width: 100%;
   background-color: transparent;
-  // top: 0;
-  // left: 0;
-  // z-index: 10;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  position: sticky;
   // position: -webkit-sticky;
   // position: -moz-sticky;
   // position: -o-sticky;
   // position: -ms-sticky;
-  // position: sticky;
 }
 
 .modal-active {
