@@ -40,7 +40,7 @@ const Header = ({ className, containerClassName }: Props): JSX.Element => {
 
   const handleScroll = () => {
     console.log(' 🔴', window.scrollY);
-    if (headerRef.current && keyboardActive) {
+    if (headerRef.current && isMobile) {
       console.log('active 🟢', keyboardActive);
 
       headerRef.current.style.top = window.scrollY.toString();
