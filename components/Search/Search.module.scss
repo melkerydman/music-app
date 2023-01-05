@@ -26,4 +26,7 @@
   @include md-breakpoint {
     width: 50%;
   }
+  &.mobile {
+    overflow: scroll;
+  }
 }

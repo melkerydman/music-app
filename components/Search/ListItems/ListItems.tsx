@@ -17,11 +17,17 @@ type Props = {
 
 const ListItems = ({ data, type, ...rest }: Props) => {
   const [accessToken, setAccessToken] = useState('');
+  const [isMobile, setIsMobile] = useState(false);
 
   const searchResults = useStore((state) => state.search.searchResults);
   const addSearchResults = useStore((state) => state.search.addSearchResults);
   const activeCategory = useStore((state) => state.search.activeCategory);
   const setActiveCategory = useStore((state) => state.search.setActiveCategory);
+
+  // TODO: Create global state for IsMobile
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
 
   // TODO: Find another way of ahndling the access token, this is duplicate code from "Search.tsx"
   // TODO: Should probably find a way of storing the token in global state or something similiar, with a timeout set to run before the token expires.
@@ -96,6 +102,7 @@ const ListItems = ({ data, type, ...rest }: Props) => {
         type === activeCategory ? styles.active : '',
         type !== activeCategory && activeCategory !== null ? styles.hidden : '',
         styles.wrapper,
+        isMobile ? styles.mobile : '',
       ])}
       {...rest}
     >
