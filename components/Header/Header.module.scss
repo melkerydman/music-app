@@ -6,10 +6,15 @@
   left: 0;
   z-index: 10;
   position: sticky;
+
   // position: -webkit-sticky;
   // position: -moz-sticky;
   // position: -o-sticky;
   // position: -ms-sticky;
+
+  &.keyboard-active {
+    position: absolute;
+  }
 }
 
 .modal-active {

@@ -59,6 +59,7 @@ const Header = ({ className, containerClassName }: Props): JSX.Element => {
 
   useEffect(() => {
     if (keyboardActive) {
+      console.log('keyboard active 🟢');
       handleFocus();
     }
   }, [keyboardActive]);
@@ -71,6 +72,7 @@ const Header = ({ className, containerClassName }: Props): JSX.Element => {
         styles.header,
         className || '',
         isFocus ? styles['modal-active'] : '',
+        keyboardActive ? styles['keyboard-active'] : '',
       ])}
     >
       <div

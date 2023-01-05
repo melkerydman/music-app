@@ -22,7 +22,7 @@ body {
   background-image: url(../public/Gradient.png);
   background-size: cover;
   background-position: center;
-  // height: 100vh;
+  height: 100vh;
 
   &.modal-active {
     overflow: hidden;
