@@ -29,31 +29,31 @@ const SearchBox = ({ active, className, ...rest }: Props) => {
   }, [active]);
 
   // TODO: Remove from here...
-  const originalY = useRef(0);
+  // const originalY = useRef(0);
 
-  const handleFocus = () => {
-    console.log('handleFocus() 🔴');
-    if (inputRef.current) {
-      originalY.current = window.pageYOffset;
-      const inputRect = inputRef.current.getBoundingClientRect();
-      window.scrollTo(0, inputRect.top + window.pageYOffset);
-    }
-  };
+  // const handleFocus = () => {
+  //   console.log('handleFocus() 🔴');
+  //   if (inputRef.current) {
+  //     originalY.current = window.pageYOffset;
+  //     const inputRect = inputRef.current.getBoundingClientRect();
+  //     window.scrollTo(0, inputRect.top + window.pageYOffset);
+  //   }
+  // };
 
-  const handleResize = () => {
-    console.log('handleResize() 🔴');
-    if (originalY.current !== 0) {
-      window.scrollTo(0, originalY.current);
-      originalY.current = 0;
-    }
-  };
+  // const handleResize = () => {
+  //   console.log('handleResize() 🔴');
+  //   if (originalY.current !== 0) {
+  //     window.scrollTo(0, originalY.current);
+  //     originalY.current = 0;
+  //   }
+  // };
 
-  useEffect(() => {
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener('resize', handleResize);
+  //   return () => {
+  //     window.removeEventListener('resize', handleResize);
+  //   };
+  // }, []);
   // TODO: ... to here if doesn't fix viewport height issue on mobile when keyboard opens. As well as handleFocus in onFocus in input element
 
   return (
@@ -73,7 +73,7 @@ const SearchBox = ({ active, className, ...rest }: Props) => {
         onChange={(e) => setSearch(e.target.value)}
         onFocus={() => {
           setIsFocus(true);
-          handleFocus();
+          // handleFocus();
         }}
         {...rest}
       />
