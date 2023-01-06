@@ -21,14 +21,14 @@ const Header = ({ className, containerClassName }: Props): JSX.Element => {
   const headerRef = useRef<HTMLDivElement>(null);
   const originalY = useRef(0);
 
-  const handleFocus = () => {
-    console.log('handleFocus() 🔴');
-    if (headerRef.current) {
-      originalY.current = window.pageYOffset;
-      const inputRect = headerRef.current.getBoundingClientRect();
-      window.scrollTo(0, inputRect.top + window.pageYOffset);
-    }
-  };
+  // const handleFocus = () => {
+  //   console.log('handleFocus() 🔴');
+  //   if (headerRef.current) {
+  //     originalY.current = window.pageYOffset;
+  //     const inputRect = headerRef.current.getBoundingClientRect();
+  //     window.scrollTo(0, inputRect.top + window.pageYOffset);
+  //   }
+  // };
 
   const handleResize = () => {
     console.log('handleResize() 🔴');
@@ -40,6 +40,7 @@ const Header = ({ className, containerClassName }: Props): JSX.Element => {
 
   const handleScroll = () => {
     console.log(' 🔴', window.scrollY);
+    console.log('isMobile 🔴', isMobile);
     if (headerRef.current && isMobile) {
       console.log('active 🟢', keyboardActive);
 
@@ -59,6 +60,7 @@ const Header = ({ className, containerClassName }: Props): JSX.Element => {
   // TODO: ... to here if doesn't fix viewport height issue on mobile when keyboard opens. As well as handleFocus in onFocus in input element
 
   useEffect(() => {
+    console.log(window.innerWidth);
     setIsMobile(window.innerWidth < 768);
   }, []);
 
@@ -73,7 +75,8 @@ const Header = ({ className, containerClassName }: Props): JSX.Element => {
   useEffect(() => {
     if (keyboardActive) {
       console.log('keyboard active 🟢');
-      handleFocus();
+      // What do I want to do if keyboard is active?
+      // handleFocus();
     }
   }, [keyboardActive]);
 
