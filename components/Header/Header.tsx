@@ -4,10 +4,7 @@ import { handleClassName } from '../../utilities/helpers';
 import Logo from '../Logo/Logo';
 import Metronome from '../Metronome/Metronome';
 import Search from '../Search/Search';
-import {
-  useWindowDimensions,
-  useOnScreenKeyboardScrollFix,
-} from '../../utilities/hooks';
+import { useWindowDimensions } from '../../utilities/hooks';
 
 import styles from './Header.module.scss';
 
@@ -20,8 +17,7 @@ const Header = ({ className, containerClassName }: Props): JSX.Element => {
   const [isMobile, setIsMobile] = useState(false);
   const [keyboardActive, setKeyboardActive] = useState(false);
   const isFocus = useStore((state) => state.search.isFocus);
-  const { width, height } = useWindowDimensions();
-  useOnScreenKeyboardScrollFix();
+  const { height } = useWindowDimensions();
 
   useEffect(() => {
     setIsMobile(height < 768);
@@ -79,9 +75,8 @@ const Header = ({ className, containerClassName }: Props): JSX.Element => {
 
   useEffect(() => {
     if (keyboardActive) {
-      console.log('keyboard active 🟢');
-      console.log('width', width);
-      console.log('height', height);
+      const body = document.querySelector('body');
+      body.style.maxHeight = `${height}px`;
 
       // What do I want to do if keyboard is active?
       // handleFocus();
