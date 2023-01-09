@@ -1,4 +1,5 @@
 import useAuthToken from './useAuthToken';
+import useWindowDimensions from './useWindowDimensions';
+import useOnScreenKeyboardScrollFix from './useOnScreenKeyboardScrollFix';
 
-// eslint-disable-next-line import/prefer-default-export
-export { useAuthToken };
+export { useAuthToken, useWindowDimensions, useOnScreenKeyboardScrollFix };
