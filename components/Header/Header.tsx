@@ -46,9 +46,9 @@ const Header = ({ className, containerClassName }: Props): JSX.Element => {
     console.log(' 🔴', window.scrollY);
     console.log('isMobile 🔴', isMobile);
     if (headerRef.current && isMobile) {
-      console.log('active 🟢', keyboardActive);
+      console.log('active 🟢', window.scrollY.toString());
 
-      headerRef.current.style.top = window.scrollY.toString();
+      headerRef.current.style.top = `${window.scrollY.toString()}px`;
       headerRef.current.style.backgroundColor = 'blue';
     }
   };
