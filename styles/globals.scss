@@ -19,9 +19,6 @@ body {
   color: var(--colors-black);
   font-size: 1.6rem;
   background-color: var(--colors-white);
-  background-image: url(../public/Gradient.png);
-  background-size: cover;
-  background-position: center;
   height: 100vh;
 
   &.modal-active {
