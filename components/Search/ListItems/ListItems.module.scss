@@ -17,6 +17,10 @@
       display: none;
     }
   }
+
+  &.mobile {
+    overflow: visible;
+  }
 }
 
 .items {

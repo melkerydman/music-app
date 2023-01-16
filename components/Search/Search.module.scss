@@ -1,22 +1,20 @@
 @use '../../styles/breakpoints.scss' as *;
 
+// TODO: Look at these classes, they are messy
+
 .search {
   flex-grow: 1;
   display: flex;
   align-items: center;
-}
 
-.modal {
-  position: fixed;
-  overflow: hidden;
-  width: 100vw;
-  height: calc(100vh - 5.6rem);
-  background-color: rgba(0, 0, 0, 0.3);
-  top: 5.7rem;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 10000;
+  .modal {
+    height: calc(100vh - 5.6rem);
+    top: 5.7rem;
+
+    &.mobile {
+      position: absolute;
+    }
+  }
 }
 
 .search-results {
@@ -33,5 +31,8 @@
   }
   @include md-breakpoint {
     width: 50%;
+  }
+  &.mobile {
+    overflow: scroll;
   }
 }

@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styles from './Search.module.scss';
 
@@ -8,6 +8,7 @@ import { searchForItem } from '../../utilities/services/spotify/searchSpotify';
 import SearchBox from './SearchBox/SearchBox';
 import ListItems from './ListItems/ListItems';
 import { handleClassName } from '../../utilities/helpers';
+import Modal from '../Modal/Modal';
 // import { useAuthToken } from '../../utilities/hooks';
 
 const Search = () => {
@@ -16,6 +17,7 @@ const Search = () => {
   const [isMobile, setIsMobile] = useState(false);
   const search = useStore((state) => state.search.search);
   const isFocus = useStore((state) => state.search.isFocus);
+  const setIsFocus = useStore((state) => state.search.setIsFocus);
   const searchResultsFromStore = useStore(
     (state) => state.search.searchResults
   );
@@ -62,7 +64,12 @@ const Search = () => {
       !albums?.items.length && !artists?.items.length && !tracks?.items.length;
 
     return (
-      <ul className={styles['search-results']}>
+      <ul
+        className={handleClassName([
+          styles['search-results'],
+          isMobile ? styles.mobile : '',
+        ])}
+      >
         {noResults ? (
           <li>No results found.</li>
         ) : (
@@ -82,19 +89,22 @@ const Search = () => {
     );
   };
 
-  // TODO: potentially memoize component to avoid re-renders
-  // TODO: Create Modal component
-  const Modal = ({ children }: PropsWithChildren): JSX.Element => (
-    <div className={handleClassName([styles.modal])}>{children}</div>
-  );
-
   return (
     <div className={handleClassName([styles.search])}>
       {!isFocus && <SearchBox />}
       {isFocus && isMobile && (
         <>
           <SearchBox active />
-          <Modal>
+          <Modal
+            isOpen={isFocus}
+            onClose={() => {
+              setIsFocus(false);
+            }}
+            className={handleClassName([
+              styles.modal,
+              isMobile ? styles.mobile : '',
+            ])}
+          >
             {search !== '' &&
               Object.entries(searchResultsFromStore).length! > 0 && (
                 <SearchResults />
@@ -105,7 +115,16 @@ const Search = () => {
       {isFocus && !isMobile && (
         <>
           <SearchBox active />
-          <Modal>
+          <Modal
+            isOpen={isFocus}
+            onClose={() => {
+              setIsFocus(false);
+            }}
+            className={handleClassName([
+              styles.modal,
+              isMobile ? styles.mobile : '',
+            ])}
+          >
             {search !== '' &&
               Object.entries(searchResultsFromStore).length! > 0 && (
                 <SearchResults />
