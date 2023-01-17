@@ -14,7 +14,7 @@ import TrackList from '../../TrackList/TrackList';
 import Lyrics from './Lyrics/Lyrics';
 import NewGrid from '../../NewGrid/NewGrid';
 
-// import styles from './TrackPage.module.scss';
+import styles from './TrackPage.module.scss';
 
 type DataType = {
   album: SpotifyApi.AlbumObjectFull;
@@ -71,7 +71,7 @@ const TrackPage = ({ data }: Props) => {
           <NewGrid item sm={8}>
             <Lyrics data={{ lyrics }} />
           </NewGrid>
-          <NewGrid item sm={4}>
+          <NewGrid className={styles.aside} item sm={4}>
             <DataItems title="Track information" items={dataItems} />
             <TrackList simple album={album} tracks={album.tracks.items} />
           </NewGrid>
