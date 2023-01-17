@@ -62,7 +62,9 @@ const TrackList = React.memo(({ album, tracks, className, simple }: Props) => {
     <div className={className}>
       <div className={styles.outer}>
         <Heading as="h5" className={styles.title}>
-          {album.name}
+          <Link href={`/${album.type}/${album.id}`}>
+            <a>{album.name}</a>
+          </Link>
         </Heading>
         <Paragraph sans weight="thin" as="div">
           {releaseDate.getFullYear()} - {tracks.length} tracks
