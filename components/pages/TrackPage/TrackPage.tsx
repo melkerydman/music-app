@@ -67,12 +67,12 @@ const TrackPage = ({ data }: Props) => {
         />
       </PageSection>
       <PageSection>
-        <NewGrid container fullBorder>
+        <NewGrid container>
           <NewGrid item sm={8}>
             <Lyrics data={{ lyrics }} />
           </NewGrid>
           <NewGrid item sm={4}>
-            <DataItems items={dataItems} />
+            <DataItems title="Track information" items={dataItems} />
             <TrackList simple album={album} tracks={album.tracks.items} />
           </NewGrid>
         </NewGrid>

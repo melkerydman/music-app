@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { handleClassName } from '../../utilities/helpers';
-import { Paragraph } from '../Typography/Typography';
+import { Heading, Paragraph } from '../Typography/Typography';
 import styles from './DataItems.module.scss';
 
 type DataItemType = {
@@ -9,34 +10,57 @@ type DataItemType = {
 };
 
 interface Props {
+  title: string;
   items: DataItemType[];
 }
 
-const DataItem = ({ title, value, description }: DataItemType) => (
-  <div className={handleClassName([styles.text])}>
-    <div>
-      <dt className={handleClassName([styles.heading])}>{title}</dt>
-      <dd>{value}</dd>
-      {description && <button>show more</button>}
-    </div>
-    {description && (
-      <Paragraph sans as="p">
-        {description}
-      </Paragraph>
-    )}
-  </div>
-);
+const DataItem = ({ title, value, description }: DataItemType) => {
+  console.log('test 🔴');
+  const [showDescription, setShowDescription] = useState(false);
 
-const DataItems = ({ items }: Props): JSX.Element => (
-  <dl>
-    {items.map((item, index) => (
-      <DataItem
-        key={index}
-        title={item.title}
-        value={item.value}
-        description={item.description}
-      />
-    ))}
-  </dl>
+  return (
+    <div className={handleClassName([styles.item])}>
+      <div className={handleClassName([styles['item-top']])}>
+        <dt className={handleClassName([styles['item-key']])}>{title}</dt>
+        <dd className={handleClassName([styles['item-value']])}>{value}</dd>
+        {description && (
+          <button
+            onClick={() => {
+              setShowDescription((prev) => !prev);
+            }}
+          >
+            {showDescription ? '-' : '+'}
+          </button>
+        )}
+      </div>
+      {description && showDescription && (
+        <Paragraph
+          className={handleClassName([styles['item-description']])}
+          sans
+          as="p"
+        >
+          {description}
+        </Paragraph>
+      )}
+    </div>
+  );
+};
+
+const DataItems = ({ title, items }: Props): JSX.Element => (
+  <div>
+    <Heading as="h5" className={styles.title}>
+      {title}
+    </Heading>
+    <dl>
+      {items.map((item, index) => (
+        <DataItem
+          key={index}
+          title={item.title}
+          value={item.value}
+          description={item.description}
+        />
+      ))}
+    </dl>
+  </div>
 );
 export default DataItems;
