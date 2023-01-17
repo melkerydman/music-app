@@ -3,11 +3,15 @@
 .album {
   &__outer {
     position: relative;
-    padding-bottom: 100%;
+    // padding-bottom: 100%;
   }
 
   // &__inner {
   // }
+
+  &__heading {
+    padding-left: 0.8rem;
+  }
 }
 
 .more-albums {
@@ -17,7 +21,7 @@
     margin-bottom: 2.4rem;
   }
 
-  &__innner {
+  &__inner {
     display: flex;
     overflow: scroll;
 
@@ -25,4 +29,9 @@
       flex-direction: column;
     }
   }
+}
+
+.a {
+  display: flex;
+  gap: 0.8rem;
 }

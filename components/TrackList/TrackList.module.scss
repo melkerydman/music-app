@@ -1,10 +1,17 @@
 .outer {
-  margin-bottom: 0.8rem;
+  margin-bottom: 3.6rem;
+
+  &--simple {
+    margin-bottom: 0.8rem;
+  }
 }
 
 .title {
   // margin-bottom: 2.4rem;
-  font-size: 2.4rem;
+  font-size: 2.8rem;
+  &--simple {
+    font-size: 2.4rem;
+  }
 }
 
 .item {
@@ -26,6 +33,14 @@
   // padding-right: 2.4rem;
 }
 
+.track {
+  flex-grow: 1;
+  &-artist {
+    font-size: 1.2rem;
+    color: #454545;
+  }
+}
+
 .number {
   width: 4.8rem;
   &--simple {
@@ -40,5 +55,11 @@
     font-weight: 500;
   }
   &--simple {
+  }
+}
+
+.disc-section {
+  &:not(:last-child) {
+    margin-bottom: 3.6rem;
   }
 }

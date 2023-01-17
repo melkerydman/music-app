@@ -1,6 +1,8 @@
-// TODO: Double check if commented stuff is needed - otherwise remove
-
 .aside {
+  // TODO: Fix the max-height here
+  max-height: 95vh;
+  overflow: scroll;
+
   > div:not(:last-child) {
     margin-bottom: 4.8rem;
   }

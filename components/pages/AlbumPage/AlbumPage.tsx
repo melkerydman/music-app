@@ -3,7 +3,6 @@ import {
   getArtistsAlbums,
   getTokenClient,
 } from '../../../utilities/services/spotify';
-import Data from '../../DataItems/DataItems';
 import NewGrid from '../../NewGrid/NewGrid';
 import PageHeader from '../../layout/PageHeader/PageHeader';
 import PageSection from '../../layout/PageSection/PageSection';
@@ -11,6 +10,7 @@ import TrackList from '../../TrackList/TrackList';
 
 // import styles from './AlbumPage.module.scss';
 import MoreAlbums from './MoreAlbums/MoreAlbums';
+import DataItems from '../../DataItems/DataItems';
 
 type DataType = {
   album: SpotifyApi.AlbumObjectFull;
@@ -34,7 +34,7 @@ const AlbumPage = ({ data }: Props) => {
     label,
   } = album;
 
-  const gridItems = [
+  const dataItems = [
     {
       title: 'Tracks',
       value: total_tracks.toString() || 'Unknown',
@@ -46,16 +46,15 @@ const AlbumPage = ({ data }: Props) => {
       description: '',
     },
     { title: 'Label', value: label || 'Unknown', description: '' },
-    { title: 'Label', value: label || 'Unknown', description: '' },
   ];
 
-  const [artistsAlbums, setArtistsAlbumslbums] = useState(null);
+  const [artistsAlbums, setArtistsAlbums] = useState(null);
 
   // TODO: Finish partially created authentication hook
   useEffect(() => {
     const fetchAlbumsOnLoad = async () => {
       const token = await getTokenClient();
-      setArtistsAlbumslbums(await getArtistsAlbums(artists[0].id, token));
+      setArtistsAlbums(await getArtistsAlbums(artists[0].id, token));
     };
     fetchAlbumsOnLoad();
   }, [artists]);
@@ -70,31 +69,19 @@ const AlbumPage = ({ data }: Props) => {
         />
       </PageSection>
       <PageSection>
-        <NewGrid container fullBorder>
-          {gridItems.map((item, index) => (
-            <NewGrid key={index} item xs={6} sm={3}>
-              <Data
-                title={item.title}
-                value={item.value}
-                description={item.description}
-              />
-            </NewGrid>
-          ))}
-        </NewGrid>
-      </PageSection>
-      <PageSection>
-        <NewGrid container fullBorder>
+        <NewGrid container>
+          <NewGrid item sm={8}>
+            <TrackList album={album} tracks={tracks.items}></TrackList>
+          </NewGrid>
           {artistsAlbums && (
-            <NewGrid item sm={3}>
+            <NewGrid item sm={4}>
+              <DataItems title="Album information" items={dataItems} />
               <MoreAlbums
                 albums={artistsAlbums.items}
                 activeAlbumId={album.id}
               />
             </NewGrid>
           )}
-          <NewGrid item sm={9}>
-            <TrackList tracks={tracks.items}></TrackList>
-          </NewGrid>
         </NewGrid>
       </PageSection>
     </>
