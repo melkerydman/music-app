@@ -1,5 +1,5 @@
 import Image from 'next/future/image';
-import { Heading } from '../../Typography/Typography';
+import { Display, Heading } from '../../Typography/Typography';
 import styles from './PageHeader.module.scss';
 import NewGrid from '../../NewGrid/NewGrid';
 
@@ -13,8 +13,7 @@ const PageHeader = ({ image, heading, subHeading }: Props) => {
   const { url } = image;
 
   return (
-    // <header className={styles.header}>
-    <header>
+    <header className={styles.header}>
       <NewGrid container>
         <NewGrid item sm={3}>
           <div className={styles['image-wrapper']}>
@@ -30,8 +29,12 @@ const PageHeader = ({ image, heading, subHeading }: Props) => {
           </div>
         </NewGrid>
         <NewGrid item sm={9} className={styles.titles}>
-          <Heading as="h4">{subHeading}</Heading>
-          <Heading as="h1">{heading}</Heading>
+          <Heading className={styles.titles__sub} as="h4">
+            {subHeading}
+          </Heading>
+          <Display className={styles.titles__main} small as="h1">
+            {heading}
+          </Display>
         </NewGrid>
       </NewGrid>
     </header>
