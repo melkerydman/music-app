@@ -3,7 +3,7 @@ import {
   getArtistsAlbums,
   getTokenClient,
 } from '../../../utilities/services/spotify';
-import Data from '../../Data/Data';
+import Data from '../../DataItems/DataItems';
 import NewGrid from '../../NewGrid/NewGrid';
 import PageHeader from '../../layout/PageHeader/PageHeader';
 import PageSection from '../../layout/PageSection/PageSection';
