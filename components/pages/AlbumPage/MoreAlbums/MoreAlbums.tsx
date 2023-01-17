@@ -40,7 +40,7 @@ interface Props {
 const MoreAlbums = ({ albums, className, activeAlbumId }: Props) => (
   <div className={handleClassName([className, styles['more-albums']])}>
     <Heading className={styles.heading} as="h5">
-      More albums from artist
+      More from artist
     </Heading>
     <ul className={styles['more-albums__inner']}>
       {albums.map((album, index) => {
