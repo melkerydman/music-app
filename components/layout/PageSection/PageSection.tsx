@@ -20,7 +20,11 @@ const PageSection = ({
   ...rest
 }: Props) => (
   <section
-    className={handleClassName([className || '', border ? styles.border : ''])}
+    className={handleClassName([
+      styles.section,
+      className || '',
+      border ? styles.border : '',
+    ])}
     {...rest}
   >
     {!withoutContainer ? (
