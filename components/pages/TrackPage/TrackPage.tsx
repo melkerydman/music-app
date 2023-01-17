@@ -13,7 +13,6 @@ import PageSection from '../../layout/PageSection/PageSection';
 import TrackList from '../../TrackList/TrackList';
 import Lyrics from './Lyrics/Lyrics';
 import NewGrid from '../../NewGrid/NewGrid';
-import AlbumInfo from './AlbumInfo/AlbumInfo';
 
 // import styles from './TrackPage.module.scss';
 
@@ -68,7 +67,7 @@ const TrackPage = ({ data }: Props) => {
         />
       </PageSection>
       <PageSection>
-        <NewGrid container fullBorder>
+        <NewGrid container>
           {gridItems.map((item, index) => (
             <NewGrid key={index} item xs={6} sm={3}>
               <Data
@@ -82,12 +81,11 @@ const TrackPage = ({ data }: Props) => {
       </PageSection>
       <PageSection>
         <NewGrid container fullBorder>
-          <NewGrid item sm={3}>
-            <AlbumInfo album={album}></AlbumInfo>
-            <TrackList simple tracks={album.tracks.items} />
-          </NewGrid>
-          <NewGrid item sm={9}>
+          <NewGrid item sm={8}>
             <Lyrics data={{ lyrics }} />
+          </NewGrid>
+          <NewGrid item sm={4}>
+            <TrackList simple album={album} tracks={album.tracks.items} />
           </NewGrid>
         </NewGrid>
       </PageSection>

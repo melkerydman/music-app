@@ -15,7 +15,7 @@ const PageHeader = ({ image, heading, subHeading }: Props) => {
   return (
     // <header className={styles.header}>
     <header>
-      <NewGrid container fullBorder>
+      <NewGrid container>
         <NewGrid item sm={3}>
           <div className={styles['image-wrapper']}>
             <Image

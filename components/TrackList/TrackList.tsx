@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { Heading } from '../Typography/Typography';
+import { Heading, Paragraph } from '../Typography/Typography';
 import {
   formatDuration,
   handleClassName,
@@ -14,11 +14,11 @@ import styles from './TrackList.module.scss';
 // TODO: Potentially find a way to stop re-renders when going from a track to a different track but on the same album
 
 const SimpleTrack = ({ item }: { item: SpotifyApi.TrackObjectSimplified }) => (
-  <li className={handleClassName([styles.item, styles['item-small']])}>
-    <span className={styles['number--small']}>{`${item.track_number}.`}</span>
+  <li className={handleClassName([styles.item, styles['item--simple']])}>
+    <span className={styles['number--simple']}>{`${item.track_number}.`}</span>
     <Link href={`/${item.type}/${item.id}`}>
       <a>
-        <Heading as="h6" className={styles['heading-small']}>
+        <Heading as="h6" className={styles.heading}>
           {item.name}
         </Heading>
       </a>
@@ -32,9 +32,7 @@ const Track = ({ item }: { item: SpotifyApi.TrackObjectSimplified }) => (
     <div>
       <Link href={`/${item.type}/${item.id}`}>
         <a>
-          <Heading as="h6" className={styles['']}>
-            {item.name}
-          </Heading>
+          <Heading as="h6">{item.name}</Heading>
         </a>
       </Link>
       <div>
@@ -50,19 +48,26 @@ const Track = ({ item }: { item: SpotifyApi.TrackObjectSimplified }) => (
 );
 
 interface Props {
+  album: SpotifyApi.AlbumObjectFull;
   tracks: SpotifyApi.TrackObjectSimplified[];
   className?: string;
   simple?: boolean;
 }
 
-const TrackList = React.memo(({ tracks, className, simple }: Props) => {
+const TrackList = React.memo(({ album, tracks, className, simple }: Props) => {
   const discs = groupBy(tracks, 'disc_number');
+  const releaseDate = new Date(album.release_date);
 
   return (
     <div className={className}>
-      <Heading as="h5" className={styles.title}>
-        Tracklist
-      </Heading>
+      <div className={styles.outer}>
+        <Heading as="h5" className={styles.title}>
+          {album.name}
+        </Heading>
+        <Paragraph sans weight="thin" as="div">
+          {releaseDate.getFullYear()} - {tracks.length} tracks
+        </Paragraph>
+      </div>
       {discs.map((disc, index) => (
         <section key={index}>
           {discs.length > 1 && <h3>Disc {index + 1}</h3>}

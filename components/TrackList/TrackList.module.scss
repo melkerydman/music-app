@@ -1,5 +1,10 @@
+.outer {
+  margin-bottom: 1.6rem;
+}
+
 .title {
-  margin-bottom: 2.4rem;
+  // margin-bottom: 2.4rem;
+  font-size: 2.4rem;
 }
 
 .item {
@@ -10,9 +15,10 @@
   align-items: flex-start;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  &--small {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+
+  &--simple {
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
   }
   // margin-left: -2.4rem;
   // margin-right: -2.4rem;
@@ -21,20 +27,18 @@
 }
 
 .number {
-  width: 4rem;
-  &--small {
-    width: 2rem;
-    font-size: 1.2rem;
+  width: 4.8rem;
+  &--simple {
+    width: 2.4rem;
+    // font-size: 1.2rem;
   }
 }
 
 .heading {
-  &-small {
-    font-size: 1.2rem;
-    font-weight: 400;
-
-    &:hover {
-      font-weight: 500;
-    }
+  font-weight: 400;
+  &:hover {
+    font-weight: 500;
+  }
+  &--simple {
   }
 }
