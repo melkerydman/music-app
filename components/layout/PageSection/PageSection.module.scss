@@ -1,7 +1,7 @@
 @use '../../../styles/breakpoints.scss' as *;
 
 .border {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--colors-grey-500);
 }
 .section {
   padding-left: 0.8rem;

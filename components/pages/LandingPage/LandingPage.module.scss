@@ -1,0 +1,22 @@
+@use '../../../styles/breakpoints.scss' as *;
+.header {
+  &__desktop {
+    padding: 20vh 0 5.6rem;
+  }
+  &__mobile {
+    padding: 20vh 0 0.8rem;
+  }
+}
+.content {
+  gap: 2.4rem;
+  @include sm-breakpoint {
+    gap: 0;
+    padding: 2.6rem 0 0;
+  }
+  &__last {
+    @include sm-breakpoint {
+      // TODO: In grid component, make sure parent width of grid items is always 100% - so childrens width can be adapted
+      padding-left: 25%;
+    }
+  }
+}

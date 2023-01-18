@@ -9,10 +9,12 @@ import SearchBox from './SearchBox/SearchBox';
 import ListItems from './ListItems/ListItems';
 import { handleClassName } from '../../utilities/helpers';
 import Modal from '../Modal/Modal';
+import { useWindowDimensions } from '../../utilities/hooks';
 // import { useAuthToken } from '../../utilities/hooks';
 
 const Search = () => {
   // const accessToken = useAuthToken();
+  const { width } = useWindowDimensions();
   const [accessToken, setAccessToken] = useState('');
   const [isMobile, setIsMobile] = useState(false);
   const search = useStore((state) => state.search.search);
@@ -26,8 +28,8 @@ const Search = () => {
   );
 
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-  }, []);
+    setIsMobile(width < 768);
+  }, [width]);
 
   // TODO: Finish partially created authentication hook
   useEffect(() => {
