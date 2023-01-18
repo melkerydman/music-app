@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useStore from '../../../store/useStore';
 import { handleClassName } from '../../../utilities/helpers';
+import { useWindowDimensions } from '../../../utilities/hooks';
 
 import styles from './SearchBox.module.scss';
 
@@ -11,6 +12,7 @@ type Props = {
 
 const SearchBox = ({ active, className, ...rest }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const { width } = useWindowDimensions();
   const [isMobile, setIsMobile] = useState(false);
 
   const search = useStore((state) => state.search.search);
@@ -19,8 +21,8 @@ const SearchBox = ({ active, className, ...rest }: Props) => {
   const setIsFocus = useStore((state) => state.search.setIsFocus);
 
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-  }, []);
+    setIsMobile(width < 768);
+  }, [width]);
 
   useEffect(() => {
     if (active) {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import useStore from '../../../store/useStore';
 import { handleClassName } from '../../../utilities/helpers';
+import { useWindowDimensions } from '../../../utilities/hooks';
 import { getTokenClient } from '../../../utilities/services/spotify';
 import { fetchNext } from '../../../utilities/services/spotify/searchSpotify';
 import { Heading } from '../../Typography/Typography';
@@ -16,6 +17,7 @@ type Props = {
 };
 
 const ListItems = ({ data, type, ...rest }: Props) => {
+  const { width } = useWindowDimensions();
   const [accessToken, setAccessToken] = useState('');
   const [isMobile, setIsMobile] = useState(false);
 
@@ -26,8 +28,8 @@ const ListItems = ({ data, type, ...rest }: Props) => {
 
   // TODO: Create global state for IsMobile
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-  }, []);
+    setIsMobile(width < 768);
+  }, [width]);
 
   // TODO: Find another way of ahndling the access token, this is duplicate code from "Search.tsx"
   // TODO: Should probably find a way of storing the token in global state or something similiar, with a timeout set to run before the token expires.
