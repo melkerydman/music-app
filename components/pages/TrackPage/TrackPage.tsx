@@ -7,15 +7,14 @@ import {
   formatTempo,
   formatTimeSignature,
 } from '../../../utilities/helpers';
-import Data from '../../Data/Data';
+import DataItems from '../../DataItems/DataItems';
 import PageHeader from '../../layout/PageHeader/PageHeader';
 import PageSection from '../../layout/PageSection/PageSection';
 import TrackList from '../../TrackList/TrackList';
 import Lyrics from './Lyrics/Lyrics';
 import NewGrid from '../../NewGrid/NewGrid';
-import AlbumInfo from './AlbumInfo/AlbumInfo';
 
-// import styles from './TrackPage.module.scss';
+import styles from './TrackPage.module.scss';
 
 type DataType = {
   album: SpotifyApi.AlbumObjectFull;
@@ -34,7 +33,7 @@ const TrackPage = ({ data }: Props) => {
   // TODO: Remove headerheight completely?
   // const headerHeight = useHeaderStore((props) => props.height);
 
-  const gridItems = [
+  const dataItems = [
     {
       title: 'Tempo',
       value: formatTempo(features.tempo),
@@ -68,26 +67,13 @@ const TrackPage = ({ data }: Props) => {
         />
       </PageSection>
       <PageSection>
-        <NewGrid container fullBorder>
-          {gridItems.map((item, index) => (
-            <NewGrid key={index} item xs={6} sm={3}>
-              <Data
-                title={item.title}
-                value={item.value}
-                description={item.description}
-              />
-            </NewGrid>
-          ))}
-        </NewGrid>
-      </PageSection>
-      <PageSection>
-        <NewGrid container fullBorder>
-          <NewGrid item sm={3}>
-            <AlbumInfo album={album}></AlbumInfo>
-            <TrackList simple tracks={album.tracks.items} />
-          </NewGrid>
-          <NewGrid item sm={9}>
+        <NewGrid container>
+          <NewGrid item sm={8}>
             <Lyrics data={{ lyrics }} />
+          </NewGrid>
+          <NewGrid className={styles.aside} item sm={4}>
+            <DataItems title="Track information" items={dataItems} />
+            <TrackList simple album={album} tracks={album.tracks.items} />
           </NewGrid>
         </NewGrid>
       </PageSection>

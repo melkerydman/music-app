@@ -4,7 +4,7 @@ import styles from './typography.module.scss';
 type TypographyType = {
   className?: string;
   children?: React.ReactNode;
-  weight?: 'bold' | 'thin';
+  weight?: 'thin' | 'normal' | 'bold';
 };
 
 type DisplayType = {
@@ -25,8 +25,10 @@ export const Display = ({
   return (
     <Component
       className={handleClassName([
-        styles.display,
-        small ? styles['display--sm'] : '',
+        // styles.display,
+        // small ? styles['display--sm'] : '',
+        'display-lg',
+        small ? 'display-sm' : '',
         weight ? styles[weight] : '',
         className || '',
       ])}
@@ -53,7 +55,8 @@ export const Heading = ({
   return (
     <Component
       className={handleClassName([
-        styles[as],
+        // styles[as],
+        as,
         weight ? styles[weight] : '',
         className || '',
       ])}
@@ -67,6 +70,7 @@ export const Heading = ({
 type ParagraphType = {
   as?: 'p' | 'span' | 'div';
   small?: boolean;
+  xs?: boolean;
   sans?: boolean;
 };
 
@@ -74,6 +78,7 @@ export const Paragraph = ({
   as = 'p',
   sans,
   small,
+  xs,
   weight,
   className,
   children,
@@ -84,10 +89,11 @@ export const Paragraph = ({
   return (
     <Component
       className={handleClassName([
-        styles.p,
+        'p',
         className || '',
         sans ? styles.sans : '',
-        small ? styles['p--sm'] : '',
+        small ? 'p-sm' : '',
+        xs ? 'p-xs' : '',
         weight ? styles[weight] : '',
       ])}
       {...rest}

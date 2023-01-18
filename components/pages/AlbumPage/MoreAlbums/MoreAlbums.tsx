@@ -10,19 +10,25 @@ const Album = ({ album }: { album: SpotifyApi.AlbumObjectFull }) => {
   return (
     <li>
       <Link href={`/${album.type}/${album.id}`}>
-        <a>
+        <a className="flex">
           <div className={styles.album__outer}>
             {images[0]?.url && (
               <Image
                 src={images[0].url}
                 alt={name}
-                fill
+                height="48"
+                width="48"
                 className={styles.album__inner}
               />
             )}
           </div>
 
-          <Heading as="h6">{name}</Heading>
+          <Heading
+            className={handleClassName([styles.album__heading, 'p'])}
+            as="h6"
+          >
+            {name}
+          </Heading>
         </a>
       </Link>
     </li>
@@ -37,7 +43,7 @@ interface Props {
 const MoreAlbums = ({ albums, className, activeAlbumId }: Props) => (
   <div className={handleClassName([className, styles['more-albums']])}>
     <Heading className={styles.heading} as="h5">
-      More albums
+      More from artist
     </Heading>
     <ul className={styles['more-albums__inner']}>
       {albums.map((album, index) => {

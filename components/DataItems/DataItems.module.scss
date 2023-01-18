@@ -1,0 +1,40 @@
+@use '../../styles/breakpoints.scss' as *;
+
+.title {
+  margin-bottom: 0.8rem;
+}
+
+.item {
+  border-bottom: 1.5px solid lightgrey;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+
+  &-top {
+    display: flex;
+    gap: 1.6rem;
+    align-items: flex-start;
+  }
+
+  &-key {
+    width: 9.6rem;
+  }
+
+  &-value {
+    flex-grow: 1;
+  }
+
+  &-description {
+    font-weight: 400;
+    color: #454545;
+    font-size: 1.2rem;
+  }
+}
+
+.item-heading {
+}
+
+.text > * {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

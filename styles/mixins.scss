@@ -3,55 +3,69 @@
 
 @mixin display-lg {
   font-size: 9.6rem;
+  font-size: clamp(4.8rem, 1.6rem + 5.5556vw, 9.6rem);
   font-weight: 500;
   letter-spacing: -0.07em;
 }
 @mixin display-sm {
   font-size: 7.2rem;
+  font-size: clamp(3.6rem, 1.2rem + 4.1667vw, 7.2rem);
   font-weight: 500;
   letter-spacing: -0.07em;
 }
 
 @mixin h1 {
   font-size: 5.6rem;
+  font-size: clamp(3.2rem, 1.6rem + 2.7778vw, 5.6rem);
   font-weight: 500;
   letter-spacing: -0.05em;
 }
 @mixin h2 {
   font-size: 4.4rem;
+  font-size: clamp(2.8rem, 1.7333rem + 1.8519vw, 4.4rem);
   font-weight: 500;
   letter-spacing: -0.05em;
 }
 @mixin h3 {
   font-size: 3.6rem;
+  font-size: clamp(2.4rem, 1.6rem + 1.3889vw, 3.6rem);
   font-weight: 500;
   letter-spacing: -0.05em;
 }
 @mixin h4 {
   font-size: 2.8rem;
+  font-size: clamp(2rem, 1.4667rem + 0.9259vw, 2.8rem);
   font-weight: 500;
   letter-spacing: -0.04em;
 }
 @mixin h5 {
-  font-size: 2.2rem;
+  font-size: 2.4rem;
+  font-size: clamp(1.8rem, 1.4rem + 0.6944vw, 2.4rem);
   font-weight: 500;
   letter-spacing: -0.03em;
 }
 @mixin h6 {
-  font-size: 1.6rem;
+  font-size: 2rem;
+  font-size: clamp(1.6rem, 1.3333rem + 0.463vw, 2rem);
   font-weight: 500;
   letter-spacing: -0.03em;
 }
 
 @mixin p {
-  font-family: var(--ff-serif);
   font-size: 1.6rem;
-  font-weight: 500;
+  font-size: clamp(1.4rem, 1.2667rem + 0.2315vw, 1.6rem);
+  font-weight: 400;
 }
 
 @mixin p-sm {
   font-size: 1.4rem;
-  font-weight: 500;
+  font-size: clamp(1.2rem, 1.0667rem + 0.2315vw, 1.4rem);
+  font-weight: 400;
+}
+@mixin p-xs {
+  font-size: 1.2rem;
+  font-size: clamp(1rem, 0.8667rem + 0.2315vw, 1.2rem);
+  font-weight: 400;
 }
 
 @mixin background-gradient($start-color, $end-color, $orientation) {
