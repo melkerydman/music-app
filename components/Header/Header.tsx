@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import useStore from '../../store/useStore';
 import { handleClassName } from '../../utilities/helpers';
 import Logo from '../Logo/Logo';
@@ -64,7 +65,11 @@ const Header = ({ className, containerClassName }: Props): JSX.Element => {
           <Search />
         ) : (
           <>
-            <Logo />
+            <Link href="/">
+              <a>
+                <Logo />
+              </a>
+            </Link>
             <Search />
             <Metronome />
           </>
