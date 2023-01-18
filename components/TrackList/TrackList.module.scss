@@ -6,19 +6,14 @@
   }
 }
 
-.title {
-  // margin-bottom: 2.4rem;
-  font-size: 2.8rem;
-  &--simple {
-    font-size: 2.4rem;
-  }
+.sub-heading {
+  color: #454545;
 }
 
 .item {
   display: flex;
   gap: 1rem;
   border-bottom: 1.5px solid lightgrey;
-  // border-bottom: 1.5px salmon dotted;
   align-items: flex-start;
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -27,16 +22,11 @@
     padding-top: 0.6rem;
     padding-bottom: 0.6rem;
   }
-  // margin-left: -2.4rem;
-  // margin-right: -2.4rem;
-  // padding-left: 2.4rem;
-  // padding-right: 2.4rem;
 }
 
 .track {
   flex-grow: 1;
   &-artist {
-    font-size: 1.2rem;
     color: #454545;
   }
 }
@@ -46,15 +36,6 @@
   &--simple {
     width: 2.4rem;
     // font-size: 1.2rem;
-  }
-}
-
-.heading {
-  font-weight: 400;
-  &:hover {
-    font-weight: 500;
-  }
-  &--simple {
   }
 }
 

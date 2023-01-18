@@ -15,11 +15,10 @@ interface Props {
 }
 
 const DataItem = ({ title, value, description }: DataItemType) => {
-  console.log('test 🔴');
   const [showDescription, setShowDescription] = useState(false);
 
   return (
-    <div className={handleClassName([styles.item])}>
+    <div className={handleClassName([styles.item, 'p'])}>
       <div className={handleClassName([styles['item-top']])}>
         <dt className={handleClassName([styles['item-key']])}>{title}</dt>
         <dd className={handleClassName([styles['item-value']])}>{value}</dd>

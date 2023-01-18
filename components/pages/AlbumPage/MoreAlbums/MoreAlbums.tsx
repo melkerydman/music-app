@@ -23,7 +23,10 @@ const Album = ({ album }: { album: SpotifyApi.AlbumObjectFull }) => {
             )}
           </div>
 
-          <Heading className={styles.album__heading} weight="thin" as="h6">
+          <Heading
+            className={handleClassName([styles.album__heading, 'p'])}
+            as="h6"
+          >
             {name}
           </Heading>
         </a>

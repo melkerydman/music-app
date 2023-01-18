@@ -16,10 +16,12 @@ import styles from './TrackList.module.scss';
 
 const SimpleTrack = ({ item }: { item: SpotifyApi.TrackObjectSimplified }) => (
   <li className={handleClassName([styles.item, styles['item--simple']])}>
-    <span className={styles['number--simple']}>{`${item.track_number}.`}</span>
+    <span
+      className={handleClassName([styles['number--simple'], 'p-sm'])}
+    >{`${item.track_number}.`}</span>
     <Link href={`/${item.type}/${item.id}`}>
       <a>
-        <Heading as="h6" className={styles.heading}>
+        <Heading as="h6" className="p-sm">
           {item.name}
         </Heading>
       </a>
@@ -28,14 +30,18 @@ const SimpleTrack = ({ item }: { item: SpotifyApi.TrackObjectSimplified }) => (
 );
 const Track = ({ item }: { item: SpotifyApi.TrackObjectSimplified }) => (
   <li className={styles.item}>
-    <span className={styles.number}>{`${item.track_number}.`}</span>
+    <span
+      className={handleClassName([styles.number, 'p'])}
+    >{`${item.track_number}.`}</span>
     <div className={styles.track}>
       <Link href={`/${item.type}/${item.id}`}>
         <a>
-          <Heading as="h6">{item.name}</Heading>
+          <Heading weight="normal" className="p" as="h6">
+            {item.name}
+          </Heading>
         </a>
       </Link>
-      <Paragraph sans as="div" className={styles['track-artist']}>
+      <Paragraph as="div" className={'p-xs'}>
         {item.artists.map((artist, index) => (
           <Link key={index} href={`/${artist.type}/${artist.id}`}>
             <a>{artist.name}</a>
@@ -43,7 +49,7 @@ const Track = ({ item }: { item: SpotifyApi.TrackObjectSimplified }) => (
         ))}
       </Paragraph>
     </div>
-    <span>{formatDuration(item.duration_ms)}</span>
+    <span className="p">{formatDuration(item.duration_ms)}</span>
   </li>
 );
 
@@ -66,24 +72,31 @@ const TrackList = React.memo(({ album, tracks, className, simple }: Props) => {
           simple ? styles['outer--simple'] : '',
         ])}
       >
-        <Heading
-          as="h3"
-          className={handleClassName([
-            styles.title,
-            simple ? styles['title--simple'] : '',
-          ])}
-        >
+        <Heading as="h3" className={handleClassName([simple ? 'h6' : ''])}>
           <Link href={`/${album.type}/${album.id}`}>
-            <a>{album.name}</a>
+            {simple ? <a>{album.name}</a> : 'Tracklist'}
           </Link>
         </Heading>
-        <Paragraph sans weight="thin" as="div">
-          {releaseDate.getFullYear()} - {tracks.length} tracks
+        <Paragraph
+          sans
+          weight="thin"
+          as="div"
+          className={handleClassName([
+            'p',
+            styles['sub-heading'],
+            simple ? 'p-sm' : '',
+          ])}
+        >
+          {releaseDate.getFullYear()} • {tracks.length} tracks
         </Paragraph>
       </div>
       {discs.map((disc, index) => (
         <section key={index} className={styles['disc-section']}>
-          {discs.length > 1 && <Heading as="h6">Disc {index + 1}</Heading>}
+          {discs.length > 1 && (
+            <Heading className={handleClassName([simple ? 'p' : ''])} as="h6">
+              Disc {index + 1}
+            </Heading>
+          )}
           <ul>
             {disc.map((track, trackIndex) => {
               if (simple) return <SimpleTrack key={trackIndex} item={track} />;
