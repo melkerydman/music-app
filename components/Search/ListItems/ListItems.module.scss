@@ -5,7 +5,7 @@
   // !INFO min height needed to use flex:1 in .items
   // min-height: 0;
   &:not(:last-child) {
-    border-bottom: solid 1px var(--colors-black);
+    border-bottom: 1.5px solid var(--colors-grey-500);
   }
 
   &.active {
