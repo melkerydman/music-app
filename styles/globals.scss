@@ -27,6 +27,10 @@ body {
 }
 #__next {
   // TODO: Create solution for 100vh that works on all devices
+  // TODO! Just for test REMOVE THIS
+  height: 100%;
+  overflow: hidden;
+  // TODO! Just for test REMOVE THIS
   // height: 100vh;
   // display: flex;
   // flex-direction: column;
