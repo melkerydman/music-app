@@ -1,6 +1,10 @@
-.aside {
+.side-content {
   display: flex;
   height: 100%;
+
+  &:global(.sticky) {
+    top: 5.6rem;
+  }
 }
 
 .scroll-bar {
@@ -12,7 +16,6 @@
 
   &__fill {
     background-color: #454545;
-    height: 0%;
   }
 }
 
@@ -29,4 +32,12 @@
   > *:not(:last-child) {
     margin-bottom: 4.8rem;
   }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
