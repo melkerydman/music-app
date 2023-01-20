@@ -1,6 +1,8 @@
 .side-content {
   display: flex;
   height: 100%;
+  // TODO! Change with varaible heights for header and footer
+  max-height: calc(100vh - 58px);
 
   &:global(.sticky) {
     top: 5.6rem;

@@ -4,11 +4,13 @@ import { AlbumPage } from '../../components/pages';
 import { getAlbum, getTokenServer } from '../../utilities/services/spotify';
 
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 
 const Album = (props) => (
   <>
     <Header />
     <AlbumPage data={props} />
+    <Footer />
   </>
 );
 

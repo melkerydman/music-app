@@ -10,13 +10,14 @@ import {
 import getTrackFeatures from '../../utilities/services/spotify/getTrackFeatures';
 import getLyrics from '../../utilities/services/musixmatch/getLyrics';
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 
 // TODO: Type props
 const Track = (props) => (
   <>
     <Header />
     <TrackPage data={props} />
-    <footer style={{ width: '100%' }}>footer</footer>
+    <Footer />
   </>
 );
 
