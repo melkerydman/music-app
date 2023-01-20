@@ -17,8 +17,25 @@ type Props = {
 const Header = ({ className, containerClassName }: Props): JSX.Element => {
   const [isMobile, setIsMobile] = useState(false);
   const [keyboardActive, setKeyboardActive] = useState(false);
+  const [isScroll, setIsScroll] = useState(false);
   const isFocus = useStore((state) => state.search.isFocus);
   const { width } = useWindowDimensions();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScroll(true);
+      } else {
+        setIsScroll(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isScroll]);
 
   useEffect(() => {
     setIsMobile(width < 768);
@@ -52,6 +69,7 @@ const Header = ({ className, containerClassName }: Props): JSX.Element => {
         className || '',
         isFocus ? styles['modal-active'] : '',
         keyboardActive ? styles['keyboard-active'] : '',
+        isScroll ? styles.shadow : '',
       ])}
     >
       <div

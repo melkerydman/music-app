@@ -29,3 +29,7 @@
   padding: 0 0.8rem;
   align-items: center;
 }
+
+.shadow {
+  filter: drop-shadow(0px 0px 0.8rem rgba(0, 0, 0, 0.15));
+}
