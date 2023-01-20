@@ -41,6 +41,7 @@
 
 // TODO: Not on mobile
 .data-items {
+  z-index: 1;
   position: sticky;
   top: 0;
   background-color: var(--colors-white);
