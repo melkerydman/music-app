@@ -22,13 +22,11 @@
   justify-content: flex-end;
 
   @include sm-breakpoint {
-    padding-left: 1.6rem;
-    padding-bottom: 0.8rem;
+    padding: 0.8rem 1.6rem;
   }
 
   @include md-breakpoint {
-    padding-left: 3.6rem;
-    padding-bottom: 2.4rem;
+    padding: 2.4rem 3.6rem;
   }
 
   &__main {

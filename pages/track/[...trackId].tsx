@@ -16,6 +16,7 @@ const Track = (props) => (
   <>
     <Header />
     <TrackPage data={props} />
+    <footer style={{ width: '100%' }}>footer</footer>
   </>
 );
 

@@ -8,9 +8,10 @@ import PageHeader from '../../layout/PageHeader/PageHeader';
 import PageSection from '../../layout/PageSection/PageSection';
 import TrackList from '../../TrackList/TrackList';
 
-import styles from './AlbumPage.module.scss';
+// import styles from './AlbumPage.module.scss';
 import MoreAlbums from './MoreAlbums/MoreAlbums';
 import DataItems from '../../DataItems/DataItems';
+import SideContent from '../../layout/SideContent/SideContent';
 
 type DataType = {
   album: SpotifyApi.AlbumObjectFull;
@@ -74,12 +75,14 @@ const AlbumPage = ({ data }: Props) => {
             <TrackList album={album} tracks={tracks.items}></TrackList>
           </NewGrid>
           {artistsAlbums && (
-            <NewGrid item sm={4} className={styles.aside}>
-              <DataItems title="Album information" items={dataItems} />
-              <MoreAlbums
-                albums={artistsAlbums.items}
-                activeAlbumId={album.id}
-              />
+            <NewGrid item sm={4}>
+              <SideContent>
+                <DataItems title="Album information" items={dataItems} />
+                <MoreAlbums
+                  albums={artistsAlbums.items}
+                  activeAlbumId={album.id}
+                />
+              </SideContent>
             </NewGrid>
           )}
         </NewGrid>

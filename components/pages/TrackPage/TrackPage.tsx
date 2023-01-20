@@ -14,7 +14,8 @@ import TrackList from '../../TrackList/TrackList';
 import Lyrics from './Lyrics/Lyrics';
 import NewGrid from '../../NewGrid/NewGrid';
 
-import styles from './TrackPage.module.scss';
+// import styles from './TrackPage.module.scss';
+import SideContent from '../../layout/SideContent/SideContent';
 
 type DataType = {
   album: SpotifyApi.AlbumObjectFull;
@@ -58,7 +59,7 @@ const TrackPage = ({ data }: Props) => {
   ];
 
   return (
-    <>
+    <main>
       <PageSection>
         <PageHeader
           image={album.images[0]}
@@ -71,13 +72,15 @@ const TrackPage = ({ data }: Props) => {
           <NewGrid item sm={8}>
             <Lyrics data={{ lyrics }} />
           </NewGrid>
-          <NewGrid className={styles.aside} item sm={4}>
-            <DataItems title="Track information" items={dataItems} />
-            <TrackList simple album={album} tracks={album.tracks.items} />
+          <NewGrid item sm={4}>
+            <SideContent>
+              <DataItems title="Track information" items={dataItems} />
+              <TrackList simple album={album} tracks={album.tracks.items} />
+            </SideContent>
           </NewGrid>
         </NewGrid>
       </PageSection>
-    </>
+    </main>
   );
 };
 export default TrackPage;

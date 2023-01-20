@@ -46,7 +46,7 @@ const DataItem = ({ title, value, description }: DataItemType) => {
 };
 
 const DataItems = ({ title, items }: Props): JSX.Element => (
-  <div>
+  <div className={styles['data-items']}>
     <Heading as="h5" className={styles.title}>
       {title}
     </Heading>
