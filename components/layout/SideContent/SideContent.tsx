@@ -10,7 +10,6 @@ type Props = {
 
 const SideContent: React.FC<Props> = React.memo(
   ({ children, className }): JSX.Element => {
-    // const [currentUrl, setCurrentUrl] = useState(pathname);
     const [isMobile, setIsMobile] = useState(null);
     const [maxHeight, setMaxHeight] = useState(null);
     const [isSticky, setIsSticky] = useState(false);
