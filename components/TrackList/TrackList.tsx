@@ -65,7 +65,7 @@ const TrackList = React.memo(({ album, tracks, className, simple }: Props) => {
   const releaseDate = new Date(album.release_date);
 
   return (
-    <div className={className}>
+    <div className={handleClassName([className || '', styles['track-list']])}>
       <div
         className={handleClassName([
           styles.outer,

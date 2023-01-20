@@ -1,3 +1,6 @@
+.track-list {
+}
+
 .outer {
   margin-bottom: 3.6rem;
 
@@ -43,5 +46,8 @@
 .disc-section {
   &:not(:last-child) {
     margin-bottom: 3.6rem;
+  }
+  &:last-child {
+    padding-bottom: 3.2rem;
   }
 }

@@ -1,6 +1,8 @@
 .side-content {
   display: flex;
   height: 100%;
+  // TODO! Change with varaible heights for header and footer
+  max-height: calc(100vh - 58px);
 
   &:global(.sticky) {
     top: 5.6rem;
@@ -11,8 +13,8 @@
   height: 100%;
   width: 0.15rem;
   background-color: var(--colors-grey-100);
-  margin-left: 2.4rem;
-  margin-right: 2.4rem;
+  margin-left: 3.6rem;
+  margin-right: 3.6rem;
 
   &__fill {
     background-color: #454545;
