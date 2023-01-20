@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { handleClassName } from '../../../utilities/helpers';
+import { handleClassName, getSmallestNumber } from '../../../utilities/helpers';
 import { useWindowDimensions } from '../../../utilities/hooks';
 import styles from './SideContent.module.scss';
 
@@ -29,10 +29,6 @@ const SideContent: React.FC<Props> = React.memo(
       scrollBarRef.current.style.height = `${percentageScrolled}%`;
     };
 
-    // TODO! logging just to avoid error commmiting, remove this
-    console.log(' 🔴', isMobile, className);
-    const getSmallestNumber = (arr: number[]) => Math.min(...arr);
-
     useEffect(() => {
       setIsMobile(width < 768);
     }, [width]);
@@ -42,10 +38,12 @@ const SideContent: React.FC<Props> = React.memo(
     }, [height]);
 
     useEffect(() => {
+      if (isMobile) return;
       fillScroll();
-    }, [isSticky]);
+    }, [isSticky, isMobile]);
 
     useEffect(() => {
+      if (isMobile) return undefined;
       let contentTotalHeight = contentRef.current.scrollHeight;
       let wrapperFromTop = wrapperRef.current.getBoundingClientRect().top;
       let wrapperHeight = Math.ceil(height - wrapperFromTop);
@@ -83,7 +81,7 @@ const SideContent: React.FC<Props> = React.memo(
         contentCopy.removeEventListener('scroll', fillScroll);
         window.removeEventListener('scroll', handleScroll);
       };
-    }, [height, width, maxHeight]);
+    }, [height, width, maxHeight, isMobile]);
 
     const ScrollBar = React.memo(() => (
       <div className={styles['scroll-bar']}>
@@ -93,10 +91,11 @@ const SideContent: React.FC<Props> = React.memo(
 
     ScrollBar.displayName = 'ScrollBar';
 
-    return (
+    const Desktop = () => (
       <div
         ref={wrapperRef}
         className={handleClassName([
+          className || '',
           styles['side-content'],
           isSticky ? 'sticky' : '',
         ])}
@@ -107,6 +106,14 @@ const SideContent: React.FC<Props> = React.memo(
         </div>
       </div>
     );
+
+    const Mobile = () => (
+      <div ref={contentRef} className={className || ''}>
+        {children}
+      </div>
+    );
+
+    return <>{isMobile ? <Mobile /> : <Desktop />}</>;
   }
 );
 
