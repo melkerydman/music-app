@@ -7,8 +7,10 @@ import formatTimeSignature from './formatTimeSignature';
 import getStringBetween from './getStringBetween';
 import groupBy from './groupBy';
 import getSmallestNumber from './getSmallestNumber';
+import click from './click';
 
 export {
+  click,
   handleClassName,
   formatDuration,
   formatKey,
