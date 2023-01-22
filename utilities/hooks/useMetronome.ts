@@ -1,37 +1,74 @@
-import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 
-// TODO: Triggers a lot of re-renders which causes the sound to play in the wrong way when pressing play
-// TODO: Tempo not correct when playing in background
-const useMetronome = (callback: () => void, initialTempo: number) => {
-  const [isRunning, setIsRunning] = useState<boolean>(false);
-  const [tempo, setTempo] = useState<number>(initialTempo);
-  const expectedTimeRef = useRef<number>(performance.now() + 60000 / tempo);
-  const timeoutRef = useRef<NodeJS.Timeout | undefined>();
+const useMetronome = (initialTempo) => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [tempo, setTempo] = useState(initialTempo);
+  const audioCtxRef = useRef(null);
 
-  const memoizedTempo = useMemo(() => tempo, [tempo]);
-
-  const round = useCallback(() => {
-    console.log('running round 🟢');
-    callback();
-    const driftedTime = performance.now() - expectedTimeRef.current;
-    expectedTimeRef.current += 60000 / memoizedTempo;
-    timeoutRef.current = setTimeout(round, 60000 / memoizedTempo - driftedTime);
-  }, [callback, memoizedTempo]);
+  const oscRef = useRef(null);
+  const nextNoteTimeRef = useRef(0);
+  const scheduleAheadTimeRef = useRef(0.1);
+  const lookaheadRef = useRef(null);
 
   useEffect(() => {
-    if (!isRunning) {
-      return undefined;
-    }
-    console.log('not undefined 🟢');
-    timeoutRef.current = setTimeout(round, 60000 / memoizedTempo);
+    audioCtxRef.current = new (window.AudioContext ||
+      window.webkitAudioContext)();
+    oscRef.current = audioCtxRef.current.createOscillator();
+    oscRef.current.connect(audioCtxRef.current.destination);
+  }, []);
+
+  const tick = useCallback(() => {
+    oscRef.current.frequency.setValueAtTime(840, nextNoteTimeRef.current);
+    oscRef.current.frequency.setValueAtTime(0, nextNoteTimeRef.current + 0.03);
+    nextNoteTimeRef.current += 60 / tempo;
+  }, [tempo]);
+
+  useEffect(() => {
+    if (isPlaying)
+      lookaheadRef.current = setInterval(() => {
+        while (
+          nextNoteTimeRef.current <
+          audioCtxRef.current.currentTime + scheduleAheadTimeRef.current
+        ) {
+          tick();
+        }
+      }, 25);
 
     return () => {
-      console.log('cleanup 🔴');
-      clearTimeout(timeoutRef.current);
+      clearInterval(lookaheadRef.current);
     };
-  }, [round, memoizedTempo, isRunning]);
+  }, [isPlaying, tick]);
 
-  return { isRunning, setIsRunning, tempo, setTempo };
+  const start = () => {
+    setIsPlaying(true);
+    if (!oscRef.current) {
+      oscRef.current = audioCtxRef.current.createOscillator();
+      oscRef.current.connect(audioCtxRef.current.destination);
+    }
+    nextNoteTimeRef.current = audioCtxRef.current.currentTime;
+    oscRef.current.frequency.setValueAtTime(840, nextNoteTimeRef.current);
+    oscRef.current.frequency.setValueAtTime(0, nextNoteTimeRef.current + 0.03);
+    oscRef.current.start(nextNoteTimeRef.current);
+    nextNoteTimeRef.current += 60 / tempo;
+
+    tick();
+  };
+
+  const stop = () => {
+    oscRef.current.frequency.setValueAtTime(0, 0);
+    setIsPlaying(false);
+    clearInterval(lookaheadRef.current);
+
+    // TODO: Find way to stop metronome without getting the crackling sound
+    oscRef.current.stop();
+    oscRef.current.disconnect();
+    oscRef.current = null;
+  };
+
+  const changeTempo = (newTempo) => {
+    setTempo(newTempo);
+  };
+
+  return { isPlaying, start, stop, tempo, changeTempo };
 };
-
 export default useMetronome;
