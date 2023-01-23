@@ -54,15 +54,21 @@
   color: var(--colors-grey-100);
 
   &:hover {
-    background-color: blue;
+    background-color: var(--colors-grey-200);
+    color: var(--colors-grey-900);
   }
   &.active {
-    background-color: green;
+    background-color: var(--colors-grey-400);
+    color: var(--colors-grey-900);
+    &:hover {
+      background-color: var(--colors-grey-200);
+    }
   }
 }
 
 .circle {
   width: 0.8rem;
   height: 0.8rem;
-  background-color: red;
+  background-color: var(--colors-gradient-start);
+  border-radius: 100%;
 }
