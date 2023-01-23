@@ -23,8 +23,7 @@ const useMetronome = (initialTempo) => {
   };
 
   useEffect(() => {
-    audioCtxRef.current = new (window.AudioContext ||
-      window.webkitAudioContext)();
+    audioCtxRef.current = new window.AudioContext();
     init();
   }, []);
 
