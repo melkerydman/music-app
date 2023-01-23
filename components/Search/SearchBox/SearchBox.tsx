@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
+import SearchIcon from '@mui/icons-material/Search';
+import CloseIcon from '@mui/icons-material/Close';
 import useStore from '../../../store/useStore';
 import { handleClassName } from '../../../utilities/helpers';
 import { useWindowDimensions } from '../../../utilities/hooks';
@@ -32,11 +34,17 @@ const SearchBox = ({ active, className, ...rest }: Props) => {
 
   return (
     <div className={handleClassName([styles.wrapper, className && className])}>
-      <button onClick={() => setIsFocus(true)}>🔦</button>
+      <button
+        className={handleClassName([styles.icon, isFocus && styles.focus])}
+        onClick={() => setIsFocus(true)}
+      >
+        {<SearchIcon fontSize="large" />}
+      </button>
       <input
         className={handleClassName([
           styles.input,
           isMobile && !isFocus && 'hidden',
+          isFocus && styles.focus,
         ])}
         id="search"
         ref={inputRef}
@@ -51,12 +59,12 @@ const SearchBox = ({ active, className, ...rest }: Props) => {
         {...rest}
       />
       <button
-        className={handleClassName([!isFocus && 'hidden'])}
+        className={handleClassName([styles.icon, !isFocus && 'hidden'])}
         onClick={() => {
           setIsFocus(false);
         }}
       >
-        X
+        <CloseIcon fontSize="large" />
       </button>
     </div>
   );

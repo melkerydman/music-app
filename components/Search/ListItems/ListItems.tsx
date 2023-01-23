@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import SouthEastIcon from '@mui/icons-material/SouthEast';
+import NorthWestIcon from '@mui/icons-material/NorthWest';
 import useStore from '../../../store/useStore';
 import { handleClassName } from '../../../utilities/helpers';
 import { useWindowDimensions } from '../../../utilities/hooks';
@@ -77,7 +79,15 @@ const ListItems = ({ data, type, ...rest }: Props) => {
     >
       <Heading as="h4">{type}</Heading>
       <button onClick={handleClick}>
-        {type !== activeCategory ? 'Expand ->' : 'Collapse <-'}
+        {type !== activeCategory ? (
+          <div>
+            Show more <SouthEastIcon />
+          </div>
+        ) : (
+          <div>
+            Show less <NorthWestIcon />
+          </div>
+        )}
       </button>
     </div>
   );

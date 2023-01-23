@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 import { handleClassName } from '../../utilities/helpers';
 import { useMetronome } from '../../utilities/hooks';
 import { Paragraph } from '../Typography/Typography';
@@ -63,7 +65,7 @@ const Metronome: React.FC<Props> = ({ initialTempo }) => {
         ])}
       >
         <button className={styles.button} onClick={handleDecrement}>
-          -
+          {<RemoveIcon fontSize="small" />}
         </button>
         <input
           type="range"
@@ -73,7 +75,7 @@ const Metronome: React.FC<Props> = ({ initialTempo }) => {
           onChange={(e) => changeTempo(Number(e.target.value))}
         />
         <button className={styles.button} onClick={handleIncrement}>
-          +
+          {<AddIcon fontSize="small" />}
         </button>
       </div>
 

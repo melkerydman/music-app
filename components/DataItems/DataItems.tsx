@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import SouthEastIcon from '@mui/icons-material/SouthEast';
+import NorthWestIcon from '@mui/icons-material/NorthWest';
 import { handleClassName } from '../../utilities/helpers';
 import { Heading, Paragraph } from '../Typography/Typography';
 import styles from './DataItems.module.scss';
@@ -28,7 +30,7 @@ const DataItem = ({ title, value, description }: DataItemType) => {
               setShowDescription((prev) => !prev);
             }}
           >
-            {showDescription ? '-' : '+'}
+            {showDescription ? <NorthWestIcon /> : <SouthEastIcon />}
           </button>
         )}
       </div>
