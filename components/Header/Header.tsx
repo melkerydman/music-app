@@ -3,7 +3,6 @@ import Link from 'next/link';
 import useStore from '../../store/useStore';
 import { handleClassName } from '../../utilities/helpers';
 import Logo from '../Logo/Logo';
-import Metronome from '../Metronome/Metronome';
 import Search from '../Search/Search';
 import { useWindowDimensions } from '../../utilities/hooks';
 
@@ -89,7 +88,6 @@ const Header = ({ className, containerClassName }: Props): JSX.Element => {
               </a>
             </Link>
             <Search />
-            <Metronome />
           </>
         )}
       </div>

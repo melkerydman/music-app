@@ -16,6 +16,7 @@ import NewGrid from '../../NewGrid/NewGrid';
 
 // import styles from './TrackPage.module.scss';
 import SideContent from '../../layout/SideContent/SideContent';
+import Metronome from '../../Metronome/Metronome';
 
 type DataType = {
   album: SpotifyApi.AlbumObjectFull;
@@ -37,7 +38,7 @@ const TrackPage = ({ data }: Props) => {
   const dataItems = [
     {
       title: 'Tempo',
-      value: formatTempo(features.tempo),
+      value: `${formatTempo(features.tempo)} BPM`,
       description: `Double speed -> ${features.tempo * 2}
       Half speed -> ${features.tempo / 2}`,
     },
@@ -74,6 +75,7 @@ const TrackPage = ({ data }: Props) => {
           </NewGrid>
           <NewGrid item sm={4}>
             <SideContent>
+              <Metronome initialTempo={formatTempo(features.tempo)} />
               <DataItems title="Track information" items={dataItems} />
               <TrackList simple album={album} tracks={album.tracks.items} />
             </SideContent>
