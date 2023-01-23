@@ -47,14 +47,12 @@ const Search = () => {
 
     const searchTimeout = setTimeout(async () => {
       try {
-        console.log('try block 🟢');
         const searchResultsFromSpotify = await searchForItem(
           accessToken,
           search
         );
         setSearchResultsInStore(searchResultsFromSpotify);
       } catch (err) {
-        console.log('catch block 🔴');
         const token = await getTokenClient();
         setAccessToken(token);
       }
