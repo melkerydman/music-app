@@ -20,7 +20,7 @@ const TrackPage = () => {
   const MobileHeader = () => (
     <NewGrid container className={styles.header__mobile}>
       <NewGrid item>
-        <Display small>Work in progress.</Display>
+        <Display small>Not really done yet.</Display>
       </NewGrid>
     </NewGrid>
   );
@@ -29,14 +29,17 @@ const TrackPage = () => {
       container
       className={handleClassName([styles.header__desktop, 'underline'])}
     >
-      <NewGrid item span={6}>
-        <Display small>Work</Display>
+      <NewGrid item span={3}>
+        <Display small>Not</Display>
       </NewGrid>
       <NewGrid item span={3}>
-        <Display small>in</Display>
+        <Display small>really</Display>
       </NewGrid>
       <NewGrid item span={3}>
-        <Display small>progress.</Display>
+        <Display small>done</Display>
+      </NewGrid>
+      <NewGrid item span={3}>
+        <Display small>yet.</Display>
       </NewGrid>
     </NewGrid>
   );
