@@ -1,22 +1,93 @@
+import { useEffect, useRef, useState } from 'react';
+import { handleClassName } from '../../utilities/helpers';
 import { useMetronome } from '../../utilities/hooks';
+import { Paragraph } from '../Typography/Typography';
 
 import styles from './Metronome.module.scss';
 
-const Metronome = () => {
-  const { isPlaying, start, stop, tempo, changeTempo } = useMetronome(120);
+interface Props {
+  initialTempo?: number;
+}
+
+const Metronome: React.FC<Props> = ({ initialTempo }) => {
+  const hoverRef = useRef<HTMLDivElement>(null);
+  const [isHovering, setIsHovering] = useState(false);
+  const { isPlaying, start, stop, tempo, changeTempo } =
+    useMetronome(initialTempo);
+
+  const minTempo = 40;
+  const maxTempo = 280;
+
+  let timeoutId;
+  const handleMouseEnter = () => {
+    clearTimeout(timeoutId);
+    setIsHovering(true);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutId = setTimeout(() => {
+      setIsHovering(false);
+    }, 300);
+  };
+
+  const handleIncrement = () => {
+    if (tempo < maxTempo) {
+      changeTempo(tempo + 1);
+    }
+  };
+  const handleDecrement = () => {
+    if (tempo > minTempo) {
+      changeTempo(tempo - 1);
+    }
+  };
+
+  useEffect(() => {
+    if (!hoverRef.current) return undefined;
+    const copy = hoverRef.current;
+
+    copy.addEventListener('mouseenter', handleMouseEnter);
+    copy.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      copy.addEventListener('mouseenter', handleMouseEnter);
+      copy.addEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
 
   return (
-    <div className={styles.metronome}>
-      <input
-        type="range"
-        min="40"
-        max="240"
-        value={tempo}
-        onChange={(e) => changeTempo(e.target.value)}
-      />
-      <div className={styles.tempo}>{tempo}</div>
-      <button onClick={isPlaying ? stop : start}>
-        {isPlaying ? 'Stop' : 'Start'}
+    <div ref={hoverRef} className={styles.metronome}>
+      <div
+        className={handleClassName([
+          styles.slider,
+          !isHovering ? 'visually-hidden' : '',
+        ])}
+      >
+        <button className={styles.button} onClick={handleDecrement}>
+          -
+        </button>
+        <input
+          type="range"
+          min={minTempo}
+          max={maxTempo}
+          value={tempo}
+          onChange={(e) => changeTempo(Number(e.target.value))}
+        />
+        <button className={styles.button} onClick={handleIncrement}>
+          +
+        </button>
+      </div>
+
+      <button
+        className={handleClassName([
+          styles.play,
+          isPlaying ? styles.active : '',
+        ])}
+        onClick={isPlaying ? stop : start}
+      >
+        <div className={styles.circle}></div>
+        <Paragraph as="div" className={styles.tempo}>
+          {tempo} BPM
+        </Paragraph>
       </button>
     </div>
   );
