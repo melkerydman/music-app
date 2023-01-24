@@ -1,36 +1,37 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styles from './Search.module.scss';
-import SearchResults from './SearchResults/SearchResults';
 
-import quickSearch from '../../utilities/services/spotify/quickSearch';
-import { getTokenClient } from '../../utilities/helpers/getToken';
-
-// TODO: Create real types somewhere
-type QuickSearchResultsType = {
-  topResult?: QuickSearchType;
-  albums?: QuickSearchType[];
-  artists?: QuickSearchType[];
-  tracks?: QuickSearchType[];
-};
-
-type QuickSearchType = {
-  href: string;
-  image: string;
-  heading: string;
-  subHeading?: string[];
-  type: string;
-  id: string;
-};
+import { getTokenClient } from '../../utilities/services/spotify';
+import useStore from '../../store/useStore';
+import { searchForItem } from '../../utilities/services/spotify/searchSpotify';
+import SearchBox from './SearchBox/SearchBox';
+import ListItems from './ListItems/ListItems';
+import { handleClassName } from '../../utilities/helpers';
+import Modal from '../Modal/Modal';
+import { useWindowDimensions } from '../../utilities/hooks';
+// import { useAuthToken } from '../../utilities/hooks';
 
 const Search = () => {
-  const [searchValue, setSearchValue] = useState<string>('');
-  const [searchResults, setSearchResults] = useState<QuickSearchResultsType>(
-    {}
-  );
+  // const accessToken = useAuthToken();
+  const { width } = useWindowDimensions();
   const [accessToken, setAccessToken] = useState('');
+  const [isMobile, setIsMobile] = useState(false);
+  const search = useStore((state) => state.search.search);
+  const isFocus = useStore((state) => state.search.isFocus);
+  const setIsFocus = useStore((state) => state.search.setIsFocus);
+  const searchResultsFromStore = useStore(
+    (state) => state.search.searchResults
+  );
+  const setSearchResultsInStore = useStore(
+    (state) => state.search.setSearchResults
+  );
 
-  // TODO: handle access token storage (on server, cookie?)
+  useEffect(() => {
+    setIsMobile(width < 768);
+  }, [width]);
+
+  // TODO: Finish partially created authentication hook
   useEffect(() => {
     const getToken = async () => {
       const token = await getTokenClient();
@@ -40,42 +41,99 @@ const Search = () => {
   }, []);
 
   useEffect(() => {
-    if (!accessToken || searchValue === '') return setSearchResults({});
+    if (search === '') {
+      return setSearchResultsInStore({});
+    }
 
-    // TODO: Naming convention for async function?
-    const search = async () => {
+    const searchTimeout = setTimeout(async () => {
       try {
-        const searchResult = await quickSearch(searchValue, accessToken);
-        setSearchResults(searchResult);
-      } catch {
-        setAccessToken(await getTokenClient());
+        const searchResultsFromSpotify = await searchForItem(
+          accessToken,
+          search
+        );
+        setSearchResultsInStore(searchResultsFromSpotify);
+      } catch (err) {
+        const token = await getTokenClient();
+        setAccessToken(token);
       }
-    };
+    }, 300);
 
-    search();
-    return undefined;
-  }, [searchValue, accessToken]);
+    return () => clearTimeout(searchTimeout);
+  }, [search, accessToken, setSearchResultsInStore]);
+
+  const SearchResults = () => {
+    const { albums, artists, tracks } = searchResultsFromStore;
+    const noResults =
+      !albums?.items.length && !artists?.items.length && !tracks?.items.length;
+
+    return (
+      <ul
+        className={handleClassName([
+          styles['search-results'],
+          isMobile ? styles.mobile : '',
+        ])}
+      >
+        {noResults ? (
+          <li>No results found.</li>
+        ) : (
+          <>
+            {tracks?.items.length > 0 && (
+              <ListItems data={tracks.items} type="track" />
+            )}
+            {artists?.items.length > 0 && (
+              <ListItems data={artists.items} type="artist" />
+            )}
+            {albums?.items.length > 0 && (
+              <ListItems data={albums.items} type="album" />
+            )}
+          </>
+        )}
+      </ul>
+    );
+  };
 
   return (
-    // TODO: Create own components
-    <div className={styles.search}>
-      <input
-        className={styles.search_input}
-        id="search"
-        name="search"
-        type="text"
-        placeholder="Search for artist, song or album"
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
-      />
-      {/* // TODO: Better way of checking if searchResults is empty */}
-      {Object.entries(searchResults).length! > 0 && (
-        <SearchResults
-          topResult={searchResults.topResult}
-          artists={searchResults.artists}
-          tracks={searchResults.tracks}
-          albums={searchResults.albums}
-        />
+    <div className={handleClassName([styles.search])}>
+      {!isFocus && <SearchBox />}
+      {isFocus && isMobile && (
+        <>
+          <SearchBox active />
+          <Modal
+            isOpen={isFocus}
+            onClose={() => {
+              setIsFocus(false);
+            }}
+            className={handleClassName([
+              styles.modal,
+              isMobile ? styles.mobile : '',
+            ])}
+          >
+            {search !== '' &&
+              Object.entries(searchResultsFromStore).length! > 0 && (
+                <SearchResults />
+              )}
+          </Modal>
+        </>
+      )}
+      {isFocus && !isMobile && (
+        <>
+          <SearchBox active />
+          <Modal
+            isOpen={isFocus}
+            onClose={() => {
+              setIsFocus(false);
+            }}
+            className={handleClassName([
+              styles.modal,
+              isMobile ? styles.mobile : '',
+            ])}
+          >
+            {search !== '' &&
+              Object.entries(searchResultsFromStore).length! > 0 && (
+                <SearchResults />
+              )}
+          </Modal>
+        </>
       )}
     </div>
   );

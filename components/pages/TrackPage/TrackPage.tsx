@@ -1,46 +1,87 @@
-import { Album, Lyrics, Track, TrackFeatures } from '../../../types';
-import { handleClassName } from '../../../utilities/helpers';
-import { Display, Heading, Paragraph } from '../../Typography/Typography';
-import AlbumAndFeatures from './AlbumAndFeatures/AlbumAndFeatures';
+// import useHeaderStore from '../../../store/useHeaderStore';
+import { Lyrics as LyricsType } from '../../../types';
+import {
+  formatDuration,
+  formatKey,
+  formatMode,
+  formatTempo,
+  formatTimeSignature,
+} from '../../../utilities/helpers';
+import DataItems from '../../DataItems/DataItems';
+import PageHeader from '../../layout/PageHeader/PageHeader';
+import PageSection from '../../layout/PageSection/PageSection';
+import TrackList from '../../TrackList/TrackList';
+import Lyrics from './Lyrics/Lyrics';
+import NewGrid from '../../NewGrid/NewGrid';
 
-import styles from './TrackPage.module.scss';
+// import styles from './TrackPage.module.scss';
+import SideContent from '../../layout/SideContent/SideContent';
+import Metronome from '../../Metronome/Metronome';
 
-type Data = {
-  album: Album;
-  track: Track;
-  features: TrackFeatures;
-  lyrics: Lyrics;
+type DataType = {
+  album: SpotifyApi.AlbumObjectFull;
+  track: SpotifyApi.TrackObjectFull;
+  features: SpotifyApi.AudioFeaturesObject;
+  lyrics: LyricsType;
 };
 
 type Props = {
-  data: Data;
+  data: DataType;
 };
 
 // TODO: Proper class names
 const TrackPage = ({ data }: Props) => {
   const { album, track, features, lyrics } = data;
+  // TODO: Remove headerheight completely?
+  // const headerHeight = useHeaderStore((props) => props.height);
 
-  const artists = track.artists.map((artist) => artist.name);
+  const dataItems = [
+    {
+      title: 'Tempo',
+      value: `${formatTempo(features.tempo)} BPM`,
+      description: `Double speed -> ${features.tempo * 2}
+      Half speed -> ${features.tempo / 2}`,
+    },
+    {
+      title: 'Key',
+      value: `${formatKey(features.key)} ${formatMode(features.mode)}`,
+      description: '',
+    },
+    {
+      title: 'Time Signature',
+      value: formatTimeSignature(features.time_signature),
+      description: '',
+    },
+    {
+      title: 'Duration',
+      value: formatDuration(features.duration_ms),
+      description: '',
+    },
+  ];
 
   return (
-    <main className={handleClassName(['container', styles.page])}>
-      <header className={styles.header}>
-        <Heading as="h3">{track.type}</Heading>
-        <Display as="h1" small>
-          {track.name}
-        </Display>
-        <Heading as="h2">{artists.join(', ')}</Heading>
-      </header>
-      <section className={styles.content}>
-        {/* //TODO: Create lyrics component */}
-        <div className={styles['lyrics-outer']}>
-          <Heading as="h4">Lyrics</Heading>
-          <Paragraph className={styles.lyrics} as="span">
-            {lyrics.lyrics_body}
-          </Paragraph>
-        </div>
-        <AlbumAndFeatures data={{ album, features, track }} />
-      </section>
+    <main>
+      <PageSection>
+        <PageHeader
+          image={album.images[0]}
+          heading={track.name}
+          subHeading={track.artists.map((artist) => artist.name).join(', ')}
+        />
+      </PageSection>
+      <PageSection>
+        <NewGrid container>
+          <NewGrid item sm={8}>
+            <Lyrics data={{ lyrics }} />
+          </NewGrid>
+          <NewGrid item sm={4}>
+            <SideContent>
+              <Metronome initialTempo={formatTempo(features.tempo)} />
+              <DataItems title="Track information" items={dataItems} />
+              <TrackList simple album={album} tracks={album.tracks.items} />
+            </SideContent>
+          </NewGrid>
+        </NewGrid>
+      </PageSection>
     </main>
   );
 };

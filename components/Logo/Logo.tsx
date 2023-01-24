@@ -1,5 +1,5 @@
 import { handleClassName } from '../../utilities/helpers';
-import styles from './logo.module.scss';
+import styles from './Logo.module.scss';
 
 type LogoType = {
   large?: boolean;

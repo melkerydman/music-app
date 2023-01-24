@@ -1,24 +1,32 @@
-import TrackPage from '../../components/pages';
-import { getAlbum, getTrack } from '../../utilities/services/spotify';
+import { GetServerSideProps } from 'next';
+
+import { TrackPage } from '../../components/pages';
+import {
+  getAlbum,
+  getTrack,
+  getTokenServer,
+} from '../../utilities/services/spotify';
 
 import getTrackFeatures from '../../utilities/services/spotify/getTrackFeatures';
 import getLyrics from '../../utilities/services/musixmatch/getLyrics';
 import Header from '../../components/Header/Header';
-
-import { getTokenServer } from '../../utilities/helpers/getToken';
+import Footer from '../../components/Footer/Footer';
 
 // TODO: Type props
 const Track = (props) => (
   <>
     <Header />
     <TrackPage data={props} />
+    <Footer />
   </>
 );
 
 export default Track;
 
-export async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const token = await getTokenServer(context);
+
+  // TODO: Entire track is already stored in state at this stage if I find a way of grabbing that one instead
   const spotifyTrack = await getTrack(context.params.trackId, token);
   const albumId = spotifyTrack.album.id;
   const spotifyAlbum = await getAlbum(albumId, token);
@@ -34,7 +42,7 @@ export async function getServerSideProps(context) {
       album: spotifyAlbum,
       track: spotifyTrack,
       features: spotifyTrackFeatures,
-      lyrics,
+      lyrics: lyrics !== undefined ? lyrics : null,
     },
   };
-}
+};

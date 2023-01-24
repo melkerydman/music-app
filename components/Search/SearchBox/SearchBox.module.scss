@@ -1,0 +1,79 @@
+@use '../../../styles/mixins.scss' as *;
+@use '../../../styles/breakpoints.scss' as *;
+// TODO: Overlay bacground color fixes, probably other things too
+
+.wrapper {
+  display: flex;
+  flex-grow: 1;
+}
+
+.input {
+  // @include underline;
+  // width: 100%;
+  flex-grow: 1;
+  font-size: 1.6rem;
+  padding-left: 0.8rem;
+  padding-right: 1.6rem;
+  color: var(--colors-grey-500);
+  position: relative;
+  z-index: 2;
+
+  &.focus {
+    color: var(--colors-grey-900);
+  }
+
+  @include xs-breakpoint {
+    font-size: 1.2rem;
+  }
+
+  // &.active {
+  //   position: fixed;
+  //   top: 0;
+  //   left: 0;
+  //   height: 5.6rem;
+  //   background-color: var(--colors-white);
+  //   // height: 100%;
+
+  //   @include xs-breakpoint {
+  //     position: relative;
+  //     height: auto;
+  //   }
+  // }
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: var(--colors-grey-500);
+
+  &.focus {
+    color: var(--colors-grey-900);
+  }
+
+  &:hover {
+    color: var(--colors-grey-900);
+  }
+}
+
+.close {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+}
+
+.overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: grey;
+  opacity: 0.3;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}

@@ -1,0 +1,53 @@
+.track-list {
+}
+
+.outer {
+  margin-bottom: 1.6rem;
+
+  &--simple {
+    margin-bottom: 0.8rem;
+  }
+}
+
+.sub-heading {
+  color: #454545;
+}
+
+.item {
+  display: flex;
+  gap: 1rem;
+  border-bottom: 1.5px solid var(--colors-grey-100);
+
+  align-items: flex-start;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  &--simple {
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+  }
+}
+
+.track {
+  flex-grow: 1;
+  &-artist {
+    color: #454545;
+  }
+}
+
+.number {
+  width: 4.8rem;
+  &--simple {
+    width: 2.4rem;
+    // font-size: 1.2rem;
+  }
+}
+
+.disc-section {
+  &:not(:last-child) {
+    margin-bottom: 3.6rem;
+  }
+  &:last-child {
+    padding-bottom: 3.2rem;
+  }
+}

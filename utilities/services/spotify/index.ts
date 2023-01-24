@@ -1,6 +1,15 @@
-import getAlbum from './getAlbum';
+import { getTokenClient, getTokenServer } from './getAccessToken';
+import { getAlbum, getArtistsAlbums } from './getAlbum';
 import getTrack from './getTrack';
+import getArtist from './getArtist';
 import getTrackFeatures from './getTrackFeatures';
-import quickSearch from './quickSearch';
 
-export { getAlbum, getTrack, getTrackFeatures, quickSearch };
+export {
+  getAlbum,
+  getArtist,
+  getArtistsAlbums,
+  getTrack,
+  getTrackFeatures,
+  getTokenClient,
+  getTokenServer,
+};

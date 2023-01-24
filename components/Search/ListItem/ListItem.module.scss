@@ -5,31 +5,28 @@
   position: relative;
   align-items: center;
   gap: 1rem;
-  padding: 1rem;
+  padding-right: 1rem;
+  padding-left: 0;
+  box-sizing: border-box;
 
   &:hover {
-    background: var(--colors-grey-100);
-
-    &:after {
-      @include background-gradient(
-        var(--colors-gradient-start),
-        var(--colors-gradient-end),
-        'vertical'
-      );
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 100%;
-      width: 3px;
-      height: 100%;
-      z-index: 1;
-    }
+    // Acts as border
+    box-shadow: inset 1px 0px 0px 1px var(--colors-black);
   }
 }
 
-.flex {
-  display: 'flex';
-  flex-direction: 'column';
+.text {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  flex-grow: 1;
+  min-width: 0;
+
+  > * {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
 }
 
 .heading {

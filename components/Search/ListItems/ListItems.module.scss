@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  // !INFO min height needed to use flex:1 in .items
+  // min-height: 0;
+  &:not(:last-child) {
+    border-bottom: 1.5px solid var(--colors-grey-100);
+  }
+
+  &.active {
+    flex: 1;
+  }
+
+  &.hidden {
+    .items {
+      display: none;
+    }
+  }
+
+  &.mobile {
+    overflow: visible;
+  }
+}
+
+.items {
+  // flex: 1;
+  overflow: scroll;
+}
