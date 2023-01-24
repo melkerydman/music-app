@@ -13,15 +13,15 @@ const Footer = () => {
       >
         <Grid item span={9}>
           <Paragraph weight="normal" small as="div">
-            Data provided by Spotify
+            Data provided by Spotify.
           </Paragraph>
           <Paragraph weight="normal" small as="div">
-            Lyrics provided by Musixmatch
+            Lyrics provided by Musixmatch.
           </Paragraph>
         </Grid>
         <Grid item span={3}>
           <Paragraph weight="normal" small as="div">
-            Made by Melker Rydman, 2023
+            Made by Melker Rydman, 2023.
           </Paragraph>
         </Grid>
       </Grid>
