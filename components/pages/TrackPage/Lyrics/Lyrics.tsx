@@ -14,8 +14,10 @@ const Lyrics = ({ data }: Props): JSX.Element => {
   const { lyrics } = data;
 
   return (
-    <div className={styles['lyrics-outer']}>
-      <Heading as="h3">Lyrics</Heading>
+    <div className={styles.lyrics__outer}>
+      <Heading className={styles.lyrics__heading} as="h3">
+        Lyrics
+      </Heading>
       <Paragraph sans className={styles.lyrics} as="span">
         {lyrics ? lyrics.lyrics_body : 'Lyrics not found 😤'}
       </Paragraph>

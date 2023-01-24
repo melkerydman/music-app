@@ -6,6 +6,8 @@
   font-weight: 400;
   line-height: 140%;
 
+  padding-bottom: 9.6rem;
+
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 
@@ -13,8 +15,12 @@
     display: none;
   }
 
-  &-outer {
+  &__outer {
     display: flex;
     flex-direction: column;
+  }
+
+  &__heading {
+    margin-bottom: 0.8rem;
   }
 }
