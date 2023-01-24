@@ -46,28 +46,25 @@ const TrackPage = () => {
   const Content = () => (
     <NewGrid container className={styles.content}>
       <NewGrid item sm={6}>
-        <Heading className="h5" as="h4">
+        {/* <Heading className="h5" as="h4">
           About
-        </Heading>
+        </Heading> */}
 
         <Paragraph>
-          {`We are thrilled to introduce you to a dynamic and evolving platform
-          that will be your go-to destination for all things music. Our site is
-          a work in progress, and we can't wait to show you what we've been
-          working on. We're building a one-stop shop for all the essential tools
-          that you need to elevate your playing and take your skills to the next
-          level. Powered by Spotify and Musixmatch, you can expect a seamless
-          integration with their services and a wealth of resources at your
-          fingertips. So, whether you're a beginner or a seasoned pro, we're
-          here to help you on your musical journey. Join us and let's make
-          beautiful music together!`}
+          {`A work in progress, all-in-one tool for musicians - collecting features that are spread across multiple platforms in one place. `}
+          <br />
+          <br />
+          {`All data provided by Spotify's powerful API, and lyrics provided by Musixmatch.`}
         </Paragraph>
       </NewGrid>
       <NewGrid item sm={6} className={styles.content__last}>
-        <Heading className="h5" as="h4">
-          Features
+        <Heading className="h5" as="h6">
+          Planned features
         </Heading>
         <ul>
+          <li className="underline">
+            <Paragraph>Various song data and metrics</Paragraph>
+          </li>
           <li className="underline">
             <Paragraph>Track-synced metronome</Paragraph>
           </li>
@@ -77,23 +74,20 @@ const TrackPage = () => {
           <li className="underline">
             <Paragraph>Customisable display options</Paragraph>
           </li>
-          <li className="underline">
-            <Paragraph>Data powered by Spotify API</Paragraph>
-          </li>
         </ul>
       </NewGrid>
     </NewGrid>
   );
 
   return (
-    <>
+    <main className={styles.main}>
       <PageSection>
         {isMobile ? <MobileHeader /> : <DesktopHeader />}
       </PageSection>
       <PageSection>
         <Content />
       </PageSection>
-    </>
+    </main>
   );
 };
 export default TrackPage;
