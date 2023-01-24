@@ -1,4 +1,9 @@
 @use '../../../styles/breakpoints.scss' as *;
+
+.main {
+  flex-grow: 1;
+}
+
 .header {
   &__desktop {
     padding: 20vh 0 5.6rem;
