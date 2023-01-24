@@ -8,7 +8,6 @@ import {
 } from '../../utilities/services/spotify';
 
 import getTrackFeatures from '../../utilities/services/spotify/getTrackFeatures';
-import getLyrics from '../../utilities/services/musixmatch/getLyrics';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 
@@ -34,15 +33,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     context.params.trackId,
     token
   );
-  const { isrc } = spotifyTrack.external_ids;
-  const lyrics = await getLyrics(isrc);
 
   return {
     props: {
       album: spotifyAlbum,
       track: spotifyTrack,
       features: spotifyTrackFeatures,
-      lyrics: lyrics !== undefined ? lyrics : null,
+      // lyrics: lyrics !== undefined ? lyrics : null,
     },
   };
 };

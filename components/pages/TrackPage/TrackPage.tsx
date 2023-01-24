@@ -1,5 +1,4 @@
 // import useHeaderStore from '../../../store/useHeaderStore';
-import { Lyrics as LyricsType } from '../../../types';
 import {
   formatDuration,
   formatKey,
@@ -22,7 +21,6 @@ type DataType = {
   album: SpotifyApi.AlbumObjectFull;
   track: SpotifyApi.TrackObjectFull;
   features: SpotifyApi.AudioFeaturesObject;
-  lyrics: LyricsType;
 };
 
 type Props = {
@@ -31,9 +29,7 @@ type Props = {
 
 // TODO: Proper class names
 const TrackPage = ({ data }: Props) => {
-  const { album, track, features, lyrics } = data;
-  // TODO: Remove headerheight completely?
-  // const headerHeight = useHeaderStore((props) => props.height);
+  const { album, track, features } = data;
 
   const dataItems = [
     {
@@ -71,7 +67,7 @@ const TrackPage = ({ data }: Props) => {
       <PageSection>
         <NewGrid container>
           <NewGrid item sm={8}>
-            <Lyrics data={{ lyrics }} />
+            <Lyrics isrc={track.external_ids.isrc} />
           </NewGrid>
           <NewGrid item sm={4}>
             <SideContent>
