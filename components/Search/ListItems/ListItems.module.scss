@@ -29,3 +29,10 @@
   // flex: 1;
   overflow: scroll;
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  padding-left: 0;
+}
