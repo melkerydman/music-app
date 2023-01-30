@@ -43,12 +43,14 @@ const Item = ({
 );
 
 interface GridProps extends GridItemProps {
+  as?: 'div' | 'main';
   container?: boolean;
   item?: boolean;
   fullBorder?: boolean;
 }
 
 const Grid = ({
+  as = 'div',
   container,
   item,
   fullBorder,
@@ -65,9 +67,11 @@ const Grid = ({
   // TODO: Maybe add some error message saying you need to use one or the other and not both
   if (container && item) return null;
 
+  const Component = as;
+
   if (container)
     return (
-      <div
+      <Component
         className={handleClassName([
           'grid',
           styles.container,
@@ -77,7 +81,7 @@ const Grid = ({
         {...rest}
       >
         {children}
-      </div>
+      </Component>
     );
   if (item)
     return (
