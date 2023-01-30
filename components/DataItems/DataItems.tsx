@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import SouthEastIcon from '@mui/icons-material/SouthEast';
-import NorthWestIcon from '@mui/icons-material/NorthWest';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 import { handleClassName } from '../../utilities/helpers';
 import { Heading, Paragraph } from '../Typography/Typography';
 import styles from './DataItems.module.scss';
@@ -12,7 +12,7 @@ type DataItemType = {
 };
 
 interface Props {
-  title: string;
+  title?: string;
   items: DataItemType[];
 }
 
@@ -30,7 +30,11 @@ const DataItem = ({ title, value, description }: DataItemType) => {
               setShowDescription((prev) => !prev);
             }}
           >
-            {showDescription ? <NorthWestIcon /> : <SouthEastIcon />}
+            {showDescription ? (
+              <RemoveIcon fontSize="large" />
+            ) : (
+              <AddIcon fontSize="large" />
+            )}
           </button>
         )}
       </div>
@@ -49,9 +53,12 @@ const DataItem = ({ title, value, description }: DataItemType) => {
 
 const DataItems = ({ title, items }: Props): JSX.Element => (
   <div className={styles['data-items']}>
-    <Heading as="h5" className={styles.title}>
-      {title}
-    </Heading>
+    {title && (
+      <Heading as="h5" className={styles.title}>
+        {title}
+      </Heading>
+    )}
+
     <dl>
       {items.map((item, index) => (
         <DataItem

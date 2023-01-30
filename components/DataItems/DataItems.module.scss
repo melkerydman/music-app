@@ -6,8 +6,8 @@
 
 .item {
   border-bottom: 1.5px solid var(--colors-grey-100);
-  padding-top: 0.6rem;
-  padding-bottom: 0.6rem;
+  padding-top: 1.6rem;
+  padding-bottom: 1.6rem;
 
   &-top {
     display: flex;
@@ -16,7 +16,7 @@
   }
 
   &-key {
-    width: 9.6rem;
+    width: 37.5%;
   }
 
   &-value {
