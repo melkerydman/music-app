@@ -25,3 +25,10 @@
     }
   }
 }
+
+.sub-heading {
+  color: var(--colors-grey-400);
+  @include sm-breakpoint {
+    margin-top: 1rem;
+  }
+}
