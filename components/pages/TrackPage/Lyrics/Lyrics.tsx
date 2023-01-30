@@ -10,7 +10,7 @@ type Props = {
 };
 
 function splitText(text) {
-  return text.split(/\n{2,}|\n/);
+  return text.split(/\n{2,}/);
 }
 
 function splitArrayInMiddle(arr: Array<string>) {
@@ -23,13 +23,14 @@ function splitArrayInMiddle(arr: Array<string>) {
 
 const Lyrics = ({ isrc }: Props): JSX.Element => {
   const [fetchedLyrics, setFetchedLyrics] = useState<any[]>(null);
-  const [columns, setColumns] = useState<'one' | 'two'>('one');
+  const [columns, setColumns] = useState<1 | 2>(1);
   const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
     const fetchLyrics = async () => {
       try {
         const result = (await getLyrics(isrc)) as LyricsType;
+        console.log('result 🔴', result);
         const lyrics = splitText(result.lyrics_body);
         setFetchedLyrics(lyrics);
         setIsFetching(false);
@@ -45,7 +46,7 @@ const Lyrics = ({ isrc }: Props): JSX.Element => {
     if (isFetching) return <div>Looking for lyrics.</div>;
 
     if (fetchedLyrics?.length > 1) {
-      if (columns === 'two') {
+      if (columns === 2) {
         const result = splitArrayInMiddle(fetchedLyrics);
         return (
           <div style={{ display: 'flex' }}>
@@ -82,15 +83,23 @@ const Lyrics = ({ isrc }: Props): JSX.Element => {
       </Paragraph>
     );
   };
+
+  const Toolbar = () => (
+    <div className={styles.toolbar}>
+      <button className={styles.button} onClick={() => setColumns(1)}>
+        Single column
+      </button>
+      <button className={styles.button} onClick={() => setColumns(2)}>
+        Two columns
+      </button>
+    </div>
+  );
   return (
     <div className={styles.lyrics__outer}>
       <Heading className={styles.lyrics__heading} as="h3">
         Lyrics
       </Heading>
-      <div className={styles.toolbar}>
-        <button onClick={() => setColumns('one')}>Single column</button>
-        <button onClick={() => setColumns('two')}>Two columns</button>
-      </div>
+      <Toolbar />
       <DisplayLyrics />
     </div>
   );
