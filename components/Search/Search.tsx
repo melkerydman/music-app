@@ -80,9 +80,12 @@ const Search = () => {
             {tracks?.items.length > 0 && (
               <ListItems data={tracks.items} type="track" />
             )}
-            {artists?.items.length > 0 && (
+            {
+              // TODO: Bring back in when artist page is created
+              /* {artists?.items.length > 0 && (
               <ListItems data={artists.items} type="artist" />
-            )}
+            )} */
+            }
             {albums?.items.length > 0 && (
               <ListItems data={albums.items} type="album" />
             )}

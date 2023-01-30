@@ -70,13 +70,7 @@ const ListItems = ({ data, type, ...rest }: Props) => {
 
   const Header = () => (
     // TODO: Create class
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        padding: '1rem',
-      }}
-    >
+    <div className={styles.header}>
       <Heading as="h4">{type}</Heading>
       <button onClick={handleClick}>
         {type !== activeCategory ? (
