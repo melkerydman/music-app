@@ -1,3 +1,5 @@
+@use '../../../../styles/breakpoints.scss' as *;
+
 .lyrics {
   white-space: pre-wrap;
   word-break: break-word;
@@ -5,6 +7,7 @@
   letter-spacing: unset;
   font-weight: 400;
   line-height: 140%;
+  padding-bottom: 9.6rem;
 
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
@@ -15,11 +18,18 @@
 
   &__outer {
     display: flex;
+    gap: 1.6rem;
+    width: 100%;
     flex-direction: column;
-    padding-bottom: 9.6rem;
+
+    @include sm-breakpoint {
+      flex-direction: row;
+    }
   }
 
   &__heading {
+    // To match width of key in DataItems that is rendered above Lyrics
+    width: calc(66.6% * 0.375);
     margin-bottom: 0.8rem;
   }
 }
