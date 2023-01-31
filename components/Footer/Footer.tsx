@@ -6,10 +6,10 @@ import styles from './Footer.module.scss';
 // eslint-disable-next-line arrow-body-style
 const Footer = () => {
   return (
-    <footer className={handleClassName([])}>
+    <footer className={handleClassName([styles.footer])}>
       <Grid
         container
-        className={handleClassName(['container', styles.wrapper])}
+        className={handleClassName(['container', styles.grid__container])}
       >
         <Grid item span={9}>
           <Paragraph weight="normal" small as="div">

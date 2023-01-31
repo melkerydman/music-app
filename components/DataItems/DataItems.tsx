@@ -9,6 +9,7 @@ type DataItemType = {
   title: string;
   value: string;
   description?: string;
+  className?: string;
 };
 
 interface Props {
@@ -16,11 +17,11 @@ interface Props {
   items: DataItemType[];
 }
 
-const DataItem = ({ title, value, description }: DataItemType) => {
+const DataItem = ({ title, value, description, className }: DataItemType) => {
   const [showDescription, setShowDescription] = useState(false);
 
   return (
-    <div className={handleClassName([styles.item, 'p'])}>
+    <div className={handleClassName([styles.item, 'p', className || ''])}>
       <div className={handleClassName([styles['item-top']])}>
         <dt className={handleClassName([styles['item-key']])}>{title}</dt>
         <dd className={handleClassName([styles['item-value']])}>{value}</dd>

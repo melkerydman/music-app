@@ -20,9 +20,9 @@ const TrackPage = () => {
   const MobileHeader = () => (
     <NewGrid container className={styles.header__mobile}>
       <NewGrid item>
-        <Display small>Not really done yet...</Display>
+        <Display small>Not really done yet</Display>
         <Heading as="h5" weight="thin" className={styles['sub-heading']}>
-          ...but you can still search for songs and albums
+          But try searching for your favourite song
         </Heading>
       </NewGrid>
     </NewGrid>
@@ -42,11 +42,11 @@ const TrackPage = () => {
         <Display small>done</Display>
       </NewGrid>
       <NewGrid item span={3}>
-        <Display small>yet...</Display>
+        <Display small>yet</Display>
       </NewGrid>
       <NewGrid item>
         <Heading as="h5" weight="thin" className={styles['sub-heading']}>
-          ...but you can still search for songs and albums
+          But try searching for your favourite song
         </Heading>
       </NewGrid>
     </NewGrid>

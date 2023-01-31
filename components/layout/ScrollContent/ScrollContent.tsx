@@ -29,6 +29,7 @@ const ScrollContent: React.FC<Props> = React.memo(
   ({ children, className }): JSX.Element => {
     const [isMobile, setIsMobile] = useState(null);
     const [scrolledPercentage, setScrolledPercentage] = useState(0);
+    const [isScrolling, setIsScrolling] = useState(false);
 
     const scrollBarRef = useRef<HTMLDivElement>(null);
 
@@ -70,14 +71,20 @@ const ScrollContent: React.FC<Props> = React.memo(
         <div className={styles.content}>{children}</div>
         <div className={styles.scroll}>
           <button
-            className={handleClassName([styles.scroll__button, 'p-sm normal'])}
+            className={handleClassName([
+              styles.scroll__button,
+              'p-sm normal',
+              isScrolling ? styles.active : '',
+            ])}
+            onClick={() => {
+              setIsScrolling((prev) => !prev);
+            }}
           >
             Auto-scroll
           </button>
           <ScrollBar />
           <div
             className={handleClassName([styles.scroll__number, 'p-sm normal'])}
-            // ref={scrollPercentageRef}
           >
             {scrolledPercentage}%
           </div>
