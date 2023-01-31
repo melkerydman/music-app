@@ -1,3 +1,5 @@
+//  TODO: In the prev. solution you couldn't drag on mobile. This version has fixed snap but its not very snappy - while its not a prio, this should be fixed at a later stage.
+
 import React, { useRef, useState } from 'react';
 
 import AddIcon from '@mui/icons-material/Add';
