@@ -1,0 +1,46 @@
+@use '../../styles/mixins.scss' as *;
+
+.slider {
+  --slider-height: 2rem;
+  --track-height: 1px;
+  --thumb-height: 2rem;
+  position: relative;
+  height: var(--slider-height);
+  width: 100%;
+  cursor: pointer;
+
+  &__container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  &__track {
+    position: absolute;
+    top: calc(var(--slider-height) / 2);
+    height: var(--track-height);
+    width: 100%;
+    background-color: var(--colors-brand);
+  }
+
+  &__thumb {
+    position: absolute;
+    height: var(--thumb-height);
+    width: var(--thumb-height);
+    top: calc(var(--thumb-height / 2));
+    border-radius: 50%;
+    background-color: var(--colors-white);
+    background-color: transparent;
+    box-shadow: 0 0 5px gray;
+    transform: translateX(-50%);
+  }
+}
+
+.button {
+  @include fill;
+  border: 1px dashed var(--colors-brand);
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
