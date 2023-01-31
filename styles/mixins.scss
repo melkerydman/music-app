@@ -112,10 +112,14 @@
   background-size: 200% 100%;
   background-position: right bottom;
   transition: all 0s;
-  &:hover,
-  &:focus {
+  &:hover {
     color: var(--colors-white);
     background-position: left bottom;
     transition: all 0.3s ease-in;
   }
+  // &:focus {
+  //   color: var(--colors-white);
+  //   background-position: left bottom;
+  //   transition: all 0.3s ease-in;
+  // }
 }

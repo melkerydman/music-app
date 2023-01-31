@@ -11,6 +11,7 @@ type Props = {
   setValue: (number) => void;
   minValue: number;
   maxValue: number;
+  step: number;
 };
 
 const InputSlider: React.FC<Props> = ({
@@ -18,6 +19,7 @@ const InputSlider: React.FC<Props> = ({
   setValue,
   minValue,
   maxValue,
+  step,
 }): JSX.Element => {
   // const [value, setValue] = useState(0);
   const sliderRef = useRef(null);
@@ -52,6 +54,17 @@ const InputSlider: React.FC<Props> = ({
     }
   };
 
+  const trackTicks = [];
+  for (let i = minValue; i <= maxValue; i += step) {
+    trackTicks.push(
+      <div
+        key={i}
+        className={styles.slider__tick}
+        style={{ left: `${((i - minValue) / (maxValue - minValue)) * 100}%` }}
+      />
+    );
+  }
+
   return (
     <div className={styles.slider__container}>
       <button
@@ -77,7 +90,7 @@ const InputSlider: React.FC<Props> = ({
           }
         }}
       >
-        <div className={styles.slider__track} />
+        <div className={styles.slider__track}>{trackTicks}</div>
         <div
           className={styles.slider__thumb}
           style={{
