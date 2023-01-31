@@ -3,7 +3,7 @@ import StopIcon from '@mui/icons-material/Stop';
 
 import { handleClassName } from '../../utilities/helpers';
 import { useMetronome } from '../../utilities/hooks';
-import { Paragraph } from '../Typography/Typography';
+import { Heading, Paragraph } from '../Typography/Typography';
 
 import styles from './Metronome.module.scss';
 import InputSlider from '../InputSlider/InputSlider';
@@ -21,6 +21,12 @@ const Metronome: React.FC<Props> = ({ initialTempo }) => {
 
   return (
     <div className={styles.metronome}>
+      <Heading
+        as="h5"
+        className={handleClassName([styles.metronome__heading, 'p normal'])}
+      >
+        Metronome
+      </Heading>
       <div className={styles.timer}>
         <button
           className={handleClassName([

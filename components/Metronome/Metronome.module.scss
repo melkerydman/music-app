@@ -1,12 +1,21 @@
 @use '../../styles/mixins.scss' as *;
+@use '../../styles/breakpoints.scss' as *;
 
 .metronome {
-  // TODO! Remove height after testing
+  position: relative;
   height: 100%;
   min-height: 16rem;
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
+
+  &__heading {
+    @include sm-breakpoint {
+      position: absolute;
+      top: 1.6rem;
+      left: 2.5rem;
+    }
+  }
 }
 .timer {
   color: var(--colors-brand);
