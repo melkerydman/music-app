@@ -1,3 +1,6 @@
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import StopIcon from '@mui/icons-material/Stop';
+
 import { handleClassName } from '../../utilities/helpers';
 import { useMetronome } from '../../utilities/hooks';
 import { Paragraph } from '../Typography/Typography';
@@ -19,17 +22,22 @@ const Metronome: React.FC<Props> = ({ initialTempo }) => {
   return (
     <div className={styles.metronome}>
       <div className={styles.timer}>
-        <div className={styles.timer__tempo}>
-          <button
-            className={handleClassName([])}
-            onClick={isPlaying ? stop : start}
+        <button
+          className={handleClassName([
+            styles.button,
+            isPlaying ? styles.active : '',
+          ])}
+          onClick={isPlaying ? stop : start}
+        >
+          {!isPlaying ? <PlayArrowIcon /> : <StopIcon />}
+
+          <Paragraph
+            as="div"
+            className={handleClassName(['p-sm bold', styles.tempo])}
           >
-            <div className={styles.circle}></div>
-            <Paragraph as="div" className={styles.tempo}>
-              {tempo} BPM
-            </Paragraph>
-          </button>
-        </div>
+            {tempo} BPM
+          </Paragraph>
+        </button>
       </div>
       <InputSlider
         value={tempo}
