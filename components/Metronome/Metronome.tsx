@@ -1,3 +1,6 @@
+// TODO: Solve issue where Metronome tempo doesn't update on changing songs
+// Issue seems to be with the "tempo" object return from useMetronome hook
+
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
 
@@ -9,7 +12,7 @@ import styles from './Metronome.module.scss';
 import InputSlider from '../InputSlider/InputSlider';
 
 interface Props {
-  initialTempo?: number;
+  initialTempo: number;
 }
 
 const Metronome: React.FC<Props> = ({ initialTempo }) => {

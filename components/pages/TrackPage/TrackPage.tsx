@@ -38,6 +38,7 @@ function splitText(text) {
 // TODO: Proper class names
 const TrackPage = ({ data }: Props) => {
   const { album, track, features } = data;
+  const [tempo, setTempo] = useState(features.tempo);
 
   const [fetchedLyrics, setFetchedLyrics] = useState<any[]>(null);
   const [isFetching, setIsFetching] = useState(true);
@@ -55,7 +56,11 @@ const TrackPage = ({ data }: Props) => {
       }
     };
     fetchLyrics();
-  }, [track.external_ids.isrc]);
+  }, [track]);
+
+  useEffect(() => {
+    setTempo(features.tempo);
+  }, [features]);
 
   const dataItems = [
     {
@@ -109,10 +114,9 @@ const TrackPage = ({ data }: Props) => {
                 <DataItems items={dataItems} />
               </NewGrid>
               <NewGrid item sm={4}>
-                <Metronome initialTempo={formatTempo(features.tempo)} />
+                <Metronome initialTempo={formatTempo(tempo)} />
               </NewGrid>
             </NewGrid>
-            {/* <Lyrics isrc={track.external_ids.isrc} /> */}
             <ScrollContent className={styles['scroll-content']}>
               <Lyrics lyrics={fetchedLyrics} isFetching={isFetching} />
             </ScrollContent>
