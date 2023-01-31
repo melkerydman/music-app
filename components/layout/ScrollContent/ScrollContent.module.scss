@@ -31,6 +31,13 @@
     white-space: nowrap;
     border: 1px dashed var(--colors-brand);
     border-radius: 100%;
+    gap: 0.6rem;
+    cursor: pointer;
+    padding: 0 0.8rem;
+
+    &.active {
+      background: #6e5895;
+    }
   }
   &__number {
     width: 7.2rem;
