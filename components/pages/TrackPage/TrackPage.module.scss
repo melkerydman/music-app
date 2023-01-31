@@ -1,10 +1,47 @@
-.aside {
-  // TODO! Duplicate code in AlbumPage.module.scss
-  // TODO: Fix the max-height here
-  max-height: 95vh;
-  overflow: scroll;
+@use '../../../styles/breakpoints.scss' as *;
 
-  > div:not(:last-child) {
-    margin-bottom: 4.8rem;
+.main {
+  flex-grow: 1;
+}
+
+.wrapper {
+  flex-direction: column-reverse;
+
+  @include sm-breakpoint {
+    flex-direction: row;
   }
+}
+
+.left {
+  @include sm-breakpoint {
+    padding-right: 4.8rem;
+    overflow: scroll;
+    max-height: calc(100vh - 58px);
+    position: sticky;
+    top: 58px;
+  }
+}
+.right {
+  @include sm-breakpoint {
+    padding-left: 0.8rem;
+  }
+}
+
+.image-wrapper {
+  margin-bottom: 1.2rem;
+
+  position: relative;
+  padding-bottom: 100%;
+  filter: drop-shadow(0px 0px 24px rgba(0, 0, 0, 0.35));
+  display: none;
+
+  @include sm-breakpoint {
+    display: revert;
+    position: sticky;
+    top: 0;
+  }
+}
+
+.scroll-content {
+  padding-top: 4.8rem;
 }

@@ -6,8 +6,8 @@
 
 .item {
   border-bottom: 1.5px solid var(--colors-grey-100);
-  padding-top: 0.6rem;
-  padding-bottom: 0.6rem;
+  padding-top: 1.6rem;
+  padding-bottom: 1.6rem;
 
   &-top {
     display: flex;
@@ -16,7 +16,8 @@
   }
 
   &-key {
-    width: 9.6rem;
+    width: 37.5%;
+    font-weight: 500;
   }
 
   &-value {
@@ -30,6 +31,19 @@
   }
 }
 
+.button {
+  &:hover {
+    .add {
+      transform: rotateZ(90deg);
+      transition: linear 0.1s;
+    }
+    .remove {
+      transform: rotateZ(-180deg);
+      transition: linear 0.1s;
+    }
+  }
+}
+
 .item-heading {
 }
 
@@ -40,9 +54,9 @@
 }
 
 // TODO: Not on mobile
-.data-items {
-  z-index: 1;
-  position: sticky;
-  top: 0;
-  background-color: var(--colors-white);
-}
+// .data-items {
+//   z-index: 1;
+//   position: sticky;
+//   top: 0;
+//   background-color: var(--colors-white);
+// }
