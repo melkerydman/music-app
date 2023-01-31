@@ -26,14 +26,15 @@ const DataItem = ({ title, value, description }: DataItemType) => {
         <dd className={handleClassName([styles['item-value']])}>{value}</dd>
         {description && (
           <button
+            className={styles.button}
             onClick={() => {
               setShowDescription((prev) => !prev);
             }}
           >
             {showDescription ? (
-              <RemoveIcon fontSize="large" />
+              <RemoveIcon className={styles.remove} fontSize="large" />
             ) : (
-              <AddIcon fontSize="large" />
+              <AddIcon className={styles.add} fontSize="large" />
             )}
           </button>
         )}
