@@ -105,7 +105,7 @@ const TrackPage = ({ data }: Props) => {
               subHeading={track.artists.map((artist) => artist.name).join(', ')}
             />
             <NewGrid container>
-              <NewGrid item sm={8}>
+              <NewGrid className={styles['data-items']} item sm={8}>
                 <DataItems items={dataItems} />
               </NewGrid>
               <NewGrid item sm={4}>
