@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
-import SouthEastIcon from '@mui/icons-material/SouthEast';
-import NorthWestIcon from '@mui/icons-material/NorthWest';
+// import SouthEastIcon from '@mui/icons-material/SouthEast';
+// import NorthWestIcon from '@mui/icons-material/NorthWest';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
+import UnfoldLessIcon from '@mui/icons-material/UnfoldLess';
 import useStore from '../../../store/useStore';
-import { handleClassName } from '../../../utilities/helpers';
+import { capitaliseWord, handleClassName } from '../../../utilities/helpers';
 import { useWindowDimensions } from '../../../utilities/hooks';
 import { getTokenClient } from '../../../utilities/services/spotify';
 import { fetchNext } from '../../../utilities/services/spotify/searchSpotify';
@@ -71,16 +74,12 @@ const ListItems = ({ data, type, ...rest }: Props) => {
   const Header = () => (
     // TODO: Create class
     <div className={styles.header}>
-      <Heading as="h4">{type}</Heading>
-      <button onClick={handleClick}>
+      <Heading as="h4">{`${capitaliseWord(type)}s`}</Heading>
+      <button className={styles.button} onClick={handleClick}>
         {type !== activeCategory ? (
-          <div>
-            Show more <SouthEastIcon />
-          </div>
+          <UnfoldMoreIcon fontSize="large" />
         ) : (
-          <div>
-            Show less <NorthWestIcon />
-          </div>
+          <UnfoldLessIcon fontSize="large" />
         )}
       </button>
     </div>
@@ -115,7 +114,24 @@ const ListItems = ({ data, type, ...rest }: Props) => {
       <Header />
       <Items />
       {type === activeCategory && (
-        <button onClick={fetchMore}>Load more {`${type}s`}</button>
+        <div
+          className={handleClassName([
+            styles.button,
+            styles['load-more'],
+            'p-sm normal',
+          ])}
+        >
+          <button
+            className={handleClassName([
+              styles.button,
+              styles['load-more'],
+              'p-sm normal',
+            ])}
+            onClick={fetchMore}
+          >
+            Load more {`${type}s`} <ExpandMoreIcon fontSize="large" />
+          </button>
+        </div>
       )}
     </li>
   );

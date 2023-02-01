@@ -1,3 +1,5 @@
+@use '../../../styles/mixins.scss' as *;
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -21,7 +23,7 @@
   }
 
   &.mobile {
-    overflow: visible;
+    // overflow: visible;
   }
 }
 
@@ -35,4 +37,23 @@
   justify-content: space-between;
   padding: 1rem;
   padding-left: 0;
+}
+
+.button {
+  cursor: pointer;
+}
+
+.load-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.6rem 0;
+  color: var(--colors-brand);
+
+  .button {
+    @include fill;
+    border: 1px dashed var(--colors-brand);
+    border-radius: 100%;
+    padding: 0 0.8rem;
+  }
 }

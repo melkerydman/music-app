@@ -10,10 +10,8 @@ import ListItems from './ListItems/ListItems';
 import { handleClassName } from '../../utilities/helpers';
 import Modal from '../Modal/Modal';
 import { useWindowDimensions } from '../../utilities/hooks';
-// import { useAuthToken } from '../../utilities/hooks';
 
 const Search = () => {
-  // const accessToken = useAuthToken();
   const { width } = useWindowDimensions();
   const [accessToken, setAccessToken] = useState('');
   const [isMobile, setIsMobile] = useState(false);
