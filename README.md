@@ -34,20 +34,20 @@ Some of my main learnings so far include:
 - I've set up a solid path to production following Git flow. Utilising a Vercel pipeline I've been able to, in addition to my local environment, on feature branch and development level before pushing to production.
 - The value and challenges of planning and estimation, for anything and everything... I've been using Clickup in order to plan sprints and tasks, while using t-shirt estimates. I've also tried to set up a design system in Figma. While following the AirBnB style guide, and trying to set and follow architectural rules. The main take-away is that when you have these things to lean on, you don't have to spend as much time making decisions as you go - actually being able to focus on solving issues instead of making decisions. However, the process is not straight-forward and its incredibly valueable being in a team setting, rather than on your own for most parts of it.
 
-### Versions
+## Versions
 
-#### 1.0.0
+### 1.0.0
 
 Initial version with basic API integrations
 
-#### 1.1.0
+### 1.1.0
 
 Updated design
 Initial auto-scroll functionality
 Updated Metronome to work better on mobile
 Fixes to Search bar on mobile
 
-### Known bugs and issues
+## Known bugs and issues
 
 - If idle for ~1h the access token for the Spotify API expires and page needs re-load (priority fix)
 - Musixmatch only provide 30% of lyrics without setting up a business plan, unfortunate but the project is primarily for learning purposes anyways :)
