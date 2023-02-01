@@ -13,8 +13,7 @@
 
     &.mobile {
       position: absolute;
-      min-height: calc(100vh - 5.6rem);
-      height: auto;
+      overflow: scroll;
     }
   }
 }
@@ -36,6 +35,6 @@
     width: 50%;
   }
   &.mobile {
-    // overflow: scroll;
+    overflow: scroll;
   }
 }
