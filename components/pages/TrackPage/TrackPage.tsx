@@ -109,11 +109,11 @@ const TrackPage = ({ data }: Props) => {
               heading={track.name}
               subHeading={track.artists.map((artist) => artist.name).join(', ')}
             />
-            <NewGrid container>
+            <NewGrid container className={styles.mb}>
               <NewGrid className={styles['data-items']} item sm={8}>
                 <DataItems items={dataItems} />
               </NewGrid>
-              <NewGrid item sm={4}>
+              <NewGrid className={styles.metronome} item sm={4}>
                 <Metronome initialTempo={formatTempo(tempo)} />
               </NewGrid>
             </NewGrid>

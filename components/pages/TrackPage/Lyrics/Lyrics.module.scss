@@ -7,7 +7,9 @@
   letter-spacing: unset;
   font-weight: 400;
   line-height: 140%;
-  padding-bottom: 9.6rem;
+  @include sm-breakpoint {
+    padding-bottom: 9.6rem;
+  }
 
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
