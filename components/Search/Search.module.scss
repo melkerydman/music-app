@@ -10,10 +10,11 @@
   .modal {
     height: calc(100vh - 5.6rem);
     top: 5.7rem;
-    height: 50vh;
 
     &.mobile {
       position: absolute;
+      min-height: calc(100vh - 5.6rem);
+      height: auto;
     }
   }
 }
