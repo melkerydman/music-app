@@ -117,7 +117,10 @@ const TrackPage = ({ data }: Props) => {
                 <Metronome initialTempo={formatTempo(tempo)} />
               </NewGrid>
             </NewGrid>
-            <ScrollContent className={styles['scroll-content']}>
+            <ScrollContent
+              scrollDuration={features.duration_ms}
+              className={styles['scroll-content']}
+            >
               <Lyrics lyrics={fetchedLyrics} isFetching={isFetching} />
             </ScrollContent>
           </NewGrid>

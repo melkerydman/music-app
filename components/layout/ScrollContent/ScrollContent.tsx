@@ -1,3 +1,5 @@
+// TODO: Scroll speed needs fine-tuning
+
 import React, { useEffect, useRef, useState } from 'react';
 import { handleClassName } from '../../../utilities/helpers';
 import { useWindowDimensions } from '../../../utilities/hooks';
@@ -6,6 +8,7 @@ import styles from './ScrollContent.module.scss';
 type Props = {
   children: React.ReactNode;
   className?: string;
+  scrollDuration?: number;
 };
 
 const getScrollPercentage = () => {
@@ -26,7 +29,7 @@ const getScrollPercentage = () => {
 };
 
 const ScrollContent: React.FC<Props> = React.memo(
-  ({ children, className }): JSX.Element => {
+  ({ children, className, scrollDuration = 60 }): JSX.Element => {
     const [isMobile, setIsMobile] = useState(null);
     const [scrolledPercentage, setScrolledPercentage] = useState(0);
     const [isScrolling, setIsScrolling] = useState(false);
@@ -55,6 +58,27 @@ const ScrollContent: React.FC<Props> = React.memo(
         window.removeEventListener('scroll', handleScroll);
       };
     }, [height, width, isMobile]);
+
+    useEffect(() => {
+      const { body } = document;
+      const html = document.documentElement;
+      const docHeight = Math.max(
+        body.scrollHeight,
+        body.offsetHeight,
+        html.clientHeight,
+        html.scrollHeight,
+        html.offsetHeight
+      );
+      if (!isScrolling) return undefined;
+      const interval = setInterval(() => {
+        window.scrollBy(0, 1);
+        if (scrolledPercentage >= 100) {
+          clearInterval(interval);
+          setIsScrolling(false);
+        }
+      }, scrollDuration / docHeight);
+      return () => clearInterval(interval);
+    }, [isScrolling, scrolledPercentage, scrollDuration, height]);
 
     const ScrollBar = React.memo(() => (
       <div className={styles.scroll__bar}>
