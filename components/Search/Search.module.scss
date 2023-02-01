@@ -23,6 +23,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
 
   @include sm-breakpoint {
     width: 75%;
@@ -33,6 +34,6 @@
     width: 50%;
   }
   &.mobile {
-    overflow: scroll;
+    // overflow: scroll;
   }
 }

@@ -1,4 +1,9 @@
+@use '../../styles/breakpoints.scss' as *;
+
 .track-list {
+  @include sm-breakpoint {
+    padding: 0 1.6rem;
+  }
 }
 
 .outer {

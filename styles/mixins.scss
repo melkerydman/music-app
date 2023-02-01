@@ -89,26 +89,37 @@
 }
 
 @mixin underline {
-  // background: linear-gradient(
-  //   to right,
-  //   var(--colors-gradient-start) 50%,
-  //   var(--colors-white) 50%
-  // );
-  // background-size: 200% 100%;
-  // background-position: right bottom;
   transition: all 0s;
   &:hover,
   &:focus {
-    // background-position: left bottom;
     border-bottom: solid 1px var(--colors-black);
     transition: all 0.3s ease-in;
   }
   &:hover {
-    // color: var(--colors-white);
     color: var(--colors-black);
   }
   &:focus {
-    // color: var(--colors-white);
     color: var(--colors-black);
   }
+}
+
+@mixin fill {
+  background: linear-gradient(
+    to right,
+    var(--colors-brand) 50%,
+    var(--colors-white) 50%
+  );
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all 0s;
+  &:hover {
+    color: var(--colors-white);
+    background-position: left bottom;
+    transition: all 0.3s ease-in;
+  }
+  // &:focus {
+  //   color: var(--colors-white);
+  //   background-position: left bottom;
+  //   transition: all 0.3s ease-in;
+  // }
 }

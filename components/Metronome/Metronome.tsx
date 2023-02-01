@@ -1,96 +1,60 @@
-import { useEffect, useRef, useState } from 'react';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+// TODO: Solve issue where Metronome tempo doesn't update on changing songs
+// Issue seems to be with the "tempo" object return from useMetronome hook
+
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import StopIcon from '@mui/icons-material/Stop';
+
 import { handleClassName } from '../../utilities/helpers';
 import { useMetronome } from '../../utilities/hooks';
-import { Paragraph } from '../Typography/Typography';
+import { Heading, Paragraph } from '../Typography/Typography';
 
 import styles from './Metronome.module.scss';
+import InputSlider from '../InputSlider/InputSlider';
 
 interface Props {
-  initialTempo?: number;
+  initialTempo: number;
 }
 
 const Metronome: React.FC<Props> = ({ initialTempo }) => {
-  const hoverRef = useRef<HTMLDivElement>(null);
-  const [isHovering, setIsHovering] = useState(false);
   const { isPlaying, start, stop, tempo, changeTempo } =
     useMetronome(initialTempo);
 
   const minTempo = 40;
   const maxTempo = 280;
 
-  let timeoutId;
-  const handleMouseEnter = () => {
-    clearTimeout(timeoutId);
-    setIsHovering(true);
-  };
-
-  const handleMouseLeave = () => {
-    timeoutId = setTimeout(() => {
-      setIsHovering(false);
-    }, 300);
-  };
-
-  const handleIncrement = () => {
-    if (tempo < maxTempo) {
-      changeTempo(tempo + 1);
-    }
-  };
-  const handleDecrement = () => {
-    if (tempo > minTempo) {
-      changeTempo(tempo - 1);
-    }
-  };
-
-  useEffect(() => {
-    if (!hoverRef.current) return undefined;
-    const copy = hoverRef.current;
-
-    copy.addEventListener('mouseenter', handleMouseEnter);
-    copy.addEventListener('mouseleave', handleMouseLeave);
-
-    return () => {
-      copy.addEventListener('mouseenter', handleMouseEnter);
-      copy.addEventListener('mouseleave', handleMouseLeave);
-    };
-  }, []);
-
   return (
-    <div ref={hoverRef} className={styles.metronome}>
-      <div
-        className={handleClassName([
-          styles.slider,
-          !isHovering ? 'visually-hidden' : '',
-        ])}
+    <div className={styles.metronome}>
+      <Heading
+        as="h5"
+        className={handleClassName([styles.metronome__heading, 'p normal'])}
       >
-        <button className={styles.button} onClick={handleDecrement}>
-          {<RemoveIcon fontSize="small" />}
-        </button>
-        <input
-          type="range"
-          min={minTempo}
-          max={maxTempo}
-          value={tempo}
-          onChange={(e) => changeTempo(Number(e.target.value))}
-        />
-        <button className={styles.button} onClick={handleIncrement}>
-          {<AddIcon fontSize="small" />}
+        Metronome
+      </Heading>
+      <div className={styles.timer}>
+        <button
+          className={handleClassName([
+            styles.button,
+            isPlaying ? styles.active : '',
+          ])}
+          onClick={isPlaying ? stop : start}
+        >
+          {!isPlaying ? <PlayArrowIcon /> : <StopIcon />}
+
+          <Paragraph
+            as="div"
+            className={handleClassName(['p-sm bold', styles.tempo])}
+          >
+            {tempo} BPM
+          </Paragraph>
         </button>
       </div>
-
-      <button
-        className={handleClassName([
-          styles.play,
-          isPlaying ? styles.active : '',
-        ])}
-        onClick={isPlaying ? stop : start}
-      >
-        <div className={styles.circle}></div>
-        <Paragraph as="div" className={styles.tempo}>
-          {tempo} BPM
-        </Paragraph>
-      </button>
+      <InputSlider
+        value={tempo}
+        setValue={changeTempo}
+        minValue={minTempo}
+        maxValue={maxTempo}
+        step={3}
+      />
     </div>
   );
 };

@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { handleClassName } from '../../utilities/helpers';
+import { useWindowDimensions } from '../../utilities/hooks';
 import styles from './Modal.module.scss';
 
 // TODO: potentially memoize component to avoid re-renders
@@ -17,10 +18,22 @@ const Modal = ({
   className,
   children,
 }: ModalType): JSX.Element => {
+  const { width, height } = useWindowDimensions();
+  const [isMobile, setIsMobile] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
+
   const addClassToBody = () => document.body.classList.add('modal-active');
   const removeClassFromBody = () =>
     document.body.classList.remove('modal-active');
+
+  useEffect(() => {
+    setIsMobile(width < 768);
+  }, [width]);
+
+  useEffect(() => {
+    if (!modalRef.current || !isMobile) return;
+    modalRef.current.style.height = `${height - 57}px`;
+  }, [height, isMobile]);
 
   const handleClickOutside = useCallback(
     (event: MouseEvent) => {

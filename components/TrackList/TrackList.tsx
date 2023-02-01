@@ -5,6 +5,7 @@ import {
   formatDuration,
   handleClassName,
   groupBy,
+  capitaliseWord,
 } from '../../utilities/helpers';
 
 import styles from './TrackList.module.scss';
@@ -87,7 +88,8 @@ const TrackList = React.memo(({ album, tracks, className, simple }: Props) => {
             simple ? 'p-sm' : '',
           ])}
         >
-          {releaseDate.getFullYear()} • {tracks.length} tracks
+          {capitaliseWord(album.album_type)} • {releaseDate.getFullYear()} •{' '}
+          {tracks.length} tracks
         </Paragraph>
       </div>
       {discs.map((disc, index) => (

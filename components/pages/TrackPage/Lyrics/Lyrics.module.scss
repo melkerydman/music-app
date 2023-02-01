@@ -1,3 +1,5 @@
+@use '../../../../styles/breakpoints.scss' as *;
+
 .lyrics {
   white-space: pre-wrap;
   word-break: break-word;
@@ -5,8 +7,9 @@
   letter-spacing: unset;
   font-weight: 400;
   line-height: 140%;
-
-  padding-bottom: 9.6rem;
+  @include sm-breakpoint {
+    padding-bottom: 9.6rem;
+  }
 
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
@@ -17,10 +20,54 @@
 
   &__outer {
     display: flex;
+    gap: 1.6rem;
+    width: 100%;
     flex-direction: column;
+
+    @include sm-breakpoint {
+      flex-direction: row;
+    }
   }
 
   &__heading {
+    // To match width of key in DataItems that is rendered above Lyrics
+    width: calc(66.6% * 0.375);
     margin-bottom: 0.8rem;
+  }
+}
+
+.toolbar {
+  display: flex;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  background-color: #2e2e2e;
+  gap: 0.8rem;
+  position: relative;
+
+  .button {
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1.2rem;
+    gap: 0.8rem;
+
+    height: 3.2rem;
+
+    background-color: #454545;
+    border-radius: 0.6rem;
+    color: var(--colors-grey-100);
+
+    &:hover {
+      background-color: var(--colors-grey-200);
+      color: var(--colors-grey-900);
+    }
+    &.active {
+      background-color: var(--colors-grey-400);
+      color: var(--colors-grey-900);
+      &:hover {
+        background-color: var(--colors-grey-200);
+      }
+    }
   }
 }

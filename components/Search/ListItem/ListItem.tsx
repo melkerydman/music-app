@@ -47,7 +47,7 @@ const ListItem = ({ content }: Props): JSX.Element => {
                   </Heading>
                 )}
               </div>
-              <div className={content.type}>{content.type} icon</div>
+              {/* <div className={content.type}>{content.type} icon</div> */}
             </a>
           </Link>
         </li>
@@ -76,7 +76,7 @@ const ListItem = ({ content }: Props): JSX.Element => {
                   {content.name}
                 </Heading>
               </div>
-              <div className={content.type}>{content.type} icon</div>
+              {/* <div className={content.type}>{content.type} icon</div> */}
             </a>
           </Link>
         </li>
@@ -110,7 +110,7 @@ const ListItem = ({ content }: Props): JSX.Element => {
                   </Heading>
                 )}
               </div>
-              <div className={content.type}>{content.type} icon</div>
+              {/* <div className={content.type}>{content.type} icon</div> */}
             </a>
           </Link>
         </li>
