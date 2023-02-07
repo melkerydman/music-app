@@ -22,10 +22,13 @@ const getScrollPercentage = () => {
     html.scrollHeight,
     html.offsetHeight
   );
+
   const windowScroll = window.pageYOffset;
   const scrollPercentage = (windowScroll / (docHeight - winHeight)) * 100;
-
-  return Math.ceil(scrollPercentage);
+  if (Number.isNaN(scrollPercentage)) {
+    return 100;
+  }
+  return Math.min(100, Math.max(0, Math.ceil(scrollPercentage)));
 };
 
 const ScrollContent: React.FC<Props> = React.memo(
@@ -45,6 +48,10 @@ const ScrollContent: React.FC<Props> = React.memo(
     useEffect(() => {
       scrollBarRef.current.style.height = `${scrolledPercentage}%`;
     }, [scrolledPercentage]);
+
+    useEffect(() => {
+      setScrolledPercentage(getScrollPercentage());
+    }, []);
 
     const handleScroll = () => {
       setScrolledPercentage(getScrollPercentage());
