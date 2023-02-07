@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import styles from './Search.module.scss';
 
@@ -59,7 +59,7 @@ const Search = () => {
     return () => clearTimeout(searchTimeout);
   }, [search, accessToken, setSearchResultsInStore]);
 
-  const SearchResults = () => {
+  const searchResults = useMemo(() => {
     const { albums, artists, tracks } = searchResultsFromStore;
     const noResults =
       !albums?.items.length && !artists?.items.length && !tracks?.items.length;
@@ -81,8 +81,8 @@ const Search = () => {
             {
               // TODO: Bring back in when artist page is created
               /* {artists?.items.length > 0 && (
-              <ListItems data={artists.items} type="artist" />
-            )} */
+          <ListItems data={artists.items} type="artist" />
+        )} */
             }
             {albums?.items.length > 0 && (
               <ListItems data={albums.items} type="album" />
@@ -91,12 +91,12 @@ const Search = () => {
         )}
       </ul>
     );
-  };
+  }, [searchResultsFromStore, isMobile]);
 
   return (
     <div className={handleClassName([styles.search])}>
       {!isFocus && <SearchBox />}
-      {isFocus && isMobile && (
+      {isFocus && (
         <>
           <SearchBox active />
           <Modal
@@ -110,29 +110,8 @@ const Search = () => {
             ])}
           >
             {search !== '' &&
-              Object.entries(searchResultsFromStore).length! > 0 && (
-                <SearchResults />
-              )}
-          </Modal>
-        </>
-      )}
-      {isFocus && !isMobile && (
-        <>
-          <SearchBox active />
-          <Modal
-            isOpen={isFocus}
-            onClose={() => {
-              setIsFocus(false);
-            }}
-            className={handleClassName([
-              styles.modal,
-              isMobile ? styles.mobile : '',
-            ])}
-          >
-            {search !== '' &&
-              Object.entries(searchResultsFromStore).length! > 0 && (
-                <SearchResults />
-              )}
+              Object.entries(searchResultsFromStore).length! > 0 &&
+              searchResults}
           </Modal>
         </>
       )}
