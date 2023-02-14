@@ -45,9 +45,9 @@ const ScrollContent: React.FC<Props> = React.memo(
       setIsMobile(width < 768);
     }, [width]);
 
-    useEffect(() => {
-      scrollBarRef.current.style.height = `${scrolledPercentage}%`;
-    }, [scrolledPercentage]);
+    // useEffect(() => {
+    //   scrollBarRef.current.style.height = `${scrolledPercentage}%`;
+    // }, [scrolledPercentage]);
 
     useEffect(() => {
       setScrolledPercentage(getScrollPercentage());
@@ -89,7 +89,11 @@ const ScrollContent: React.FC<Props> = React.memo(
 
     const ScrollBar = React.memo(() => (
       <div className={styles.scroll__bar}>
-        <div ref={scrollBarRef} className={styles['scroll__bar--fill']} />
+        <div
+          ref={scrollBarRef}
+          style={{ height: `${scrolledPercentage}%` }}
+          className={styles['scroll__bar--fill']}
+        />
       </div>
     ));
 
@@ -113,11 +117,21 @@ const ScrollContent: React.FC<Props> = React.memo(
           >
             Auto-scroll
           </button>
-          <ScrollBar />
           <div
-            className={handleClassName([styles.scroll__number, 'p-sm normal'])}
+            style={{
+              display: 'flex',
+              position: 'relative',
+            }}
           >
-            {scrolledPercentage}%
+            <div
+              className={handleClassName([
+                styles.scroll__number,
+                'p-xs normal',
+              ])}
+            >
+              {scrolledPercentage}
+            </div>
+            <ScrollBar />
           </div>
         </div>
       </div>

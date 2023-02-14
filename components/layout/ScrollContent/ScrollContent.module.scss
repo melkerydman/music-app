@@ -15,16 +15,23 @@
   color: var(--colors-brand);
 
   &__bar {
-    height: 100%;
+    height: 100px;
     width: 0.15rem;
     background-color: var(--colors-grey-100);
-    margin-left: 1.6rem;
-    margin-right: 1.6rem;
+    // margin-left: 1.6rem;
 
     &--fill {
       min-height: 1%;
       background-color: var(--colors-brand);
     }
+  }
+  &__number {
+    // width: 7.2rem;
+    transform: rotateZ(90deg);
+    transform-origin: 0 0;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
   &__button {
     @include fill;
@@ -34,13 +41,11 @@
     gap: 0.6rem;
     cursor: pointer;
     padding: 0 0.8rem;
+    margin-right: 2.4rem;
 
     &.active {
       background: #6e5895;
     }
-  }
-  &__number {
-    width: 7.2rem;
   }
 }
 
