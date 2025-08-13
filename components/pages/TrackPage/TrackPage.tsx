@@ -48,7 +48,15 @@ const TrackPage = ({ data }: Props) => {
       try {
         const result = (await getLyrics(track.external_ids.isrc)) as LyricsType;
         const lyrics = splitText(result.lyrics_body);
-        setFetchedLyrics(lyrics);
+        // Repeat lyrics for auto scroll testing
+        const repeatedLyrics = [
+          ...lyrics,
+          ...lyrics,
+          ...lyrics,
+          ...lyrics,
+          ...lyrics,
+        ];
+        setFetchedLyrics(repeatedLyrics);
         setIsFetching(false);
       } catch {
         setFetchedLyrics(['Lyrics not found.']);
@@ -62,26 +70,39 @@ const TrackPage = ({ data }: Props) => {
     setTempo(features.tempo);
   }, [features]);
 
+  const unavailableMsg = 'Data unavailable';
+
   const dataItems = [
     {
       title: 'Tempo',
-      value: `${formatTempo(features.tempo)} BPM`,
-      description: `Double speed -> ${features.tempo * 2}
-      Half speed -> ${features.tempo / 2}`,
+      value: features?.tempo
+        ? `${formatTempo(features.tempo)} BPM`
+        : unavailableMsg,
+      description: features?.tempo
+        ? `Double speed -> ${features.tempo * 2}
+      Half speed -> ${features.tempo / 2}`
+        : '',
     },
     {
       title: 'Key',
-      value: `${formatKey(features.key)} ${formatMode(features.mode)}`,
+      value:
+        features?.key !== undefined && features?.mode !== undefined
+          ? `${formatKey(features.key)} ${formatMode(features.mode)}`
+          : unavailableMsg,
       description: '',
     },
     {
       title: 'Time Signature',
-      value: formatTimeSignature(features.time_signature),
+      value: features?.time_signature
+        ? formatTimeSignature(features.time_signature)
+        : unavailableMsg,
       description: '',
     },
     {
       title: 'Duration',
-      value: formatDuration(features.duration_ms),
+      value: track?.duration_ms
+        ? formatDuration(track.duration_ms)
+        : unavailableMsg,
       description: '',
     },
   ];
@@ -114,11 +135,11 @@ const TrackPage = ({ data }: Props) => {
                 <DataItems items={dataItems} />
               </NewGrid>
               <NewGrid className={styles.metronome} item sm={4}>
-                <Metronome initialTempo={formatTempo(tempo)} />
+                <Metronome initialTempo={formatTempo(tempo) || 120} />
               </NewGrid>
             </NewGrid>
             <ScrollContent
-              scrollDuration={features.duration_ms}
+              scrollDuration={track.duration_ms}
               className={styles['scroll-content']}
             >
               <Lyrics lyrics={fetchedLyrics} isFetching={isFetching} />
