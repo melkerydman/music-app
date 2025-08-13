@@ -12,6 +12,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Lint code**: `npm run lint`
 - **Fix lint issues**: `npm run lint:fix`
 
+## Node Version
+
+This project uses **Node.js v18.7.0** (specified in `.nvmrc`). Use `nvm use` to switch to the correct version.
+
 ## Architecture Overview
 
 This is a Next.js music application that integrates with Spotify API and Musixmatch API. The app follows a modular component architecture with TypeScript and SCSS modules.
