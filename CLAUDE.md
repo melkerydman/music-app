@@ -62,5 +62,18 @@ Uses Zustand with devtools middleware. Main store combines multiple slices (curr
 
 ### Known Issues
 
+- **Spotify Audio Features API Deprecated**: Spotify has deprecated their audio features endpoint that provided tempo, key, danceability, and other track analysis data. This affects most core features of the app that display track metrics and analysis.
+  - **Potential Solution**: Cyanite.ai API could be used as an alternative for audio analysis features, using ISRC codes or metadata matching to link Spotify tracks with audio analysis data.
 - Spotify access token expires after ~1 hour requiring page reload
 - Musixmatch provides only 30% of lyrics on free tier
+
+## Recent Changes & Workarounds
+
+**2025-08-13**: Applied fixes for deprecated Spotify Audio Features API:
+- **Metronome fallback**: Added 120 BPM default when tempo unavailable (`components/pages/TrackPage/TrackPage.tsx:119`)
+- **Data display fallbacks**: Added "Data unavailable" fallback for tempo, key, time signature display when API data missing
+- **Duration fix**: Changed auto-scroll and duration display to use `track.duration_ms` instead of `features.duration_ms` since track duration still available from regular Spotify API
+- **Test lyrics**: Added 5x repetition of fetched lyrics for scroll testing due to Musixmatch 30% limit
+- **Graceful degradation**: App remains functional with basic track info while audio analysis features show unavailable
+
+*Note: Update this section when making significant changes that affect app functionality or architecture*
