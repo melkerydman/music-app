@@ -15,15 +15,16 @@
 .left {
   @include sm-breakpoint {
     padding-right: 4.8rem;
-    overflow: scroll;
-    max-height: calc(100vh - 58px);
+    overflow-y: scroll;
+    max-height: calc(100vh - 5.6rem);
     position: sticky;
-    top: 58px;
+    top: 5.6rem;
   }
 }
 .right {
   @include sm-breakpoint {
     padding-left: 0.8rem;
+    min-height: calc(100vh - 5.6rem);
   }
 }
 

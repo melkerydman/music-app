@@ -20,67 +20,56 @@ const TrackPage = () => {
   const MobileHeader = () => (
     <NewGrid container className={styles.header__mobile}>
       <NewGrid item>
-        <Display small>Not really done yet</Display>
-        <Heading as="h5" weight="thin" className={styles['sub-heading']}>
-          But try searching for your favourite song
-        </Heading>
+        <Display small>Music thing</Display>
       </NewGrid>
     </NewGrid>
   );
   const DesktopHeader = () => (
-    <NewGrid
-      container
-      className={handleClassName([styles.header__desktop, 'underline'])}
-    >
-      <NewGrid item span={3}>
-        <Display small>Not</Display>
+    <NewGrid container className={handleClassName([styles.header__desktop])}>
+      <NewGrid item span={6}>
+        <Display small>Music thing</Display>
       </NewGrid>
-      <NewGrid item span={3}>
-        <Display small>really</Display>
-      </NewGrid>
-      <NewGrid item span={3}>
-        <Display small>done</Display>
-      </NewGrid>
-      <NewGrid item span={3}>
-        <Display small>yet</Display>
-      </NewGrid>
-      <NewGrid item>
-        <Heading as="h5" weight="thin" className={styles['sub-heading']}>
-          But try searching for your favourite song
-        </Heading>
-      </NewGrid>
+      <NewGrid item></NewGrid>
     </NewGrid>
   );
   const Content = () => (
     <NewGrid container className={styles.content}>
-      <NewGrid item sm={6}>
+      <NewGrid item sm={6} className={styles.lol}>
         {/* <Heading className="h5" as="h4">
           About
         </Heading> */}
 
         <Paragraph>
-          {`A work in progress, all-in-one tool for musicians - collecting features that are spread across multiple platforms in one place. `}
-          <br />
-          <br />
-          {`All data provided by Spotify's powerful API, and lyrics provided by Musixmatch.`}
+          {`A work in progress, all-in-one tool for musicians - collecting features that are spread across multiple platforms in one place.*`}
+        </Paragraph>
+
+        <Paragraph>
+          {`All data provided by Spotify's API, and lyrics provided by Musixmatch.`}
+        </Paragraph>
+
+        <Paragraph xs>
+          {`* In November 2024 Spotify deprecated the Audio Features endpoint in their API, which provided tempo, key, and other track analysis data that was central to the app's functionality. Oh well!`}
         </Paragraph>
       </NewGrid>
       <NewGrid item sm={6} className={styles.content__last}>
         <Heading className="h5" as="h6">
-          Planned features
+          Potential features and updates
         </Heading>
         <ul>
           <li className="underline">
-            <Paragraph>Various song data and metrics</Paragraph>
+            <Paragraph>Alternative Audio Features API</Paragraph>
           </li>
           <li className="underline">
-            <Paragraph>Track-synced metronome</Paragraph>
+            <Paragraph>Artist page</Paragraph>
           </li>
           <li className="underline">
-            <Paragraph>Dynamic auto-scrolling lyrics</Paragraph>
+            <Paragraph>Multiple auto-scroll settings for lyrics</Paragraph>
           </li>
           <li className="underline">
-            <Paragraph>Customisable display options</Paragraph>
+            <Paragraph>Revisit UI</Paragraph>
+          </li>
+          <li className="underline">
+            <Paragraph>...</Paragraph>
           </li>
         </ul>
       </NewGrid>
