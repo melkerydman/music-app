@@ -28,6 +28,19 @@
   justify-content: center;
 }
 
+.beat-indicator {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--colors-brand);
+  border-radius: 50%;
+  pointer-events: none;
+  bottom: -4px;
+  left: var(--beat-position, 50%);
+  transform: translateX(-50%);
+  transition: left var(--beat-duration, 0.2s) cubic-bezier(0.5, 0, 0.3, 1);
+}
+
 .tempo {
   width: 6rem;
   white-space: nowrap;
