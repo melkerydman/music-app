@@ -76,4 +76,10 @@ Uses Zustand with devtools middleware. Main store combines multiple slices (curr
 - **Test lyrics**: Added 5x repetition of fetched lyrics for scroll testing due to Musixmatch 30% limit
 - **Graceful degradation**: App remains functional with basic track info while audio analysis features show unavailable
 
+**2025-08-14**: UI improvements and better lyrics handling:
+- **Conditional ScrollContent**: Only render ScrollContent component when lyrics are found, preventing unnecessary scroll controls for "Lyrics not found" state
+- **Improved lyrics rendering**: Simplified Lyrics component logic to consistently use same DOM structure (div with styles.lyrics containing Paragraph elements) regardless of content state
+- **Fixed UI jump**: Added min-height to right panel and adjusted sticky positioning to prevent layout shifts when switching between tracks with/without lyrics
+- **Better state management**: Reset lyrics state when changing tracks to show proper loading state instead of stale content
+
 *Note: Update this section when making significant changes that affect app functionality or architecture*
