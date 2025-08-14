@@ -36,7 +36,8 @@
     padding: 0 0.8rem;
 
     &.active {
-      background: #6e5895;
+      background: var(--colors-brand);
+      color: var(--colors-white);
     }
   }
   &__number {
