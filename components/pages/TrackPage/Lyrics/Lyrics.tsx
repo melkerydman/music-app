@@ -25,44 +25,20 @@ const Lyrics = ({ lyrics, isFetching }: Props): JSX.Element => {
   // const [columns, setColumns] = useState<1 | 2>(1);
 
   const DisplayLyrics = () => {
-    if (isFetching) return <div>Looking for lyrics.</div>;
-
-    if (lyrics?.length > 1) {
-      // if (columns === 2) {
-      //   const result = splitArrayInMiddle(fetchedLyrics);
-      //   return (
-      //     <div style={{ display: 'flex' }}>
-      //       <div className={styles.lyrics} style={{ width: '50%' }}>
-      //         {result.firstHalf.map((lyric, index) => (
-      //           <Paragraph key={index} as="div">
-      //             {lyric}
-      //           </Paragraph>
-      //         ))}
-      //       </div>
-      //       <div className={styles.lyrics} style={{ width: '50%' }}>
-      //         {result.secondHalf.map((lyric, index) => (
-      //           <Paragraph key={index} as="div">
-      //             {lyric}
-      //           </Paragraph>
-      //         ))}
-      //       </div>
-      //     </div>
-      //   );
-      // }
+    if (isFetching) {
       return (
         <div className={styles.lyrics}>
-          {lyrics.map((lyric, index) => (
-            <Paragraph key={index} as="div">
-              {lyric}
-            </Paragraph>
-          ))}
+          <Paragraph>Looking for lyrics.</Paragraph>
         </div>
       );
     }
+
     return (
-      <Paragraph sans className={styles.lyrics} as="div">
-        {lyrics}
-      </Paragraph>
+      <div className={styles.lyrics}>
+        {lyrics.map((lyric, index) => (
+          <Paragraph key={index}>{lyric}</Paragraph>
+        ))}
+      </div>
     );
   };
 

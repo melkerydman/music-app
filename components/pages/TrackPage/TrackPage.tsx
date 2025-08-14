@@ -40,26 +40,23 @@ const TrackPage = ({ data }: Props) => {
   const { album, track, features } = data;
   const [tempo, setTempo] = useState(features.tempo);
 
-  const [fetchedLyrics, setFetchedLyrics] = useState<any[]>(null);
+  const [fetchedLyrics, setFetchedLyrics] = useState<string[] | null>(null);
   const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
+    setFetchedLyrics(null);
+    setIsFetching(true);
+
     const fetchLyrics = async () => {
       try {
         const result = (await getLyrics(track.external_ids.isrc)) as LyricsType;
         const lyrics = splitText(result.lyrics_body);
         // Repeat lyrics for auto scroll testing
-        const repeatedLyrics = [
-          ...lyrics,
-          ...lyrics,
-          ...lyrics,
-          ...lyrics,
-          ...lyrics,
-        ];
+        const repeatedLyrics = [...lyrics, ...lyrics, ...lyrics];
         setFetchedLyrics(repeatedLyrics);
         setIsFetching(false);
       } catch {
-        setFetchedLyrics(['Lyrics not found.']);
+        setFetchedLyrics(null);
         setIsFetching(false);
       }
     };
@@ -138,12 +135,16 @@ const TrackPage = ({ data }: Props) => {
                 <Metronome initialTempo={formatTempo(tempo) || 120} />
               </NewGrid>
             </NewGrid>
-            <ScrollContent
-              scrollDuration={track.duration_ms}
-              className={styles['scroll-content']}
-            >
-              <Lyrics lyrics={fetchedLyrics} isFetching={isFetching} />
-            </ScrollContent>
+            {fetchedLyrics ? (
+              <ScrollContent
+                scrollDuration={track.duration_ms}
+                className={styles['scroll-content']}
+              >
+                <Lyrics lyrics={fetchedLyrics} isFetching={isFetching} />
+              </ScrollContent>
+            ) : (
+              <Lyrics lyrics={['Lyrics not found.']} isFetching={isFetching} />
+            )}
           </NewGrid>
         </NewGrid>
       </PageSection>
