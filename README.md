@@ -1,4 +1,4 @@
-# Music app
+# Music thing
 
 A side-project during my time as an intern at Cloud Nine. A music data platform with the goal of combining features spread across multiple platforms - a good project in the learning sense due to its scalability.
 
